@@ -1,11 +1,14 @@
 package com.example.domain;
 
+import java.util.ArrayList;
+
 public class Photo_PackageVO {
 	private String photo_package_code;
 	private String photo_package_title;
 	private String photo_package_image;
 	private int photo_package_amount;
 	private int photo_package_price;
+	private ArrayList<String> images;
 	
 	public String getPhoto_package_code() {
 		return photo_package_code;
@@ -37,7 +40,11 @@ public class Photo_PackageVO {
 	public void setPhoto_package_price(int photo_package_price) {
 		this.photo_package_price = photo_package_price;
 	}
-	
-	
+	public ArrayList<String> getImages() {
+		return images;
+	}
+	public void setImages(ArrayList<String> images) {
+		this.images = images;
+	}
 	
 }

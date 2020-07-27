@@ -50,7 +50,7 @@ public class HomeController {
 	}
 
 	/* PACKAGE */
-	@RequestMapping("/packageRead")
+	@RequestMapping("/indexPackageRead")
 	public void packageRead() {
 
 	}
@@ -134,5 +134,10 @@ public class HomeController {
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		}
 		return result;
+	}
+	
+	@RequestMapping("/cal")
+	public void callist(){
+		
 	}
 }
