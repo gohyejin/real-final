@@ -209,7 +209,7 @@ img {
 								<img class="image" src="display?fileName=friend_package.jpg" onClick="location.href='packageRead?photo_package_code=B1'"  width=250 height=200>
 							</div>
 							<div>
-								<a href="packageRead?photo_package_code=B1">친구사진</a>
+								<a href="packageRead?photo_package_code=B1">우정사진</a>
 							</div>
 								<div>30,000</div>
 						</div>	

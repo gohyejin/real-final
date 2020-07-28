@@ -35,19 +35,13 @@
 	border-collapse:collapse;
 }
 
-td{
-	padding:15px;
+.tTitle{
+	font-size:70px;
+	font-weight:bold;
+	margin-bottom:0px;
+	margin:auto;
 }
 
-th{
-	padding:15px;
-	font-size:30px;
-}
-
-.info{
-	text-align:left;
-	padding-left:20px;
-}
 
 .title{
 	font-size:50px;
@@ -55,22 +49,7 @@ th{
 	margin:auto;
 }
 
-select{
-	width:100%;
-	height: 25px;
-	font-size:20px;
-	border:none;
-	text-align-last:center; 
-}
-
-select option{
-	height: 25px;
-	font-size:20px;
-	border:none;
-	text-align-last:center; 
-}
-
-.cart button{
+.price button{
 	width:300px;
 	height: 100px;
 	font-size: 35px;
@@ -83,31 +62,40 @@ select option{
 	float:right;
 }
 
-.cart{
-	padding-right:50px;
-}
-
-.cart button:active {
+.price button:active {
 	background: #cca6cf;
 }
 
 .price input[type='text']{
-	width: 100px;
-	height: 40px;
-	margin-top: 7px;
+	height: 60px;
 	margin-bottom: 5px;
-	text-align: right;
-	font-size: 20px;
+	text-align: left;
+	font-size: 60px;
 	font-weight: bold;
 	outline: none;
 	border: none;
+	color:#fc8da0;
+	margin:20px;
 }
 
 .price{
 	padding-right:50px;
-	text-align: right;
-	font-size: 20px;
+	text-align: left;
+	font-size: 40px;
 	font-weight: bold;
+}
+
+.smallImage{
+	cursor: pointer;
+}
+
+.bigPig{
+	width:30%;
+	height:700px;
+	display: table-cell;
+	padding:20px;
+	text-align: center;
+	vertical-align: middle;
 }
 </style>
 </head>
@@ -120,30 +108,22 @@ select option{
 		
 		<br><br>
 		<div id="content">
-			<table id="tbl1" border=1>
-				<tr class="row">
-					<td rowspan=3 width=500>
-						<img src="../display?fileName=${vo.photo_package_image}" width=500 id = "bigPig"/>
-						<img src="" width=500 id = "bigImage"/>
-					</td><!-- 예시사진 -->
-					<th width=150 height=100>TITLE</th>
-					<td>"${vo.photo_package_title}"</td>
-				</tr>
-				<tr>
-					<th width=150></th>
-					<td width=400 height=100 class="price"><input type="text" value="${vo.photo_package_price}" readonly>원</td>					
-				</tr>
-				<tr>
-					<th rowspan=2 colspan=2 class="cart" height=200><button>장바구니에 담기</button></th>
-				</tr>
-				<tr class="row">
-					<th height=100>
-						<c:forEach items="${list}" var="vo">
-         				<img src="../display?fileName=${vo}" width=150>
-         			</c:forEach>
-					</th>
-				</tr>
-			</table>
+			<div id="tbl1">
+				<div class="tTitle"><${vo.photo_package_title}></div>
+					<div class="bigPig">
+						<img src="../display?fileName=${vo.photo_package_image}" width=500 id="bigPig"/>
+						<img src="" width=500 id="bigImage"/>
+					</div><br>
+				<div class="sImage">
+					<c:forEach items="${list}" var="vo">
+         				<img src="../display?fileName=${vo}" width=120 class="smallImage">
+         			</c:forEach><hr>
+				</div>
+				<div class="price">
+					\<input type="text" value="${vo.photo_package_price}" size=10 readonly>
+					<button>장바구니에 담기</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	</form>
@@ -152,12 +132,11 @@ select option{
 
 <script>
 $("#bigImage").hide();
-$("#tbl1 .row").on("click","img",function(){
+$("#tbl1 .sImage").on("click","img",function(){
 	var vo_image = $(this).attr("src");
-	alert(vo_image);
 	$("#bigPig").hide();
 	$("#bigImage").show();
-	$("#tbl1 .row #bigImage").attr("src",vo_image);
+	$("#tbl1 .bigPig #bigImage").attr("src",vo_image);
 })
 
 //상품이미지 버튼을 눌렀을때
