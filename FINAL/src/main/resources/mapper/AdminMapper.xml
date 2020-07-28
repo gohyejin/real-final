@@ -44,7 +44,7 @@
     
     
     
-    <select id="blackList" resultType="com.example.domain.UsersVO">
+    <select id="blackList" resultType="com.example.domain.AdminVO">
         select * from users where users_note=3
         <if test="searchType=='users_id'">
         	and users_id like concat('%', #{keyword}, '%') order by users_regdate desc
@@ -58,14 +58,14 @@
       	 limit #{pageStart}, #{perPageNum}
     </select>
     
-    <select id="blackRead" resultType="com.example.domain.UsersVO">
+    <select id="blackRead" resultType="com.example.domain.AdminVO">
     	select * from users where users_id=#{users_id}
     </select>
     
     <update id="blackUpdate">
     	update users set users_point=#{users_point}, users_note=#{users_note} where users_id=#{users_id}
     </update>
-        
+          
     <select id="totalCountBlack" resultType="int">
     	select count(*) from users where users_note=3
     	<if test="searchType=='users_id'">
