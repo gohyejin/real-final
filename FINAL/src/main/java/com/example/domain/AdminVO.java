@@ -19,6 +19,7 @@ public class AdminVO {
    private int users_note;
    private int amount; 
    
+   
    public String getUsers_id() {
       return users_id;
    }
