@@ -5,7 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AdminVO {
-   private String users_id;
+   private String users_id;   
    private String users_pass;
    private String users_name;
    private Date users_birthday; 
