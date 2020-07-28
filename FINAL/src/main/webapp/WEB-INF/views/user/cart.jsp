@@ -32,7 +32,7 @@
 #tbl1{
 	float:left;
 	width:48%;
-	margin: 5px;
+	margin: 2px;
 	overflow: hidden;
 	border-collapse: collapse;
 }
@@ -40,7 +40,7 @@
 #tbl2 {
 	float:right;
 	width:48%;
-	margin: 5px;
+	margin: 2px;
 	overflow: hidden;
 	border-collapse: collapse;
 	height: 100px;
@@ -55,6 +55,10 @@ th {
 	padding: 15px;
 	font-size: 25px;
 	border-bottom:3px solid #e360f2;
+}
+
+.row{
+	height: 200px;
 }
 
 .title {
@@ -148,6 +152,39 @@ th {
    cursor: pointer;
 }
 
+.totalDel{
+	width: 73px;
+	height: 30px;
+	font-size: 13px;
+	margin-right: 18%;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	font-weight:lighter;
+}
+
+.btnUpdate{
+	width: 50px;
+	height: 25px;
+	font-size: 13px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	font-weight:lighter;
+	margin:auto;
+}
+
+input[type="number"]{
+	margin-bottom:5px;
+}
+
+.photo_package_title{
+	overflow:hidden;
+}
 </style>
 </head>
 <body>
@@ -164,19 +201,22 @@ th {
                <th colspan=6 id="PACKAGE">PACKAGE</th>
             </tr>
             <tr>
-               <th><input type="checkbox" class="chkAll"></th>
-               <th>IMAGE</th>
-               <th colspan=2>INFO</th>
-               <th colspan=2>PRICE</th>
+				<th><input type="checkbox" class="chkAll"></th>
+                <th width=120>IMAGE</th>
+                <th colspan=3 width=260>INFO</th>
+                <th width=80>PRICE</th>
+				<th width=10></th>
             </tr>
             {{#each plist}}
             <tr class="row">
                <td><input type="checkbox" class="chk"></td>
-               <td><img src="../display?fileName={{photo_package_image}}" width=150/></td>
-               <td class="photo_package_title">{{photo_package_title}}</td>
+               <td><img src="../display?fileName={{photo_package_image}}" width=110/></td>
+               <td class="photo_package_title" width=80>{{photo_package_title}}</td>
                <td>
-                  <span class="photo_package_price">{{photo_package_price}}</span>&nbsp;&nbsp;
-                  <span><input type="hidden" value={{package_cart_no}} size=3 class="package_cart_no"></span>
+                  <span class="photo_package_price">{{photo_package_price}}</span>
+				</td>
+				<td>
+				  <span><input type="hidden" value={{package_cart_no}} size=3 class="package_cart_no"></span>
                   <span><input type="number" value="{{package_cart_quantity}}" min="1" class="number"></span>
 				  <span><button class="btnUpdate">수정</button></span>
                </td>
@@ -187,23 +227,26 @@ th {
          </script>
          <table id="tbl2"></table>
          <script id="temp2" type="text/x-handlebars-template">
-            <tr class="row">
+            <tr>
                <th><button class="totalDel">선택삭제</button></th>
                <th colspan=6 id="COSTUME">COSTUME</th>
             </tr>
-            <tr class="row">
+            <tr>
                <th><input type="checkbox" class="chkAll"></th>
-               <th>IMAGE</th>
-               <th colspan=2>INFO</th>
-               <th colspan=2>PRICE</th>
+               <th width=120>IMAGE</th>
+               <th colspan=3 width=260>INFO</th>
+               <th width=80>PRICE</th>
+				<th width=10></th>
             </tr>
             {{#each clist}}
             <tr class="row">
                <td><input type="checkbox" class="chk"></td>
-               <td><img src="../display?fileName={{lend_costume_image}}" width=150/></td>
-               <td>{{lend_costume_name}}</td>
+               <td><img src="../display?fileName={{lend_costume_image}}" width=110/></td>
+               <td class="photo_package_title" width=80>{{lend_costume_name}}</td>
                <td>
-                  <span class="lend_costume_price">{{lend_costume_price}}</span>&nbsp;&nbsp;
+                  <span class="lend_costume_price">{{lend_costume_price}}</span>
+				</td>
+				<td>
                   <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>
                   <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="number"></span>
 				  <span><button class="btnUpdate">수정</button></span>
@@ -299,15 +342,15 @@ th {
 	});
 	
 	// 패키지 선택삭제
-	$("#tbl1").on("click", ".row .totalDel", function(){
+	$("#tbl1").on("click", ".totalDel", function(){
 	      if(!confirm("선택한 패키지를 삭제하시겠습니까?")) return;
 	      $("#tbl1 .row .chk:checked").each(function(){
-	    	 var cart_no=$(this).parent().parent().find(".package_cart_no").val();
+	    	 var pcart_no=$(this).parent().parent().find(".package_cart_no").val();
 	         $(this).prop("checked", false);
 	         $.ajax({
 	               type:"get",
 	               url:"/cart/pdelete",
-	               data:{"package_cart_no":cart_no},
+	               data:{"package_cart_no":pcart_no},
 	               dataType:"json",
 	               success:function(){}
 	         });
@@ -317,15 +360,15 @@ th {
 	   });
 	
 	// 의상 선택삭제
-	$("#tbl2").on("click", ".row .totalDel", function(){
+	$("#tbl2").on("click", ".totalDel", function(){
 	      if(!confirm("선택한 의상을 삭제하시겠습니까?")) return;
 	      $("#tbl2 .row .chk:checked").each(function(){
-	    	 var cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+	    	 var ccart_no=$(this).parent().parent().find(".costume_cart_no").val();
 	         $(this).prop("checked", false);
 	         $.ajax({
 	               type:"get",
 	               url:"/cart/cdelete",
-	               data:{"costume_cart_no":cart_no},
+	               data:{"costume_cart_no":ccart_no},
 	               dataType:"json",
 	               success:function(){}
 	         });
@@ -335,10 +378,9 @@ th {
 	   });
 	
 	// 패키지 삭제
-	$("#tbl1").on("click", ".row .btnDel", function(){
+	$("#tbl1").on("click", ".btnDel", function(){
       	if(!confirm("해당 패키지를 삭제하시겠습니까?")) return;
       	var cart_no=$(this).parent().parent().find(".package_cart_no").val();
-      
       	$.ajax({
             type:"get",
             url:"/cart/pdelete",

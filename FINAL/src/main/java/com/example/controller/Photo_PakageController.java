@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.mapper.Photo_PackageMapper;
-import com.example.service.Photo_PackageService;
 
 @Controller
 public class Photo_PakageController {
@@ -17,9 +16,6 @@ public class Photo_PakageController {
 	
 	@Autowired
 	Photo_PackageMapper mapper;
-	
-	@Autowired
-	Photo_PackageService service;
 	
 	@RequestMapping("insert")
 	public void insert() {
@@ -33,7 +29,6 @@ public class Photo_PakageController {
 	
 	@RequestMapping("list")
 	public void list(Model model)throws Exception {
-		System.out.println("g");
 		model.addAttribute("list", mapper.list());
 		
 	}
