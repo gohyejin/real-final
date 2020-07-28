@@ -123,16 +123,18 @@ button {
 	<script id="temp" type="text/x-handlebars-template">
 	{{#each QnAList}}
 		<div class="divContent">
+			<hr>
 			<div class="replydate">
-				{{board_reply_replyDate}}
-				[<b>{{board_reply_replyer}}</b>]
-				<button rno={{board_reply_rno}} style="{{printStyle board_reply_replyer}}">삭제</button>
+				<span class="replyDate">{{board_reply_replyDate}}</span>
+				<span class="replyer">{{board_reply_replyer}}</span>
+			</div><br>
+			<div class="board_reply" >
+				<button rno={{board_reply_rno}} style="{{printStyle board_reply_replyer}}">X</button>
+				{{board_reply}}
 			</div>
-			<div class="board_reply" >{{board_reply}}</div>
 		</div>
 	{{/each}}
 	</script>
-	
 	<div id="pagination"></div>
 </body>
 <script>
