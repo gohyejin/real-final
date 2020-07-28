@@ -123,30 +123,34 @@ button {
 	<script id="temp" type="text/x-handlebars-template">
 	{{#each QnAList}}
 		<div class="divContent">
-			<hr>
 			<div class="replydate">
-				<span class="replyDate">{{board_reply_replyDate}}</span>
-				<span class="replyer">{{board_reply_replyer}}</span>
-			</div><br>
-			<div class="board_reply" >
-				<button rno={{board_reply_rno}} style="{{printStyle board_reply_replyer}}">X</button>
-				{{board_reply}}
+				{{board_reply_replyDate}}
+				[<b>{{board_reply_replyer}}</b>]
+				<button rno={{board_reply_rno}} style="{{printStyle board_reply_replyer}}">삭제</button>
 			</div>
+			<div class="board_reply" >{{board_reply}}</div>
 		</div>
 	{{/each}}
 	</script>
+	
 	<div id="pagination"></div>
 </body>
 <script>
-	var board_reply_bno="${vo.board_bno}";
-	var board_reply_replyer="${users_id}";
-	var page=1;
-	
-	Handlebars.registerHelper("printStyle",function(writer){
-		   var src;
-		   if(board_reply_replyer!=writer) src="display:none;";
-		   return src;
-		});
+var board_reply_bno="${vo.board_bno}";
+var board_reply_replyer="${users_id}";
+var users_note="${users_note}";
+var page=1;
+
+Handlebars.registerHelper("printStyle",function(writer){
+	   var src;
+	   if(board_reply_replyer!=writer && users_note != 1) {
+		   src="display:none;";
+	   } else if(users_note == 1) {
+		   src="color:red;";
+	   }
+	   return src;
+	   
+	});
 	
 	getList();
 	function getList(){
