@@ -44,6 +44,7 @@ public class UsersController {
          result=1;
       }else{
          session.setAttribute("users_id", users_id);
+         session.setAttribute("users_note", usersVO.getUsers_note());
          result=2;
          if(ex_chk){
             Cookie cookie=new Cookie("users_id", users_id);

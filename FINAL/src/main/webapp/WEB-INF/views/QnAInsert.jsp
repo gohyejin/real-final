@@ -155,5 +155,17 @@ input[type="submit"]:active,#btnList:active {
 		if(!confirm("저장하시겠습니까?")) return;
 		frm.submit();
 	});
+	
+	if(frm.board_content=="") {
+		alert("내용을 입력하세요");
+		return;
+	}
+	
+	if(frm.board_title=="") {
+		alert("제목을 입력하세요");
+		return;
+	}
+	
+	
 </script>
 </html>
