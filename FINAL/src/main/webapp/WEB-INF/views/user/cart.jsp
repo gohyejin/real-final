@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>CART</title>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
 * {
 	font-family: '@여기어때 잘난체'
@@ -156,46 +157,62 @@ th {
 		<div class="title">⊙CART⊙</div>
 		<br><br>
 		<div id="content">
-			<table id="tbl1">
-				<tr class="row">
-					<th colspan=5 id="PACKAGE">PACKAGE</th>
-				</tr>
-				<tr class="row">
-					<th><input type="checkbox" class="chkAll"></th>
-					<th>IMAGE</th>
-					<th>INFO</th>
-					<th colspan=2>PRICE</th>
-				</tr>
-				<tr class="row">
-					<td><input type="checkbox" class="chk"></td>
-					<td>IMAGE(DB)</td>
-					<td><span>INFO(DB)</span> <span>단가(DB)</span> <span> <input
-							type="number" value="1" min="1" class="number">
-					</span></td>
-					<td>PRICE(DB)</td>
-					<td><button class="btnDel">X</button></td>
-				</tr>
-			</table>
-			<table id="tbl2">
-				<tr class="row">
-					<th colspan=5 id="COSTUME">COSTUME</th>
-				</tr>
-				<tr class="row">
-					<th><input type="checkbox" class="chkAll"></th>
-					<th>IMAGE</th>
-					<th>INFO</th>
-					<th colspan=2>PRICE</th>
-				</tr>
-				<tr class="row">
-					<td><input type="checkbox" class="chk"></td>
-					<td>IMAGE(DB)</td>
-					<td><span>INFO(DB)</span> <span>단가(DB)</span> <span> <input
-							type="number" value="1" min="1" class="number">
-					</span></td>
-					<td>PRICE(DB)</td>
-					<td><button class="btnDel">X</button></td>
-				</tr>
-			</table>
+         <table id="tbl1"></table>
+         <script id="temp1" type="text/x-handlebars-template">
+            <tr>
+               <th><button class="totalDel">선택삭제</button></th>
+               <th colspan=6 id="PACKAGE">PACKAGE</th>
+            </tr>
+            <tr>
+               <th><input type="checkbox" class="chkAll"></th>
+               <th>IMAGE</th>
+               <th colspan=2>INFO</th>
+               <th colspan=2>PRICE</th>
+            </tr>
+            {{#each plist}}
+            <tr class="row">
+               <td><input type="checkbox" class="chk"></td>
+               <td><img src="../display?fileName={{photo_package_image}}" width=150/></td>
+               <td class="photo_package_title">{{photo_package_title}}</td>
+               <td>
+                  <span class="photo_package_price">{{photo_package_price}}</span>&nbsp;&nbsp;
+                  <span><input type="hidden" value={{package_cart_no}} size=3 class="package_cart_no"></span>
+                  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="number"></span>
+				  <span><button class="btnUpdate">수정</button></span>
+               </td>
+               <td class="totprice">{{totprice}}</td>
+               <td><button class="btnDel">X</button></td>
+            </tr>
+            {{/each}}
+         </script>
+         <table id="tbl2"></table>
+         <script id="temp2" type="text/x-handlebars-template">
+            <tr class="row">
+               <th><button class="totalDel">선택삭제</button></th>
+               <th colspan=6 id="COSTUME">COSTUME</th>
+            </tr>
+            <tr class="row">
+               <th><input type="checkbox" class="chkAll"></th>
+               <th>IMAGE</th>
+               <th colspan=2>INFO</th>
+               <th colspan=2>PRICE</th>
+            </tr>
+            {{#each clist}}
+            <tr class="row">
+               <td><input type="checkbox" class="chk"></td>
+               <td><img src="../display?fileName={{lend_costume_image}}" width=150/></td>
+               <td>{{lend_costume_name}}</td>
+               <td>
+                  <span class="lend_costume_price">{{lend_costume_price}}</span>&nbsp;&nbsp;
+                  <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>
+                  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="number"></span>
+				  <span><button class="btnUpdate">수정</button></span>
+               </td>
+               <td class="totprice">{{totprice}}</td>
+               <td><button class="btnDel">X</button></td>
+            </tr>
+            {{/each}}
+         </script>
 		</div>
 		<div id="divFinal">
 			<div id="divSum">
@@ -230,6 +247,157 @@ th {
 	<jsp:include page="../chat.jsp" />
 </body>
 <script>
+	var cart_id="${users_id}";
+	getPlist();
+	getClist();
+	
+	// 최종 총액
+	function sum(){
+       var psum=$("#packageSum").val();
+       var csum=$("#costumeSum").val();
+       $.ajax({
+	     	 type:"get",
+	     	 url:"/cart/totsum",
+	     	 data:{"psum":psum, "csum":csum},
+	     	 dataType:"json",
+	     	 success:function(data){
+	     		 $("#totalSum").val(data);
+	     	}
+       });
+	}
+	
+	// 패키지 수량 수정
+	$("#tbl1").on("click", ".row .btnUpdate", function(){
+		var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
+		var package_cart_quantity=$(this).parent().parent().find(".number").val();
+		if(!confirm("해당 패키지의 수량을 수정하시겠습니까?")) return; 
+		$.ajax({
+			type:"get",
+			url:"/cart/pupdate",
+			data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
+			success:function(){
+				alert("수정되었습니다.");
+				getPlist();
+			}
+		});
+	});
+	
+	// 의상대여 수량 수정
+	$("#tbl2").on("click", ".row .btnUpdate", function(){
+		var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+		var costume_cart_quantity=$(this).parent().parent().find(".number").val();
+		if(!confirm("해당 의상의 수량을 수정하시겠습니까?")) return;
+		$.ajax({
+			type:"get",
+			url:"/cart/cupdate",
+			data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
+			success:function(){
+				alert("수정되었습니다.");
+				getClist();
+			}
+		});
+	});
+	
+	// 패키지 선택삭제
+	$("#tbl1").on("click", ".row .totalDel", function(){
+	      if(!confirm("선택한 패키지를 삭제하시겠습니까?")) return;
+	      $("#tbl1 .row .chk:checked").each(function(){
+	    	 var cart_no=$(this).parent().parent().find(".package_cart_no").val();
+	         $(this).prop("checked", false);
+	         $.ajax({
+	               type:"get",
+	               url:"/cart/pdelete",
+	               data:{"package_cart_no":cart_no},
+	               dataType:"json",
+	               success:function(){}
+	         });
+	      });
+	      alert("삭제되었습니다.");
+	      getPlist();
+	   });
+	
+	// 의상 선택삭제
+	$("#tbl2").on("click", ".row .totalDel", function(){
+	      if(!confirm("선택한 의상을 삭제하시겠습니까?")) return;
+	      $("#tbl2 .row .chk:checked").each(function(){
+	    	 var cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+	         $(this).prop("checked", false);
+	         $.ajax({
+	               type:"get",
+	               url:"/cart/cdelete",
+	               data:{"costume_cart_no":cart_no},
+	               dataType:"json",
+	               success:function(){}
+	         });
+	      });
+	      alert("삭제되었습니다.");
+	      getClist();
+	   });
+	
+	// 패키지 삭제
+	$("#tbl1").on("click", ".row .btnDel", function(){
+      	if(!confirm("해당 패키지를 삭제하시겠습니까?")) return;
+      	var cart_no=$(this).parent().parent().find(".package_cart_no").val();
+      
+      	$.ajax({
+            type:"get",
+            url:"/cart/pdelete",
+            data:{"package_cart_no":cart_no},
+            dataType:"json",
+            success:function(){}
+      	});
+      	alert("삭제되었습니다.");
+      	getPlist();
+   	});
+	
+	// 의상 삭제
+	$("#tbl2").on("click", ".row .btnDel", function(){
+      	if(!confirm("해당 의상을 삭제하시겠습니까?")) return;
+      	var cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+      
+      	$.ajax({
+            type:"get",
+            url:"/cart/cdelete",
+            data:{"costume_cart_no":cart_no},
+            dataType:"json",
+            success:function(){}
+      	});
+      	alert("삭제되었습니다.");
+      	getClist();
+   	});
+
+	// 패키지 목록
+	function getPlist(){
+	      $.ajax({
+	         type:"get",
+	         url:"/cart/plist",
+	         data:{"package_cart_id":cart_id},
+	         dataType:"json",
+	         success:function(data){
+	            var temp=Handlebars.compile($("#temp1").html());
+	            $("#tbl1").html(temp(data));
+	            $("#packageSum").val(data.psum);
+	            sum();
+	         }
+	      });
+	   }
+
+	// 의상대여 목록
+  	function getClist(){
+        $.ajax({
+           type:"get",
+           url:"/cart/clist",
+           data:{"costume_cart_id":cart_id},
+           dataType:"json",
+           success:function(data){
+              var temp=Handlebars.compile($("#temp2").html());
+              $("#tbl2").html(temp(data));
+              $("#costumeSum").val(data.csum);
+              sum();
+           }
+        });
+     }
+	
 	//각 행에있는 체크버튼을 클릭 했을 때
 	$("#tbl1").on("click", ".row .chk", function() {
 		var isChkAll = true;
