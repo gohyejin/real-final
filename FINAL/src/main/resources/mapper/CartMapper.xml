@@ -39,4 +39,8 @@
 		from lend_costume c, costume_cart cart
 		where lend_costume_code=costume_cart_costume_code and costume_cart_id=#{costume_cart_id};
     </select>
+    <insert id="pinsert">
+    	insert into package_cart(package_cart_id, package_cart_package_code, package_cart_quantity, package_cart_price)
+		values(#{package_cart_id}, #{package_cart_package_code}, 1, #{package_cart_price});
+    </insert>
 </mapper>

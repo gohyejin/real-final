@@ -66,4 +66,10 @@ public class CartController {
 	public void cupdate(Costume_CartVO costume_cartVO){
 		mapper.cUpdate(costume_cartVO);
 	}
+	
+	@RequestMapping("/cart/pinsert")
+	@ResponseBody
+	public void pinsert(Package_CartVO vo){
+		mapper.pinsert(vo);
+	}
 }

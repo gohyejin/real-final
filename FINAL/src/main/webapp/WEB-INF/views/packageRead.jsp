@@ -49,7 +49,7 @@
 	margin:auto;
 }
 
-.price button{
+.price #btnCart{
 	width:300px;
 	height: 100px;
 	font-size: 35px;
@@ -62,7 +62,7 @@
 	float:right;
 }
 
-.price button:active {
+.price #btnCart:active {
 	background: #cca6cf;
 }
 
@@ -114,6 +114,7 @@
 						<img src="../display?fileName=${vo.photo_package_image}" width=500 id="bigPig"/>
 						<img src="" width=500 id="bigImage"/>
 					</div><br>
+					<input type="submit" value="수정">
 				<div class="sImage">
 					<c:forEach items="${list}" var="vo">
          				<img src="../display?fileName=${vo}" width=120 class="smallImage">
@@ -121,7 +122,7 @@
 				</div>
 				<div class="price">
 					\<input type="text" value="${vo.photo_package_price}" size=10 readonly>
-					<button>장바구니에 담기</button>
+					<input type="button" value="장바구니에 담기" id="btnCart">
 				</div>
 			</div>
 		</div>
@@ -138,6 +139,22 @@ $("#tbl1 .sImage").on("click","img",function(){
 	$("#bigImage").show();
 	$("#tbl1 .bigPig #bigImage").attr("src",vo_image);
 })
+
+$("#btnCart").on("click", function(){
+	var title="${vo.photo_package_title}";
+	var id="${users_id}";
+	var package_code="${vo.photo_package_code}";
+	var price="${vo.photo_package_price}";
+	alert(title + " 패키지를 장바구니에 추가하시겠습니까?");
+	$.ajax({
+		type:"get",
+		url:"/cart/pinsert",
+		data:{"package_cart_id":id, "package_cart_package_code":package_code, "package_cart_price":price},
+		success:function(){}
+	});
+	if(!confirm("추가되었습니다. 장바구니로 이동하시겠습니까?")) return;
+	location.href="user/cart";
+});
 
 //상품이미지 버튼을 눌렀을때
 $("#btnImage").on("click", function(){
@@ -181,7 +198,6 @@ $(frm.file).on("change", function(){
   var file=$(frm.file)[0].files[0];
   $("#image").attr("src", URL.createObjectURL(file))
 })
-
 
 </script>
 </html>
