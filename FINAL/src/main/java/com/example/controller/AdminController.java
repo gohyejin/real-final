@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.domain.AdminVO;
 import com.example.domain.BoardVO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
@@ -38,7 +39,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/userUpdate", method=RequestMethod.POST)
-    public String userUpdate(UsersVO vo, int page) {
+    public String userUpdate(AdminVO vo, int page) {
     	mapper.userinfoUpdate(vo);
     	
     	return "redirect:userlist?page="+page;
@@ -64,7 +65,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/blackUpdate", method=RequestMethod.POST)
-    public String blackUpdate(UsersVO vo, int page) {
+    public String blackUpdate(AdminVO vo, int page) {
     	mapper.blackUpdate(vo);
     	
     	return "redirect:blacklist?page="+page;

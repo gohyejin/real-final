@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.mapper.AdminMapper">
 
-    <select id="userList" resultType="com.example.domain.UsersVO">
+    <select id="userList" resultType="com.example.domain.AdminVO">
         select * from users where users_note not in(1, 3)
         <if test="searchType=='users_id'">
         	and users_id like concat('%', #{keyword}, '%') order by users_regdate desc
@@ -17,7 +17,7 @@
       	 limit #{pageStart}, #{perPageNum}
     </select>
     
-    <select id="userRead" resultType="com.example.domain.UsersVO">
+    <select id="userRead" resultType="com.example.domain.AdminVO">
     	select * from users where users_id=#{users_id}
     </select>
     

@@ -6,7 +6,7 @@ public class UsersVO {
    private String users_id;
    private String users_pass;
    private String users_name;
-   private Date users_birthday;
+   private String users_birthday;
    private String users_zipcode;
    private String users_address;
    private String users_phone;
@@ -39,10 +39,10 @@ public String getUsers_name() {
 public void setUsers_name(String users_name) {
 	this.users_name = users_name;
 }
-public Date getUsers_birthday() {
+public String getUsers_birthday() {
 	return users_birthday;
 }
-public void setUsers_birthday(Date users_birthday) {
+public void setUsers_birthday(String users_birthday) {
 	this.users_birthday = users_birthday;
 }
 public String getUsers_zipcode() {
@@ -139,6 +139,5 @@ public String toString() {
 			+ ", users_birthdayMonth=" + users_birthdayMonth + ", users_birthdayDay=" + users_birthdayDay
 			+ ", users_addresss=" + users_addresss + ", users_addressDetail=" + users_addressDetail + "]";
 }
-   
-   
+
 }
