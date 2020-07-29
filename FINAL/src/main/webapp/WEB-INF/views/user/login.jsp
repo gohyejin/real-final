@@ -6,6 +6,8 @@
 	<meta charset="UTF-8">
 	<title>LOGIN</title>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 * {
 	font-family: 'Comic Sans MS'
@@ -135,13 +137,24 @@ body {
 		<div class="btn"><input type="button" id="btnSignup" value="SIGN UP"/></div>
 		<div class="or">or</div>
 		<div class="or">
-         <a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/index&response_type=code">
-            <img class="kakao" src="../display?fileName=kakao.png" width=345>
-         </a>
-      </div>
-      <div class="or">
-          <jsp:include page="naverlogin.jsp"></jsp:include>
-      </div>
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin&response_type=code">
+				<img class="kakao" src="../display?fileName=kakao.png" width=345>
+			</a>
+		</div>
+		<div class="or">
+			<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+			<div id="naver_id_login"></div>
+			  
+			<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+			<script type="text/javascript">
+				var naver_id_login = new naver_id_login("bkD4xjtArMlE7W11ZuTX", "http://localhost:8088/naverlogin");
+				var state = naver_id_login.getUniqState();
+				naver_id_login.setButton("green", 5, 70);
+				naver_id_login.setDomain("http://localhost:8088/index");
+				naver_id_login.setState(state);
+				naver_id_login.init_naver_id_login();
+			</script>
+		</div>
 		<br>
 	</div>
 </body>
