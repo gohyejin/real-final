@@ -4,10 +4,10 @@ public class Lend_CostumeVO {
 	private String lend_costume_code;
 	private String lend_costume_name;
 	private String lend_costume_image;
-	private String lend_costume_size;
 	private String lend_costume_content;
 	private int lend_costume_amount;
 	private int lend_costume_price;
+	
 	public String getLend_costume_code() {
 		return lend_costume_code;
 	}
@@ -26,12 +26,6 @@ public class Lend_CostumeVO {
 	public void setLend_costume_image(String lend_costume_image) {
 		this.lend_costume_image = lend_costume_image;
 	}
-	public String getLend_costume_size() {
-		return lend_costume_size;
-	}
-	public void setLend_costume_size(String lend_costume_size) {
-		this.lend_costume_size = lend_costume_size;
-	}
 	public String getLend_costume_content() {
 		return lend_costume_content;
 	}
@@ -49,6 +43,5 @@ public class Lend_CostumeVO {
 	}
 	public void setLend_costume_price(int lend_costume_price) {
 		this.lend_costume_price = lend_costume_price;
-	}
-		
+	}	
 }

@@ -6,7 +6,14 @@ public class Costume_CartVO {
 	private String costume_cart_costume_code;
 	private int costume_cart_quantity;
 	private int costume_cart_price;
+	private String costume_size;
 	
+	public String getCostume_size() {
+		return costume_size;
+	}
+	public void setCostume_size(String costume_size) {
+		this.costume_size = costume_size;
+	}
 	public int getCostume_cart_no() {
 		return costume_cart_no;
 	}

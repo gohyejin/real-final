@@ -126,15 +126,11 @@ select option {
 					</tr>
 					<tr>
 						<th width=150>SIZE</th>
-						<td width=200><select name="size">
-								<option
-									<c:out value="${vo.lend_costume_size=='S'?'selected':''}"/>>S</option>
-								<option
-									<c:out value="${vo.lend_costume_size=='M'?'selected':''}"/>>M</option>
-								<option
-									<c:out value="${vo.lend_costume_size=='L'?'selected':''}"/>>L</option>
-								<option
-									<c:out value="${vo.lend_costume_size=='XL'?'selected':''}"/>>XL</option>
+						<td width=200><select name="size" id="size">
+								<option>S</option>
+								<option>M</option>
+								<option>L</option>
+								<option>XL</option>
 						</select></td>
 						<th width=150>PRICE</th>
 						<td width=200>
@@ -143,13 +139,9 @@ select option {
 					</tr>
 					<tr>
 						<th>AMOUNT</th>
-						<td><select>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-						</select></td>
+						<td>
+							<input type="number" value="1" min="1" id="quantity">
+						</td>
 					</tr>
 					<tr>
 						<th>INFO</th>
@@ -161,7 +153,7 @@ select option {
 						</td>
 					</tr>
 					<tr>
-						<th colspan=4><button class="cart">장바구니에 담기</button></th>
+						<th colspan=4><input type="button" value="장바구니에 담기" class="cart"></th>
 					</tr>
 				</table>
 				<c:if test="${users_note==1}">
@@ -189,10 +181,21 @@ select option {
 	
 	//장바구니 버튼을 클릭했을 때
 	$(".cart").on("click", function(){
-		if(!confirm("상품을 장바구니에 담으시겠습니까?")) return;
-		frm.action="cartInsert";
-		frm.submit();
-		alert("장바구니에 담겼습니다!");
+		var title="${vo.lend_costume_name}";
+		var id="${users_id}";
+		var code="${vo.lend_costume_code}";
+		var quantity=$("#quantity").val();
+		var price="${vo.lend_costume_price}";
+		var size=$("#size").val();
+		if(!confirm(title + " 의상을 장바구니에 담으시겠습니까?")) return;
+		$.ajax({
+			type:"get",
+			url:"/cart/cinsert",
+			data:{"costume_cart_id":id, "costume_cart_costume_code":code, "costume_cart_quantity":quantity, "costume_cart_price":price, "costume_size":size},
+			success:function(){}
+		});
+		if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
+		location.href="user/cart";
 	});
 	
 	//수정버튼을 눌렀을 대

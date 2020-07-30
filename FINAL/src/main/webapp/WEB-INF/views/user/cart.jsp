@@ -209,8 +209,11 @@ input[type="number"]{
             </tr>
             {{#each plist}}
             <tr class="row">
-               <td><input type="checkbox" class="chk"></td>
-               <td><img src="../display?fileName={{photo_package_image}}" width=110/></td>
+               <td>
+					<input type="checkbox" class="chk">
+					<input type="hidden" value="{{package_cart_package_code}}" class="package_cart_package_code">
+				</td>
+               <td><img src="../display?fileName={{photo_package_image}}" width=110 class="image"/></td>
                <td class="photo_package_title" width=80>{{photo_package_title}}</td>
                <td>
                   <span class="photo_package_price">{{photo_package_price}}</span>
@@ -240,9 +243,12 @@ input[type="number"]{
             </tr>
             {{#each clist}}
             <tr class="row">
-               <td><input type="checkbox" class="chk"></td>
-               <td><img src="../display?fileName={{lend_costume_image}}" width=110/></td>
-               <td class="photo_package_title" width=80>{{lend_costume_name}}</td>
+               <td>
+					<input type="checkbox" class="chk">
+					<input type="hidden" value="{{costume_cart_costume_code}}" class="costume_cart_costume_code">
+				</td>
+               <td><img src="../display?fileName={{lend_costume_image}}" width=110 class="image"/></td>
+               <td class="photo_package_title" width=80>{{lend_costume_name}}/{{costume_size}}</td>
                <td>
                   <span class="lend_costume_price">{{lend_costume_price}}</span>
 				</td>
@@ -293,6 +299,18 @@ input[type="number"]{
 	var cart_id="${users_id}";
 	getPlist();
 	getClist();
+	
+	// 패키지 read
+	$("#tbl1").on("click", ".image", function(){
+		var package_code=$(this).parent().parent().find(".package_cart_package_code").val();
+		location.href="../packageRead?photo_package_code="+package_code;
+	});
+	
+	// 의상 read
+	$("#tbl2").on("click", ".image", function(){
+		var costume_code=$(this).parent().parent().find(".costume_cart_costume_code").val();
+		location.href="../costumeRead?lend_costume_code="+costume_code;
+	});
 	
 	// 최종 총액
 	function sum(){

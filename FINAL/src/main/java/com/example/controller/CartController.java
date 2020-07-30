@@ -72,4 +72,10 @@ public class CartController {
 	public void pinsert(Package_CartVO vo){
 		mapper.pinsert(vo);
 	}
+	
+	@RequestMapping("/cart/cinsert")
+	@ResponseBody
+	public void cinsert(Costume_CartVO vo){
+		mapper.cinsert(vo);
+	}
 }

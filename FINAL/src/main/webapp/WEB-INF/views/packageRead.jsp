@@ -145,14 +145,14 @@ $("#btnCart").on("click", function(){
 	var id="${users_id}";
 	var package_code="${vo.photo_package_code}";
 	var price="${vo.photo_package_price}";
-	alert(title + " 패키지를 장바구니에 추가하시겠습니까?");
+	if(!confirm(title + " 패키지를 장바구니에 담으시겠습니까?")) return;
 	$.ajax({
 		type:"get",
 		url:"/cart/pinsert",
 		data:{"package_cart_id":id, "package_cart_package_code":package_code, "package_cart_price":price},
 		success:function(){}
 	});
-	if(!confirm("추가되었습니다. 장바구니로 이동하시겠습니까?")) return;
+	if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
 	location.href="user/cart";
 });
 
