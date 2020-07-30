@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>MY PAGE</title>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 * {font-family:'@여기어때 잘난체'}
 
@@ -49,12 +50,12 @@ input[type=text],input[type=password] {
 	height: 50px;
 }
 
-.btnShow button,.btnShowchk button,#btnCode{
+.btnShow input[type=button],.btnShowchk input[type=button],#btnCode{
 	height: 55px;
 	width:90px;
 }
 
-input[type=button]{
+#previousPage{
 	width:510px;
 	height: 60px;
 	font-size: 30px;
@@ -67,7 +68,7 @@ input[type=button]{
 	border-radius:3px 3px 3px 3px;
 }
 
-input[type=submit]{
+#btnUpdate{
 	width:250px;
 	height: 60px;
 	font-size: 30px;
@@ -79,7 +80,7 @@ input[type=submit]{
 	border-radius:3px 3px 3px 3px;
 }
 
-input[type=reset]{
+#btnCancel{
 	width:250px;
 	height: 60px;
 	font-size: 30px;
@@ -100,45 +101,52 @@ input[type=reset]{
 		<br><br>
 		<div id="content">
 			<br>
-			<form name="frm" action="/user/update">
+			<form name="frm" action="/user/update" method="post">
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　ID" maxlength="20" />
+					<input type="text" size=60 placeholder="　　ID" value="${users_id}" maxlength="20" name="users_id" id="users_id" readonly />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="password" size=48 placeholder="　　PASSWORD" maxlength="20" class="pass" /> 
-					<span class="btnShow"><button>SHOW</button></span>
+					<input type="password" size=48 placeholder="　　PASSWORD" value="${vo.users_pass}" maxlength="20" name="users_pass" class="pass" /> 
+					<span class="btnShow"><input type="button" value="SHOW"></span>
 				</div>
 				<br>
 				<div class="btn">
-					<input type="password" size=48 placeholder="　　PASSWORD CHECK"maxlength="20" class="passchk" /> 
-					<span class="btnShowchk"><button>SHOW</button></span>
+					<input type="password" size=48 placeholder="　　PASSWORD CHECK" maxlength="20" class="passchk" /> 
+					<span class="btnShowchk"><input type="button" value="SHOW"></span>
+				</div>
+				<div>
+	            	<span id="users_passCHK">비밀번호 확인</span>
+         		</div>
+				<br>
+				<div class="btn">
+					<input type="text" size=60 placeholder="　　NAME" value="${vo.users_name}" name="users_name" id="users_name" />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　NAME" />
+					<input type="text" size=60 placeholder="　　BIRTHDAY" value="${vo.users_birthday}" name="users_birthday" id="users_birthday" />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　BIRTHDAY" />
+					<input type="text" size=48 placeholder="　　ADDRESSS" value="${vo.users_zipcode}" name="users_zipcode" id="users_zipcode" readonly /> 
+					<span><input type="button" value="ZIP CODE" id="btnCode"></span>
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=48 placeholder="　　ADDRESSS" /> 
-					<span><button id="btnCode">ZIP CODE</button></span>
+				<input type="text" size=60 placeholder="　　ADDRESS" value="${vo.users_address}" name="users_address" id="users_address" />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　PHONE NUMBER" />
+					<input type="text" size=60 placeholder="　　PHONE NUMBER" value="${vo.users_phone}" name="users_phone" id="users_phone" />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　E-MAIL" />
+					<input type="text" size=60 placeholder="　　E-MAIL" value="${vo.users_email}" name="users_email" id="users_email" readonly />
 				</div>
 				<br>
 				<div class="btn">
-					<input type="submit" value="UPDATE" /> 
-					<input type="reset" value="CANCEL" /><br>
+					<input type="submit" value="UPDATE" id="btnUpdate"/> 
+					<input type="reset" value="CANCEL" id="btnCancel"/><br>
 					<input type="button" value="PREVIOUS PAGE" id="previousPage"/>
 				</div>
 				<br>
@@ -149,6 +157,63 @@ input[type=reset]{
 
 </body>
 <script>
+	passChk();
+	
+	// 우편번호
+	   $("#btnCode").on("click", function(){
+		   openAddress();
+	   });
+	
+	// 우편번호
+   	function openAddress() {
+	      new daum.Postcode({
+	         oncomplete:function(data) {
+	            $("#users_zipcode").val(data.zonecode);
+	            $("#users_address").val(data.address);
+	            $("#users_address").focus();
+	            }
+	      }).open();
+	   }
+	
+	// 수정버튼 클릭시
+	$(frm).submit(function(e){
+		e.preventDefault();
+		var users_pass=$(".pass").val();
+		var users_passchk=$(".passchk").val();
+		var users_name=$("#users_name").val();
+		var users_birthday=$("#users_birthday").val();
+		var users_zipcode=$("#users_zipcode").val();
+		var users_address=$("#users_address").val();
+		var users_phone=$("#users_phone").val();
+		var users_email=$("#users_email").val();
+		
+		if(users_pass=="" || users_passchk=="" || users_name=="" || users_birthday=="" || users_zipcode=="" || users_address=="" || users_phone=="" || users_email==""){
+			alert("회원정보를 모두 입력해주세요.");
+		}else{
+			if(!confirm("회원정보를 수정하시겠습니까?")) return;
+			frm.submit();
+			alert("수정되었습니다.");	
+		}
+	});
+	
+	// 비밀번호 확인
+	function passChk(){
+      $(".pass, .passchk").change(function(){
+         var users_pass=$(".pass").val();
+         var users_passChk=$(".passchk").val();
+         
+         if(users_pass==users_passChk){
+            $("#users_passCHK").html("비밀번호가 일치합니다.");
+         }else if(users_pass!=users_passChk){
+            $("#users_passCHK").html("비밀번호가 일치하지 않습니다.");
+         }
+         
+         if(users_pass=="" || users_passChk==""){
+            $("#users_passCHK").html("");
+         }
+      });
+   }
+
 	$("#previousPage").on("click", function(){
 		location.href="/user/mypage";
 	})

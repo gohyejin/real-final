@@ -11,4 +11,9 @@
        insert into users(users_id, users_pass, users_name, users_birthday, users_zipcode, users_address, users_phone, users_email, users_gender, users_note, users_regdate) 
        values (#{users_id}, #{users_pass}, #{users_name}, #{users_birthday}, #{users_zipcode}, #{users_address}, #{users_phone}, #{users_email}, #{users_gender}, #{users_note}, now())
     </insert>
+    <update id="update">
+    	update users
+    	set users_pass=#{users_pass}, users_name=#{users_name}, users_birthday=#{users_birthday}, users_zipcode=#{users_zipcode}, users_address=#{users_address}, users_phone=#{users_phone}, users_email=#{users_email}
+    	where users_id=#{users_id}
+    </update>
 </mapper>

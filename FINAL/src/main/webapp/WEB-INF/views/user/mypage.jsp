@@ -136,7 +136,7 @@ td{
    
    /*UPDATE클릭 했을때 이동*/
    $(".userUpdate").on("click", function(){
-      location.href="/user/mypageRead";
+      location.href="/user/read";
    })
 
 </script>

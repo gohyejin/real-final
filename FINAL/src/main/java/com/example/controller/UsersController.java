@@ -36,6 +36,19 @@ public class UsersController {
 	@Autowired
 	private KakaoAPI kakao;
 
+	@RequestMapping(value="/user/update", method=RequestMethod.POST)
+	public String update(UsersVO vo){
+		umapper.update(vo);
+		return "/user/mypage";
+	}
+   
+	@RequestMapping("/user/read")
+	public String read(String users_id, Model model, HttpSession session){
+		users_id=(String)session.getAttribute("users_id");
+		model.addAttribute("vo", umapper.read(users_id));
+		return "/user/mypageRead";
+	}
+	
 	@RequestMapping(value = "/kakaoLogin")
 	public String login(@RequestParam("code") String code, HttpSession session) {
 		String access_Token = kakao.getAccessToken(code);
