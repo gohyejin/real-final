@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ChartMapper">
     <select id="ordersList" resultType="hashmap">
-        select orders_no, orders_id, users_name, photo_package_title, photo_package_amount, photo_package_price, (photo_package_amount*photo_package_price) package_total, 
-			lend_costume_name, lend_costume_amount, lend_costume_price, (lend_costume_amount*lend_costume_price) costume_total, 
-			orders_day, orders_paytype, users_point discount, (((photo_package_amount*photo_package_price)+(lend_costume_amount*lend_costume_price))-users_point) total
+        select orders_no, orders_id, users_name, photo_package_title, orders_package_quantity, photo_package_price, (orders_package_quantity*photo_package_price) package_total, 
+			lend_costume_name, orders_costume_quantity, lend_costume_price, (orders_costume_quantity*lend_costume_price) costume_total, 
+			orders_day, orders_paytype, users_point discount, (((orders_package_quantity*photo_package_price)+(orders_costume_quantity*lend_costume_price))-users_point) total
 		from orders, photo_package, lend_costume , users
 		where orders_package_code=photo_package_code and orders_costume_code=lend_costume_code and orders_id=users_id
 		<if test="searchType=='photo_package_title'">
@@ -50,6 +50,16 @@
     
     
     
+    <select id="orderread" resultType="com.example.domain.ChartReadVO">
+    	 select orders_no, orders_id, users_name, photo_package_title, orders_package_quantity, photo_package_price, (orders_package_quantity*photo_package_price) package_total, 
+			lend_costume_name, orders_costume_quantity, lend_costume_price, (orders_costume_quantity*lend_costume_price) costume_total, 
+			orders_day, orders_paytype, users_point discount, (((orders_package_quantity*photo_package_price)+(orders_costume_quantity*lend_costume_price))-users_point) total
+		from orders, photo_package, lend_costume , users
+		where orders_package_code=photo_package_code and orders_costume_code=lend_costume_code and orders_id=users_id and orders_no=#{orders_no}
+    </select>
+    
+    
+    
     <select id="packagechart" resultType="com.example.domain.ChartsVO">
         select photo_package_title name, (select count(orders_package_code) *photo_package_price) value
     	from orders o, photo_package p
@@ -60,7 +70,7 @@
     </select>
     
     <select id="packagechart2" resultType="com.example.domain.ChartsVO">
-        select photo_package_title name, count(photo_package_amount) value
+        select photo_package_title name, count(orders_package_quantity) value
     	from orders o, photo_package p
     	where p.photo_package_code=o.orders_package_code
     		and MONTH(orders_day) like #{month}
@@ -78,7 +88,7 @@
     </select>
     
     <select id="costumechart2" resultType="com.example.domain.ChartsVO">
-        select lend_costume_name name, count(lend_costume_amount) value
+        select lend_costume_name name, count(orders_costume_quantity) value
     	from orders o, lend_costume l
     	where l.lend_costume_code=o.orders_costume_code
     		and MONTH(orders_day) like #{month}

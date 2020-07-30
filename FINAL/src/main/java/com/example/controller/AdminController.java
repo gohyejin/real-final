@@ -21,7 +21,7 @@ public class AdminController {
 	@RequestMapping("/admin/userlist")
 	public String userList(Model model, Criteria cri) {
 		
-		cri.setPerPageNum(3);
+		cri.setPerPageNum(5);
     	PageMaker pm=new PageMaker();
     	pm.setCri(cri);
     	pm.setTotalCount(mapper.totalCount(cri));
@@ -48,7 +48,7 @@ public class AdminController {
 	@RequestMapping("/admin/blacklist")
 	public String blackList(Model model, Criteria cri) {
 		
-		cri.setPerPageNum(1);
+		cri.setPerPageNum(5);
     	PageMaker pm=new PageMaker();
     	pm.setCri(cri);
     	pm.setTotalCount(mapper.totalCountBlack(cri));

@@ -166,11 +166,11 @@ input[type="submit"]:active,#btnList:active {
 				</table>
 				<div class="button">
 					<c:if test="${users_id == vo.board_writer || users_note==1}">
-						<input type="submit" value="수정">
-						<input type="reset" value="취소" id="reset">
-						<input type="button" value="삭제" id="btnDel">
+						<input type="submit" value="UPDATE">
+						<input type="reset" value="RESET" id="reset">
+						<input type="button" value="DELETE" id="btnDel">
 					</c:if>
-					<input type="button" value="목록" id="btnList">
+					<input type="button" value="LIST" id="btnList">
 				</div>
 			</form>
 			<jsp:include page="QnAReply.jsp"/>

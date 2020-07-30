@@ -6,39 +6,69 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>패키지별 차트</title>
+	<title>COSTUME CHART</title>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
+   <style>
+select{
+	height: 30px;
+	font-size: 20px;
+	border: none;
+}
+
+#COSTUME{
+   color:#e360f2;
+   font-size: 50px;
+   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+   margin:20px;
+}
+#chart_div3,#chart_div4{
+	margin:auto;
+}
+
+.cbtnMonth{
+	width: 80px;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.cbtnMonth:active {
+	background: #cca6cf;
+}
+
+</style>
 </head>
 <body>
-	<h1>코스튬 차트</h1>
-		<a href="/admin/chart">전체 결제</a>
-		<a href="/admin/packagechart">패키지차트</a>
-		<select id="selMonth" style="height:25px;">
-			<option value="">선택하세요</option>
+		<div id="COSTUME">COSTUME CHART</div>
+		<select id="cselMonth">
 			<option value="1">1월</option>
 			<option value="2">2월</option>
 			<option value="3">3월</option>
 			<option value="4">4월</option>
 			<option value="5">5월</option>
 			<option value="6">6월</option>
-			<option value="7">7월</option>
+			<option value="7" selected>7월</option>
 			<option value="8">8월</option>
 			<option value="9">9월</option>
 			<option value="10">10월</option>
 			<option value="11">11월</option>
 			<option value="12">12월</option>
 		</select>
-		<button id="btnMonth">보기</button>
-		<div id="chart_div" style="width:600px; height:500px;"></div>
-		<div id="chart_div2" style="width:600px; height:500px;"></div>
+		<button class="cbtnMonth">SHOW</button>
+		<div id="chart_div3" style="width: 600px; height: 500px;"></div>
+		<div id="chart_div4" style="width: 600px; height: 500px;"></div>
+
 </body>
 <script type="text/javascript">
 var varTitle;
 
-$("#btnMonth").click(function(){
-	var month=$("#selMonth option:checked").val();
+$(".cbtnMonth").click(function(){
+	var month=$("#cselMonth option:checked").val();
 	varTitle=$("#selChart option:checked").text();
 	changeChart();
 });
@@ -50,7 +80,7 @@ function changeChart(){
     google.charts.setOnLoadCallback(drawVisualization);
     function drawVisualization() { 
     	
-    	var month=$("#selMonth option:checked").val();
+    	var month=$("#cselMonth option:checked").val();
     	
         $.ajax({
             type:"get",
@@ -71,7 +101,7 @@ function changeChart(){
                 };
 
                 /* 차트 그리기 */
-                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div3'));
                 chart.draw(data, options);
                 
             }
@@ -94,7 +124,7 @@ function changeChart(){
                 };
 
                 /* 차트 그리기 */
-                var chart = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div4'));
                 chart.draw(data, options);
                 
             }

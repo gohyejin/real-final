@@ -6,33 +6,141 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원목록</title>
+<title>BLACK LIST</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<style>
+* {
+	font-family: '@여기어때 잘난체'
+}
+
+#page {
+	background: white;
+	margin: 15px;
+	height: hidden;
+}
+
+#content {
+	margin-top: none;
+	margin-left: 70px;
+	margin-right: 70px;
+	padding: 30px margin-top: 10px;
+	text-align: center;
+}
+
+#tbl1 {
+	width: 70%;
+	margin: auto;
+	overflow: hidden;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.title {
+	font-size: 50px;
+	text-align: center;
+	margin: auto;
+	margin-top:10px;
+}
+
+td {
+	padding: 15px;
+	border-bottom: 1px solid #e360f2;
+}
+
+th {
+	padding: 15px;
+	font-size: 25px;
+	border-bottom: 3px solid #e360f2;
+}
+
+#btnInsert {
+	text-align: center;
+}
+
+#pagination{
+	padding:20px;
+	text-align:center;
+}
+
+.search{
+	margin:auto;
+	text-align:center;
+	padding:20px;
+}
+
+input[type="submit"]{
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+}
+
+
+input[type="submit"]:active {
+	background: #cca6cf;
+}
+
+input[type="text"]::placeholder {
+	text-align: center;
+}
+
+input[type="text"]{
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	padding: 5px;
+}
+
+select{
+	height: 30px;
+	font-size: 20px;
+	border: none;
+}
+
+hr{
+	border: 2px solid #e360f2;
+	width:70%;
+}
+
+#total{
+	text-align:center;
+}
+
+</style>
 </head>
 <body>
-	
-	<h1>블랙리스트목록</h1>
-	블랙리스트수 : <span id="total">${pm.totalCount}</span>
+	<jsp:include page="../menu.jsp" />
+	<div id="page">
+	<jsp:include page="../header.jsp" />
+	<div id="total">BLACK USERS COUNT : ${pm.totalCount}</div>
+	<div class="title">⊙ BLACK LIST ⊙</div>
 	<div>
 		<form name="frm" action="/admin/blacklist">
+		<div class="search">
 			<select name="searchType">
-				<option value="users_id" <c:out value="${cri.searchType=='users_id'?'selected':''}"/>>회원아이디</option>
-				<option value="users_name" <c:out value="${cri.searchType=='users_name'?'selected':''}"/>>회원이름</option>
-				<option value="users_point" <c:out value="${cri.searchType=='users_point'?'selected':''}"/>>회원포인트</option>
+				<option value="users_id" <c:out value="${cri.searchType=='users_id'?'selected':''}"/>>ID</option>
+				<option value="users_name" <c:out value="${cri.searchType=='users_name'?'selected':''}"/>>NAME</option>
+				<option value="users_point" <c:out value="${cri.searchType=='users_point'?'selected':''}"/>>POINT</option>
 			</select>
-			<input type="text" name="keyword" value="${cri.keyword}">
-			<input type="submit" value="검색">
+			<input type="text" name="keyword" value="${cri.keyword}"size=50 placeholder="SEARCH TERM"> 
+			<input type="submit" value="SEARCH">
+		</div><hr>
 		</form>
 	</div>
-	<table border=1 id="tbl">
+	<table id="tbl1">
 		<tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>생일</th>
-			<th>연락처</th>
-			<th>이메일</th>
-			<th>포인트</th>
-			<th>권한</th>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>BIRTHDAY</th>
+			<th>TEL</th>
+			<th>E-MAIL</th>
+			<th>POINT</th>
+			<th>TYPE</th>
 		</tr>
 		<c:forEach items="${blacklist}" var="vo">
 			<tr class="row">
@@ -73,12 +181,11 @@
 		            <a href="${pm.endPage+1}">▶</a>
 		        </c:if>
     		</div>
-    		
+    			<jsp:include page="../chat.jsp"/>
+	<jsp:include page="../top.jsp"/>
+	</div>
 </body>
 <script>
-	
-	
-	
 	$("#tbl").on("click", ".row", function(){
 		var users_id=$(this).find(".users_id").html();
 		var page=$("#page2").val();

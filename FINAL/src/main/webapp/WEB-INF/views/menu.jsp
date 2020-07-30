@@ -19,6 +19,18 @@
 	background-color:rgba(255,255,255,0.3);
 }
 
+#menu1 {
+	width: 1780px;
+	padding: 10px;
+	color: black;
+	position: fixed;
+	right: 50px;
+	top: 100px;
+	text-align:right;
+	background:white;
+	background-color:rgba(255,255,255,0.3);
+}
+
 .items0,.items1,.items2,.items3,.items4,.items5,.items6,.items7,.items8,.items5-1{
 	color: black;
 	font-size: 30px;
@@ -29,7 +41,17 @@
 	background-color:rgba(0.7);
 }
 
-.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover{
+.items1-1,.items2-1,.items3-1{
+	color: black;
+	font-size: 20px;
+	cursor: pointer;
+	display: inline-block;
+	margin: 10px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	background-color:rgba(0.7);
+}
+
+.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover,.items1-1:hover,.items2-1:hover,.items3-1:hover{
 	color: #e360f2;
 }
 
@@ -58,11 +80,6 @@ a {
 		<div class="items4">
 			<b>CART</b>
 		</div>
-		<c:if test="${users_note==1}">
-		<div class="items5-1">
-			<b>ADMIN PAGE</b>
-		</div>
-		</c:if>
 		<c:if test="${users_note==0}">
 		<div class="items5">
 			<b>MY PAGE</b>
@@ -72,12 +89,30 @@ a {
          <div class="items6">
             <b>LOGIN</b>
          </div>
-      </c:if>
-      <c:if test="${users_id!=null}">
-         [ <b>${users_id}</b>님 ]
+    	</c:if>
+		<c:if test="${users_note==1}">
+			[ ${users_id} ] 관리자님
+		</c:if>
+		<c:if test="${users_note==0}">
+		[ <b>${users_id}</b>님 ]
+		</c:if>
+     	<c:if test="${users_id!=null}">
          <div class="items7">
             <a href="/user/logout"><b>LOGOUT</b></a>
-         </div>
+        </div>
+		</c:if>
+	</div>
+	<div id="menu1">
+	<c:if test="${users_note==1}">
+		<div class="items1-1">
+			<b>USER LIST</b>
+		</div>
+		<div class="items2-1">
+			<b>ORDERS LIST</b>
+		</div>
+		<div class="items3-1">
+			<b>BLACK LIST</b>
+		</div>
       </c:if>
 	</div>
 <script>
@@ -102,9 +137,19 @@ a {
 		}
 	});
 	
-	/*ADMIN PGAE메뉴*/
-	$(".items5-1").on("click",function(){
+	/*ADMIN USER LIST메뉴*/
+	$(".items1-1").on("click",function(){
 		location.href="/admin/userlist";
+	})
+	
+	/*ADMIN CHART메뉴*/
+	$(".items2-1").on("click",function(){
+		location.href="/admin/chart";
+	})
+	
+	/*ADMIN CHART메뉴*/
+	$(".items3-1").on("click",function(){
+		location.href="/admin/blacklist";
 	})
 	
 	/*Q&A메뉴*/

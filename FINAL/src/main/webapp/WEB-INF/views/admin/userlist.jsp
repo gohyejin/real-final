@@ -40,6 +40,7 @@
 	font-size: 50px;
 	text-align: center;
 	margin: auto;
+	margin-top:10px;
 }
 
 td {
@@ -57,7 +58,7 @@ th {
 	text-align: center;
 }
 
-.row2:hover {
+.row:hover {
 	background:hotpink;
 	cursor: pointer;
 	color:#fff;
@@ -68,10 +69,10 @@ th {
 	text-align:center;
 }
 
-.select{
+.search{
 	margin:auto;
 	text-align:center;
-	margin:10px;
+	padding:20px;
 }
 
 input[type="submit"]{
@@ -85,16 +86,12 @@ input[type="submit"]{
 	border-radius: 3px 3px 3px 3px;
 }
 
-#insert{
-	width: 100%;
-	height: 30px;
-	float:right;
-}
 
 input[type="submit"]:active {
 	background: #cca6cf;
 }
-input::placeholder {
+
+input[type="text"]::placeholder {
 	text-align: center;
 }
 
@@ -104,27 +101,34 @@ input[type="text"]{
 	text-align: center;
 	border: none;
 	padding: 5px;
-	margin-left:8%;
 }
 
 select{
 	height: 30px;
 	font-size: 20px;
-	text-align: center;
 	border: none;
-	padding: 5px;
 }
+
+hr{
+	border: 2px solid #e360f2;
+	width:70%;
+}
+
+#total{
+	text-align:center;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
 	<div id="page">
 	<jsp:include page="../header.jsp" />
-	USERS COUNT : <span id="total">${pm.totalCount}</span>
-		<div class="title">⊙ USERS LIST ⊙</div>
+	<div id="total">USERS COUNT : ${pm.totalCount}</div>
+	<div class="title">⊙ USERS LIST ⊙</div>
 	<div>
 		<form name="frm" action="/admin/userlist">
-		<div class="select">
+		<div class="search">
 			<select name="searchType">
 				<option value="users_id"
 					<c:out value="${cri.searchType=='users_id'?'selected':''}"/>>ID</option>
@@ -135,18 +139,18 @@ select{
 			</select>
 				<input type="text" name="keyword" value="${cri.keyword}"size=50 placeholder="SEARCH TERM"> 
 				<input type="submit" value="SEARCH">
-			</div>
+			</div><hr>
 		</form>
 	</div>
-	<table border=1 id="tbl1">
+	<table id="tbl1">
 		<tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>생일</th>
-			<th>연락처</th>
-			<th>이메일</th>
-			<th>포인트</th>
-			<th>권한</th>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>BIRTHDAY</th>
+			<th>TEL</th>
+			<th>E-MAIL</th>
+			<th>POINT</th>
+			<th>TYPE</th>
 		</tr>
 		<c:forEach items="${userlist}" var="vo">
 			<tr class="row">
@@ -185,7 +189,8 @@ select{
         </c:if>
   	</div>
 </div>
-<jsp:include page="../chat.jsp" />
+	<jsp:include page="../chat.jsp"/>
+	<jsp:include page="../top.jsp"/>
 </body>
 <script>
 	$("#tbl1").on("click",".row",function() {

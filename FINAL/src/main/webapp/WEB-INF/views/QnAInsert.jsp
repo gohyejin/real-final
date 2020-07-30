@@ -139,33 +139,31 @@ input[type="submit"]:active,#btnList:active {
 	<jsp:include page="chat.jsp" />
 </body>
 <script>
+var users_id="${users_id}";
+if(users_id == "") {
+   $("#users_id").val("GUEST");
+}
 
-	var users_id="${users_id}";
-	if(users_id == "") {
-		$("#users_id").val("GUEST");
-	}
-	
-	$("#btnList").on("click", function(){
-		var page=$(frm.page).val();
-		location.href="QnA?page="+page;
-	});
-	
-	$(frm).submit(function(e){
-		e.preventDefault();
-		if(!confirm("저장하시겠습니까?")) return;
-		frm.submit();
-	});
-	
-	if(frm.board_content=="") {
-		alert("내용을 입력하세요");
-		return;
-	}
-	
-	if(frm.board_title=="") {
-		alert("제목을 입력하세요");
-		return;
-	}
-	
-	
+$("#btnList").on("click", function(){
+   var page=$(frm.page).val();
+   location.href="QnA?page="+page;
+});
+
+$(frm).submit(function(e){
+   e.preventDefault();
+   if($(frm.board_title).val()=="") {
+      alert("제목을 입력하세요");
+      return;
+   } 
+   
+   if($(frm.board_content).val()=="") {
+      alert("내용을 입력하세요");   
+      return;
+   }
+   if(!confirm("저장하시겠습니까?")) return;
+   
+   frm.submit();
+   
+});
 </script>
 </html>

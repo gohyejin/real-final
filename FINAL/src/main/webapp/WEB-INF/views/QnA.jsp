@@ -51,11 +51,6 @@ th {
 	font-size: 25px;
 	border-bottom: 3px solid #e360f2;
 }
-
-#btnInsert {
-	text-align: center;
-}
-
 .row2:hover {
 	background:hotpink;
 	cursor: pointer;
@@ -77,6 +72,7 @@ th {
 	color: white;
 	border: none;
 	border-radius: 3px 3px 3px 3px;
+	text-align: center;
 }
 
 #insert{
@@ -142,7 +138,6 @@ th {
 <script>
 	  
 	$("#tbl1").on("click", ".row2", function(){
-		
 		var board_bno=$(this).find(".board_bno").html();
 		var page=$("#page2").val();
 		location.href="QnARead?board_bno="+board_bno+"&page="+page;

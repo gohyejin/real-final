@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,30 +38,17 @@ public class ChartController {
 		
 		
 	}
-	/*
-	@RequestMapping("/admin/chart2")
-	public void ordersList() {
+	
+	@RequestMapping("/admin/orderread")
+	public void orderread(int orders_no, Model model){
+		model.addAttribute("vo", mapper.orderread(orders_no));
 		
 	}
-
-	@RequestMapping(value="/chart.json")
-	@ResponseBody
-	public HashMap<String , Object> ordersListjson(Criteria cri) {
-		HashMap<String , Object> map=new HashMap<String , Object>();
+	
+	@RequestMapping("/admin/PCchart")
+	public void PCchart() {
 		
-		cri.setPerPageNum(5);
-    	PageMaker pm=new PageMaker();
-		pm.setCri(cri);
-		pm.setTotalCount(mapper.orderCount(cri));
-		map.put("pm", pm);
-		
-		map.put("cri", cri);
-    	map.put("ordersList", mapper.ordersListjson(cri));
-    	map.put("count", mapper.orderCount(cri));
-		
-		return map;
 	}
-	*/
 	
 	@RequestMapping("/admin/packagechart")
 	public void packagechart() {
