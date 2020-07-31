@@ -111,6 +111,10 @@ hr{
 	text-align:center;
 }
 
+.active {
+	color: hotpink;
+}
+
 </style>
 </head>
 <body>

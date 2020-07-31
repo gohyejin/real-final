@@ -9,68 +9,138 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>COSTUME_REPLY_LIST</title>
 <style>
-.divContent {
-	width: 800px;
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid black;
+* {
+	font-family: '@여기어때 잘난체'
+}
+
+#page {
+	background: white;
+	margin: 15px;
+	height: hidden;
+}
+
+#content {
+	margin-top: none;
+	margin-left: 70px;
+	margin-right: 70px;
+	padding: 30px;
+	margin-top: 10px;
 	text-align: center;
-	padding: 10px;
-	margin: auto;
+	margin-top: 10px;
 }
 
-#divInput {
-	width: 800px;
+textarea {
+	resize: none;
+	font-size: 20px;
+	border: 1px solid #BDBDBD;
 	padding: 10px;
-	margin-bottom: 10px;
-	background: #e6bbea;
-	color: white;
-	margin: auto;
+	border-radius: 5px 5px 5px 5px;
 }
 
-#divInsert {
-	width: 800px;
-	padding: 10px;
-	margin-bottom: 10px;
+#tbl2 {
+	width: 60%;
+	margin: auto;
+	overflow: hidden;
+	border-collapse: collapse;
+}
+
+.title {
+	font-size: 50px;
+	text-align: center;
+	margin: auto;
+	padding: 20px;
+}
+
+#txtReply {
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	padding: 5px;
+}
+
+#btnInsert {
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
 	background: #e6bbea;
 	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	float: right;
+}
+
+#btnInsert:active {
+	background: #cca6cf;
+}
+
+input::placeholder {
+	text-align: center;
+}
+
+hr {
+	border: 1px dotted #e360f2;
 }
 
 button {
-	
+	float: right;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
 }
 
-a {
-	text-decoration: none;
+.replyDate {
+	float: right;
+	font-size: 12px;
 }
 
 .active {
-	color: red;
+	color: hotpink;
 }
 
-#pagination {
-	margin-top:10px;
-	text-align: center;
+.replyer {
+	font-weight: bold;
+	font-size: 12px;
+	float: left;
+}
+
+#pagination{
+	padding:20px;
+	text-align:center;
+}
+#divInput{
+	width:60%;
+	text-align:center;
+	margin:auto;
+}
+
+#countDiv{
+	text-align:center;
+	width:100%;
 }
 </style>
 </head>
 <body>
-	<div class="title">⊙COSTUME_REPLY_LIST⊙</div>
+	<div id="countDiv">REPLY COUNT : <span id="count"></span></div>
+	<div class="title">⊙ REPLY ⊙</div>
 	<div id="divInput">
-		COSTUME_REPLY_COUNT:<span id="count"></span> <input type="text"
-			id="txtReply" size=50>
-		<button id="btnInsert">✏️</button>
+		<input type="text" id="txtReply" size=50 placeholder="CONTENT">
+		<button id="btnInsert">INSERT</button>
 	</div>
-	<div class="tbl"></div>
+	<div id="tbl2"></div>
 	<script id="temp" type="text/x-handlebars-template">
 	{{#each clist}}
 		<div class="divContent">
+			<hr>
 			<div class="replydate">
-				{{costume_reply_replyDate}}
-				[<b>{{costume_reply_replyer}}</b>]
-				<button costume_reply_rno={{costume_reply_rno}} style="{{printStyle costume_reply_replyer}}">삭제</button>
+				<span class="replyDate">{{costume_reply_replyDate}}</span>
+				<span class="replyer">{{costume_reply_replyer}}</span>
+			</div><br>
+			<div class="reply" >
+				<button costume_reply_rno={{costume_reply_rno}} style="{{printStyle costume_reply_replyer}}">X</button>
+				{{costume_reply}}
 			</div>
-			<div class="reply">{{costume_reply}}</div>
 		</div>
 	{{/each}}
 
@@ -110,7 +180,7 @@ a {
 			success : function(data) {
 				//alert(bno);
 				var temp = Handlebars.compile($("#temp").html());
-				$(".tbl").html(temp(data));
+				$("#tbl2").html(temp(data));
 				$("#count").html(data.pm.totalCount);
 
 				//페이지 리스트 출력
@@ -120,10 +190,10 @@ a {
 				}
 				for (var i = data.pm.startPage; i <= data.pm.endPage; i++) {
 					if (page == i) {
-						str += "<a href='" + i + "' class='active'>" + i
-								+ "</a>";
+						str += "[<a href='" + i + "' class='active'>" + i
+								+ "</a>]";
 					} else {
-						str += "<a href='" + i + "'>" + i + "</a>";
+						str += "[<a href='" + i + "'>" + i + "</a>]";
 					}
 				}
 				if (data.pm.next) {
@@ -136,7 +206,7 @@ a {
 	}
 
 	//댓글삭제하기
-	$(".tbl").on("click", "button", function() {
+	$("#tbl2").on("click", "button", function() {
 		var costume_reply_rno = $(this).attr("costume_reply_rno");
 		if (!confirm(costume_reply_rno + "번의 댓글을 삭제하시겠습니까?"))
 			return;

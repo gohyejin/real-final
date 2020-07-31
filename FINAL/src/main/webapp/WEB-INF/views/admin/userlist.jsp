@@ -86,6 +86,9 @@ input[type="submit"]{
 	border-radius: 3px 3px 3px 3px;
 }
 
+.active {
+	color: hotpink;
+}
 
 input[type="submit"]:active {
 	background: #cca6cf;

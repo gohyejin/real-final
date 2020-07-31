@@ -70,7 +70,7 @@ select option {
 	text-align-last: center;
 }
 
-.cart {
+.cart,#btnList {
 	width: 300px;
 	height: 100px;
 	font-size: 35px;
@@ -80,14 +80,59 @@ select option {
 	color: white;
 	border: none;
 	border-radius: 3px 3px 3px 3px;
-	float: right;
 }
 
-.cart:active {
+.cart:active,#btnList:active {
 	background: #cca6cf;
 }
 
-	input[type=file]{visibility:hidden; height:0px;}
+input[type=file] {
+	visibility: hidden;
+	height: 0px;
+}
+
+input[type=text] {
+	height: 25px;
+	font-size: 20px;
+	text-align:center;
+	border:none;
+}
+
+input[type=number] {
+	width:60px;
+	height: 25px;
+	font-size: 20px;
+	text-align:center;
+	border:none;
+}
+
+.btn{
+	width:100%;
+	padding:20px;
+}
+
+.price input[type='text']{
+	height: 60px;
+	text-align: left;
+	font-size: 60px;
+	font-weight: bold;
+	outline: none;
+	border: none;
+	color:#fc8da0;
+}
+
+.price{
+	text-align: left;
+	font-size: 40px;
+	font-weight: bold;
+	padding-left:80px;
+}
+
+.name input[type='text']{
+	text-align: left;
+	
+}
+
 </style>
 </head>
 <body>
@@ -103,25 +148,22 @@ select option {
 				<!-- <input type="hidden" value="${users_id}"> -->
 				<table id="tbl1">
 					<tr>
-						<!-- 예시사진 -->
+						<th width=150>TITLE</th>
+						<td colspan=4 class="name">
+							<input type="text" value="[${vo.lend_costume_code}]" name="lend_costume_code" readonly size=4>
+							<input type="text" value="${vo.lend_costume_name}" name="lend_costume_name" size=35>
+						</td>
 						<td rowspan=6 width=500><input type="file" name="file">
 							<c:if
 								test="${vo.lend_costume_image!=null && vo.lend_costume_image!=''}">
 								<img id="image" src="/display?fileName=${vo.lend_costume_image}"
-									width=500 />
+									width=400 />
 							</c:if> <c:if
 								test="${vo.lend_costume_image==null || vo.lend_costume_image==''}">
 								<img id="image" src="http://placehold.it/100x80" width=100>
 							</c:if> <!-- 예시사진 --> 
 							
-							<input type="hidden" name="lend_costume_image"
-							value="${vo.lend_costume_image}"></td>
-					</tr>
-					<tr>
-						<th width=150>TITLE</th>
-						<td><input type="text" value="${vo.lend_costume_code}" name="lend_costume_code" readonly></td>
-						<td colspan=3>
-							<input type="text" value="${vo.lend_costume_name}" name="lend_costume_name">
+							<input type="hidden" name="lend_costume_image" value="${vo.lend_costume_image}">
 						</td>
 					</tr>
 					<tr>
@@ -132,20 +174,11 @@ select option {
 								<option>L</option>
 								<option>XL</option>
 						</select></td>
-						<th width=150>PRICE</th>
-						<td width=200>
-							<input type="text" value="${vo.lend_costume_price}" name="lend_costume_price">
-						</td>
-					</tr>
-					<tr>
 						<th>AMOUNT</th>
 						<td>
 							<input type="number" value="1" min="1" id="quantity">
 						</td>
-					</tr>
-					<tr>
-						<th>INFO</th>
-						<td colspan=3></td>
+						
 					</tr>
 					<tr>
 						<td colspan=4>
@@ -153,19 +186,24 @@ select option {
 						</td>
 					</tr>
 					<tr>
-						<th colspan=4><input type="button" value="장바구니에 담기" class="cart"></th>
+						<td width=200 class="price" colspan=4>
+							\<input type="text" value="${vo.lend_costume_price}" name="lend_costume_price" size=10>
+						</td>
 					</tr>
 				</table>
-				<c:if test="${users_note==1}">
-					<input type="submit" value="수정">
-				</c:if>
-				<input type="button" value="목록" id="btnList"
-					onClick="location.href='costumeList'">
+				<div class="btn">
+					<c:if test="${users_note==1}">
+						<input type="submit" value="수정">
+					</c:if>
+					<input type="button" value="LIST" id="btnList" onClick="location.href='costumeList'">
+					<input type="button" value="장바구니에 담기" class="cart">
+				</div>
 			</form>
 		</div>
 		<jsp:include page="costumeReply.jsp" />
 	</div>
 	<jsp:include page="chat.jsp" />
+	<jsp:include page="top.jsp" />
 </body>
 <script>
 	//이미지 클릭했을떄

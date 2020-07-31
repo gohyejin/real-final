@@ -55,20 +55,6 @@ th {
 	margin: auto;
 }
 
-select option {
-	height: 25px;
-	font-size: 20px;
-	text-align-last: center;
-}
-
-select {
-	width: 100%;
-	height: 25px;
-	font-size: 20px;
-	border: none;
-	text-align-last: center;
-}
-
 .cart {
 	width: 200px;
 	height: 60px;
@@ -87,12 +73,95 @@ select {
 }
 
 .active {
-	color: red;
+	color: hotpink;
 }
 
 a {
 	color: black;
 	text-decoration: none;
+}
+
+select {
+	height: 30px;
+	font-size: 20px;
+	border: none;
+}
+
+hr {
+	border: 2px solid #e360f2;
+	width: 70%;
+}
+
+.search {
+	margin: auto;
+	text-align: center;
+	padding: 20px;
+}
+
+input[type="submit"] {
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#pagination {
+	padding: 20px;
+	text-align: center;
+	bottom: 30px;
+}
+
+input[type="submit"]:active {
+	background: #cca6cf;
+}
+
+#total {
+	text-align: center;
+}
+
+input[type="text"]::placeholder {
+	text-align: center;
+}
+
+input[type="text"] {
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	padding: 5px;
+}
+
+.box {
+	width: 30%;
+	float: left;
+	text-align: center;
+	margin: 20px;
+	font-size: 30px;
+	height:600px;
+}
+
+.imageBox{
+	line-height:400px;
+	text-align:center;
+	height:400px;
+}
+
+.image{
+	margin: auto;
+	margin-bottom: 5px;
+	cursor: pointer;
+    max-width:100%; 
+    max-height:100%;
+    vertical-align:middle;
+}
+
+
+#c_list {
+	height: 1900px;
 }
 </style>
 </head>
@@ -100,39 +169,50 @@ a {
 	<jsp:include page="menu.jsp" />
 	<div id="page">
 		<jsp:include page="header.jsp" />
+		<div id="total">
+			COUNT: <span>${pm.totalCount}</span>건
+		</div>
 		<div class="title">⊙ COSTUME ⊙</div>
 		<br> <br>
 		<div id="content">
-			<input type="hidden" value="${cri.page}"> [게시글 수: <span>${pm.totalCount}</span>건]
+			<input type="hidden" value="${cri.page}">
 			<form name="frm" action="costumeList">
-				<select name="searchType">
-				<option value="lend_costume_code"
-						<c:out value="${cri.searchType=='lend_costume_code'?'selected':''}"/>>코스튬코드</option>
-					<option value="lend_costume_name"
-						<c:out value="${cri.searchType=='lend_costume_name'?'selected':''}"/>>코스튬명</option>
-				</select> 
-				<input type="text" name="keyword" value="${cri.keyword}"> 
-				<input type="submit" value="코스튬검색">
-			</form>
-			<c:forEach items="${list}" var="vo">
-				<div class="box">
-					<c:if
-						test="${vo.lend_costume_image!=null && vo.lend_costume_image!=''}">
-						<img id="image" src="/display?fileName=${vo.lend_costume_image}"
-							onClick="location.href='costumeRead?lend_costume_code=${vo.lend_costume_code}'"
-							width=100 height=130>
-					</c:if>
-					<c:if
-						test="${vo.lend_costume_image==null || vo.lend_costume_image==''}">
-						<img id="image" src="http://placehold.it/100x80">
-					</c:if>
-					<div>
-						<a href="costumeRead?lend_costume_code=${vo.lend_costume_code}">${vo.lend_costume_code}</a>
-					</div>
-					<div>${vo.lend_costume_name}</div>
-					<div>${vo.lend_costume_price}</div>
+				<div class="search">
+					<select name="searchType">
+						<option value="lend_costume_code"
+							<c:out value="${cri.searchType=='lend_costume_code'?'selected':''}"/>>코스튬코드</option>
+						<option value="lend_costume_name"
+							<c:out value="${cri.searchType=='lend_costume_name'?'selected':''}"/>>코스튬명</option>
+					</select> <input type="text" name="keyword" value="${cri.keyword}" size=50
+						placeholder="SEARCH TERM"> <input type="submit"
+						value="SEARCH">
 				</div>
-			</c:forEach>
+				<hr>
+			</form>
+			<div id="c_list">
+				<c:forEach items="${list}" var="vo">
+					<div class="box">
+						<div class="imageBox">
+						<c:if test="${vo.lend_costume_image!=null && vo.lend_costume_image!=''}">
+							<img class="image" src="/display?fileName=${vo.lend_costume_image}"
+								onClick="location.href='costumeRead?lend_costume_code=${vo.lend_costume_code}'"
+								width=50%>
+						</c:if>
+						<c:if
+							test="${vo.lend_costume_image==null || vo.lend_costume_image==''}">
+							<img id="image" src="http://placehold.it/100x80">
+						</c:if>
+						</div>
+						<div>
+							<a href="costumeRead?lend_costume_code=${vo.lend_costume_code}">${vo.lend_costume_code}</a>
+						</div>
+						<div>${vo.lend_costume_name}</div>
+						<div>${vo.lend_costume_price}</div>
+					</div>
+				</c:forEach>
+				<br>
+
+			</div>
 			<div id="pagination">
 				<c:if test="${pm.prev}">
 					<a href="${pm.startPage-1}">◀</a>
@@ -152,6 +232,7 @@ a {
 		</div>
 	</div>
 	<jsp:include page="chat.jsp" />
+	<jsp:include page="top.jsp" />
 </body>
 <script>
 	//페이지를 클릭했을 때

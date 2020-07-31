@@ -43,4 +43,8 @@
     	insert into package_cart(package_cart_id, package_cart_package_code, package_cart_quantity, package_cart_price)
 		values(#{package_cart_id}, #{package_cart_package_code}, 1, #{package_cart_price});
     </insert>
+    <insert id="cinsert">
+    	insert into costume_cart(costume_cart_id, costume_cart_costume_code, costume_cart_quantity, costume_cart_price, costume_size)
+    	values(#{costume_cart_id}, #{costume_cart_costume_code}, #{costume_cart_quantity}, #{costume_cart_price}, #{costume_size});
+    </insert>
 </mapper>

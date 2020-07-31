@@ -12,8 +12,8 @@
         limit #{pageStart}, #{perPageNum}
     </select>
     <select id="insert">
-        insert into lend_costume(lend_costume_code,lend_costume_name,lend_costume_image,lend_costume_amount,lend_costume_price,lend_costume_size,lend_costume_content) 
-        values(#{lend_costume_code},#{lend_costume_name},#{lend_costume_image},#{lend_costume_amount},#{lend_costume_price},#{lend_costume_size},#{lend_costume_content})
+        insert into lend_costume(lend_costume_code,lend_costume_name,lend_costume_image,lend_costume_amount,lend_costume_price,lend_costume_content) 
+        values(#{lend_costume_code},#{lend_costume_name},#{lend_costume_image},#{lend_costume_amount},#{lend_costume_price},#{lend_costume_content})
     </select>
     <select id="read" resultType="com.example.domain.Lend_CostumeVO">
     	select * from lend_costume where lend_costume_code=#{lend_costume_code}

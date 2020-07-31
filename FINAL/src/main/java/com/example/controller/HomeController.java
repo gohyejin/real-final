@@ -60,6 +60,11 @@ public class HomeController {
 		return "/costumeReply";
 	}
 	
+	@RequestMapping("/costumeInsert")
+	public String costumInsert() {
+		return "/costumeInsert";
+	}
+	
 	@RequestMapping(value="/costumeReplyInsert",method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(Costume_ReplyVO vo) {
@@ -76,7 +81,7 @@ public class HomeController {
 	/*COSTUME---------------------------------------------------------------------------------------------------------*/
 	@RequestMapping("/costumeList")
 	public String list(Model model,Criteria cri) {
-		cri.setPerPageNum(10);
+		cri.setPerPageNum(9);
 		
 		PageMaker pm=new PageMaker();
 		pm.setCri(cri);
@@ -91,12 +96,6 @@ public class HomeController {
 	@RequestMapping("/costumeRead")
 	public void costumeRead(Model model,String lend_costume_code) {
 		model.addAttribute("vo",lmapper.read(lend_costume_code));
-		
-	}
-	
-	
-	@RequestMapping("/costumeInsert")
-	public void costumeInsert() {
 		
 	}
 	

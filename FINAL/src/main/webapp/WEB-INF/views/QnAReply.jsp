@@ -96,6 +96,10 @@ button {
 	font-size: 12px;
 }
 
+.active {
+	color: hotpink;
+}
+
 .replyer {
 	font-weight: bold;
 	font-size: 12px;
@@ -117,7 +121,7 @@ button {
 	<div class="title">⊙ REPLY ⊙</div>
 	<div id="divInput">
 		<input type="text" id="txtReply" size=50 placeholder="CONTENT">
-		<button id="btnInsert">입력</button>
+		<button id="btnInsert">INSERT</button>
 	</div>
 	<div id="tbl2"></div>
 	<script id="temp" type="text/x-handlebars-template">

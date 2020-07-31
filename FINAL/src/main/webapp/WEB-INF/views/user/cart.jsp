@@ -185,6 +185,11 @@ input[type="number"]{
 .photo_package_title{
    overflow:hidden;
 }
+
+.image{
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -294,6 +299,7 @@ input[type="number"]{
 		</div>
 	</div>
 	<jsp:include page="../chat.jsp" />
+	<jsp:include page="../top.jsp" />
 </body>
 <script>
 	var cart_id="${users_id}";

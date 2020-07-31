@@ -143,6 +143,10 @@ hr{
 	color: black;
 }
 
+.active {
+	color: hotpink;
+}
+
 </style>
 </head>
 <body>

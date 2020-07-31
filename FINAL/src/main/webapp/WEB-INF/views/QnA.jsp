@@ -84,6 +84,10 @@ th {
 #btnInsert:active {
 	background: #cca6cf;
 }
+
+.active {
+	color: hotpink;
+}
 </style>
 </head>
 <body>
