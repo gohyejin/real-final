@@ -41,7 +41,7 @@
 	background-color:rgba(0.7);
 }
 
-.items1-1,.items2-1,.items3-1,.items4-1{
+.items1-1,.items2-1,.items3-1,.items4-1,.items2-2{
 	color: black;
 	font-size: 20px;
 	cursor: pointer;
@@ -51,7 +51,7 @@
 	background-color:rgba(0.7);
 }
 
-.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover,.items1-1:hover,.items2-1:hover,.items3-1:hover,.items4-1:hover{
+.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover,.items1-1:hover,.items2-1:hover,.items3-1:hover,.items4-1:hover,.items2-2:hover{
 	color: #e360f2;
 }
 
@@ -108,13 +108,16 @@ a {
 			<b>USER LIST</b>
 		</div>
 		<div class="items2-1">
-			<b>ORDERS LIST</b>
+			<b>PACKAGE ORDERS</b>
+		</div>
+		<div class="items2-2">
+			<b>COSTUME ORDERS</b>
 		</div>
 		<div class="items3-1">
 			<b>BLACK LIST</b>
 		</div>
 		<div class="items4-1">
-			<b>COSTUM INSERT</b>
+			<b>COSTUME INSERT</b>
 		</div>
       </c:if>
 	</div>
@@ -145,9 +148,14 @@ a {
 		location.href="/admin/userlist";
 	})
 	
-	/*ADMIN CHART메뉴*/
+	/*ADMIN pCHART메뉴*/
 	$(".items2-1").on("click",function(){
-		location.href="/admin/chart";
+		location.href="/admin/pchart";
+	})
+	
+	/*ADMIN cCHART메뉴*/
+	$(".items2-2").on("click",function(){
+		location.href="/admin/cchart";
 	})
 	
 	/*ADMIN CHART메뉴*/

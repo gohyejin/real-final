@@ -70,7 +70,7 @@ select option {
 	text-align-last: center;
 }
 
-.cart,#btnList {
+.cart,#btnList,input[type=submit] {
 	width: 300px;
 	height: 100px;
 	font-size: 35px;

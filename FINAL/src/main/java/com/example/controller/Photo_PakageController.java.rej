@@ -1,9 +1,0 @@
-diff a/FINAL/src/main/java/com/example/controller/Photo_PakageController.java b/FINAL/src/main/java/com/example/controller/Photo_PakageController.java	(rejected hunks)
-@@ -8,7 +8,6 @@
- import org.springframework.web.bind.annotation.RequestMapping;
- 
- import com.example.mapper.Photo_PackageMapper;
--import com.example.service.Photo_PackageService;
- 
- @Controller
- public class Photo_PakageController {

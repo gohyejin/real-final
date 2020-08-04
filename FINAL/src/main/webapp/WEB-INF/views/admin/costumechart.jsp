@@ -52,8 +52,8 @@ select{
 			<option value="4">4월</option>
 			<option value="5">5월</option>
 			<option value="6">6월</option>
-			<option value="7" selected>7월</option>
-			<option value="8">8월</option>
+			<option value="7">7월</option>
+			<option value="8" selected>8월</option>
 			<option value="9">9월</option>
 			<option value="10">10월</option>
 			<option value="11">11월</option>

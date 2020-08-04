@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ORDER LIST</title>
+	<title>COSTUME ORDER</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/2594a0d020.js" crossorigin="anonymous"></script>
 	<style>
@@ -154,21 +154,20 @@ hr{
 	<div id="page">
 	<jsp:include page="../header.jsp" />
 	<div id="total">ORDERS COUNT : ${pm.totalCount}</div>
-	<div class="title">⊙ ORDERS LIST ⊙</div>
+	<div class="title">⊙ COSTUME ORDER ⊙</div>
 	<div class="a">
 		<button onClick="location.href='/admin/PCchart'">CHART <i class="fas fa-chart-line"></i></button>
 	</div>
 	<div id="orderList">
 		<div>
-		<form name="frm" action="/admin/chart">
+		<form name="frm" action="/admin/cchart">
 		<div class="search">
 			<select name="searchType">
-				<option value="photo_package_title" <c:out value="${cri.searchType=='photo_package_title'?'selected':''}"/>>PACKAGE</option>
 				<option value="lend_costume_name" <c:out value="${cri.searchType=='lend_costume_name'?'selected':''}"/>>COSTUME</option>
 				<option value="orders_paytype" <c:out value="${cri.searchType=='orders_paytype'?'selected':''}"/>>PAY TYPE</option>
-				<option value="orders_day" <c:out value="${cri.searchType=='orders_day'?'selected':''}"/>>MONTH</option>
+				<option value="orders_day" <c:out value="${cri.searchType=='orders_day'?'selected':''}"/>>DATE</option>
 			</select>
-			<input type="text" name="keyword" value="${cri.keyword}" size=50 placeholder="SEARCH TERM"> 
+			<input type="text" name="keyword" value="${cri.keyword}" size=50 placeholder="SEARCH TERM">
 			<input type="submit" value="SEARCH">
 		</div><hr>
 		</form>
@@ -178,22 +177,27 @@ hr{
 				<th width=20>NO.</th>
 				<th>ID</th>
 				<th>NAME</th>
-				<th>PACKAGE</th>
 				<th>COSTUME</th>
+				<th>PRICE</th>
+				<th>QUANTITY</th>
 				<th>ORDER DATE</th>
-				<th>DISCOUNT</th>
-				<th>ALL TOTAL</th>
+				<th>TOTAL PRICE</th>
+				<th>PAY TYPE</th>
 			</tr>
 			<c:forEach items="${ordersList}" var="vo">
 			<tr class="row">
 				<td class="orders_no">${vo.orders_no}</td>
-				<td>${vo.orders_id}</td>
+				<td>${vo.users_id}</td>
 				<td>${vo.users_name}</td>
-				<td>${vo.photo_package_title}</td>
 				<td>${vo.lend_costume_name}</td>
+				<td>${vo.costume_cart_price}</td>
+				<td>${vo.costume_cart_quantity}</td>
 				<td><fmt:formatDate value="${vo.orders_day}" pattern="yyyy년MM월dd일"/></td>
-				<td><fmt:formatNumber value="${vo.discount}" pattern="#,### Point" /></td>
-				<td><fmt:formatNumber value="${vo.total}" pattern="#,### 원" /></td>
+				<td><fmt:formatNumber value="${vo.costume_total}" pattern="#,### 원" /></td>
+				<td>
+					<c:if test="${vo.orders_paytype==0}">카카오 결제</c:if>
+					<c:if test="${vo.orders_paytype==1}">현금 결제</c:if>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -221,16 +225,30 @@ hr{
 	
 </body>
 <script>
-$("#tbl1").on("click", ".row", function(){
-	var orders_no=$(this).find(".orders_no").html();
-	var page="${param.page}";
-	location.href = "/admin/orderread?orders_no=" + orders_no+ "&page="+page;
-});
-
 $("#pagination a").click(function(e){
 	e.preventDefault();
 	var page=$(this).attr("href");
-	location.href="chart?page="+page;
+	location.href="cchart?page="+page;
 });
+
+
+if($(frm.keyword).val()=="카카오") {
+	$(frm.keyword).val("0");
+	frm.submit();
+}else if($(frm.keyword).val()=="현금") {
+	$(frm.keyword).val("1");
+	frm.submit();
+}
+
+
+if($(frm.keyword).val()=="0") {
+	$(frm.keyword).val("카카오");
+}
+
+
+if($(frm.keyword).val()=="1") {
+	$(frm.keyword).val("현금");
+}
+
 </script>
 </html>

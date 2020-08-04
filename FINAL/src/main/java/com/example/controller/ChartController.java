@@ -24,24 +24,31 @@ public class ChartController {
 	@Autowired
 	ChartMapper mapper;
 	
-	@RequestMapping("/admin/chart")
-	public void ordersList(Model model, Criteria cri) {
+	@RequestMapping("/admin/pchart")
+	public void PordersList(Model model, Criteria cri)  {
+		
+		 
+		cri.setPerPageNum(5);
+    	PageMaker pm=new PageMaker();
+    	pm.setCri(cri);
+    	pm.setTotalCount(mapper.packageorderCount(cri));
+    	
+    	model.addAttribute("cri", cri);
+    	model.addAttribute("pm", pm);
+		model.addAttribute("ordersList", mapper.packageOrdersList(cri));
+	}
+	
+	@RequestMapping("/admin/cchart")
+	public void CordersList(Model model, Criteria cri) throws Exception {
 		
 		cri.setPerPageNum(5);
     	PageMaker pm=new PageMaker();
     	pm.setCri(cri);
-    	pm.setTotalCount(mapper.orderCount(cri));
+    	pm.setTotalCount(mapper.costumeorderCount(cri));
     	
     	model.addAttribute("cri", cri);
     	model.addAttribute("pm", pm);
-		model.addAttribute("ordersList", mapper.ordersList(cri));
-		
-		
-	}
-	
-	@RequestMapping("/admin/orderread")
-	public void orderread(int orders_no, Model model){
-		model.addAttribute("vo", mapper.orderread(orders_no));
+		model.addAttribute("ordersList", mapper.costumeOrdersList(cri));
 		
 	}
 	
