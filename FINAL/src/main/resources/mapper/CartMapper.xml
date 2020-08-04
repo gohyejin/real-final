@@ -47,4 +47,14 @@
     	insert into costume_cart(costume_cart_id, costume_cart_costume_code, costume_cart_quantity, costume_cart_price, costume_size)
     	values(#{costume_cart_id}, #{costume_cart_costume_code}, #{costume_cart_quantity}, #{costume_cart_price}, #{costume_size});
     </insert>
+    <select id="pread" resultType="com.example.domain.Package_CartVO">
+    	select pk.*, pp.photo_package_code, pp.photo_package_title, pp.photo_package_image 
+		from package_cart pk, photo_package pp
+		where pp.photo_package_code = pk.package_cart_package_code and package_cart_no=#{package_cart_no}
+    </select>
+    <select id="cread" resultType="com.example.domain.Costume_CartVO">
+		select cc.*, lc.lend_costume_name, lc.lend_costume_image, lc.lend_costume_code
+		from costume_cart cc, lend_costume lc 
+		where lc.lend_costume_code = cc.costume_cart_costume_code and costume_cart_no=#{costume_cart_no}
+    </select>
 </mapper>

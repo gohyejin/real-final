@@ -16,4 +16,6 @@ public interface CartMapper {
 	public int csum(String costume_cart_id); // 의상 총액
 	public void pinsert(Package_CartVO vo); // 패키지 장바구니 담기
 	public void cinsert(Costume_CartVO vo); // 의상대여 장바구니 담기
+	public Package_CartVO pread(int package_cart_no);
+	public Costume_CartVO cread(int costume_cart_no);
 }

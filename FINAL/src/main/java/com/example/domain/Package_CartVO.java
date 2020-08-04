@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public class Package_CartVO {
+public class Package_CartVO extends Photo_PackageVO{
 	private int package_cart_no;
 	private String package_cart_id;
 	private String package_cart_package_code;

@@ -73,7 +73,7 @@ th {
    cursor: pointer;
 }
 
-.number{
+.pnumber, .cnumber{
    width:30px;
 }
 
@@ -215,7 +215,7 @@ input[type="number"]{
             {{#each plist}}
             <tr class="row">
                <td>
-					<input type="checkbox" class="chk">
+					<input type="checkbox" name="packageCHK" class="chk">
 					<input type="hidden" value="{{package_cart_package_code}}" class="package_cart_package_code">
 				</td>
                <td><img src="../display?fileName={{photo_package_image}}" width=110 class="image"/></td>
@@ -224,9 +224,8 @@ input[type="number"]{
                   <span class="photo_package_price">{{photo_package_price}}</span>
 				</td>
 				<td>
-                  <span><input type="hidden" value={{package_cart_no}} size=3 class="package_cart_no"></span>
-                  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="number"></span>
-				  <span><button class="btnUpdate">수정</button></span>
+                  <span><input type="hidden" value={{package_cart_no}} size=3 name="package_cart_no" class="package_cart_no"></span>
+                  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="pnumber"></span>
                </td>
                <td class="totprice">{{totprice}}</td>
                <td><button class="btnDel">X</button></td>
@@ -249,7 +248,7 @@ input[type="number"]{
             {{#each clist}}
             <tr class="row">
                <td>
-					<input type="checkbox" class="chk">
+					<input type="checkbox" name="costumeCHK" class="chk">
 					<input type="hidden" value="{{costume_cart_costume_code}}" class="costume_cart_costume_code">
 				</td>
                <td><img src="../display?fileName={{lend_costume_image}}" width=110 class="image"/></td>
@@ -259,8 +258,7 @@ input[type="number"]{
 				</td>
 				<td>
                   <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>
-                  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="number"></span>
-				  <span><button class="btnUpdate">수정</button></span>
+                  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="cnumber"></span>
                </td>
                <td class="totprice">{{totprice}}</td>
                <td><button class="btnDel">X</button></td>
@@ -306,6 +304,32 @@ input[type="number"]{
 	getPlist();
 	getClist();
 	
+	//구매하기 버튼을 클릭했을 때
+	$("#btnOrder").on("click", function(){
+		 var packageCHK = new Array();
+		 var costumeCHK = new Array();
+		 var usersid="${users_id}";
+		 
+        $("input[name=packageCHK]:checked").each(function() {
+        	var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
+        	packageCHK.push(package_cart_no);
+     	});
+        
+        $("input[name=costumeCHK]:checked").each(function() {
+        	var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+        	costumeCHK.push(costume_cart_no);
+     	});
+        
+        $.ajax({
+        	type:"get",
+        	url:"/cart/purchase",
+        	data:{"packageChk[]":packageCHK, "costumeChk[]":costumeCHK, "users_id":usersid},
+        	success:function(){
+        		location.href="/user/purchase?users_id="+usersid;
+        	}
+        });
+	});
+	
 	// 패키지 read
 	$("#tbl1").on("click", ".image", function(){
 		var package_code=$(this).parent().parent().find(".package_cart_package_code").val();
@@ -333,33 +357,29 @@ input[type="number"]{
        });
 	}
 	
-	// 패키지 수량 수정
-	$("#tbl1").on("click", ".row .btnUpdate", function(){
+	//패키지 수량 수정
+	$("#tbl1").on("change", ".row .pnumber", function(){
 		var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
-		var package_cart_quantity=$(this).parent().parent().find(".number").val();
-		if(!confirm("해당 패키지의 수량을 수정하시겠습니까?")) return; 
+		var package_cart_quantity=$(this).parent().parent().find(".pnumber").val();
 		$.ajax({
 			type:"get",
 			url:"/cart/pupdate",
 			data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
 			success:function(){
-				alert("수정되었습니다.");
 				getPlist();
 			}
 		});
 	});
 	
 	// 의상대여 수량 수정
-	$("#tbl2").on("click", ".row .btnUpdate", function(){
+	$("#tbl2").on("change", ".row .cnumber", function(){
 		var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
-		var costume_cart_quantity=$(this).parent().parent().find(".number").val();
-		if(!confirm("해당 의상의 수량을 수정하시겠습니까?")) return;
+		var costume_cart_quantity=$(this).parent().parent().find(".cnumber").val();
 		$.ajax({
 			type:"get",
 			url:"/cart/cupdate",
 			data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
 			success:function(){
-				alert("수정되었습니다.");
 				getClist();
 			}
 		});

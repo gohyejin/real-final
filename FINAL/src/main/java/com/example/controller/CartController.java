@@ -1,6 +1,10 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +16,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.domain.Costume_CartVO;
 import com.example.domain.Package_CartVO;
 import com.example.mapper.CartMapper;
+import com.example.mapper.UsersMapper;
 
 @Controller
 public class CartController {
 	@Autowired
 	CartMapper mapper;
+	@Autowired
+	UsersMapper umapper;
+	
+	@RequestMapping(value="/cart/purchase")
+	public String purchase(String users_id, HttpSession session, HttpServletRequest request){
+		String[] packageNo = request.getParameterValues("packageChk[]");
+		String[] costumeNo = request.getParameterValues("costumeChk[]");
+		ArrayList<Package_CartVO> packageList=new ArrayList<Package_CartVO>();
+		ArrayList<Costume_CartVO> costumeList=new ArrayList<Costume_CartVO>();
+		session= request.getSession();
+		int package_price=0;
+		int costume_price=0;
+		for (int i = 0; i < packageNo.length; i++) { 
+			packageList.add(mapper.pread(Integer.parseInt(packageNo[i])));
+			package_price += mapper.pread(Integer.parseInt(packageNo[i])).getPackage_cart_price()*mapper.pread(Integer.parseInt(packageNo[i])).getPackage_cart_quantity();
+			session.setAttribute("psum", package_price);
+		}
+		
+		for (int i = 0; i < costumeNo.length; i++) { 
+			costumeList.add(mapper.cread(Integer.parseInt(costumeNo[i])));
+			costume_price += mapper.cread(Integer.parseInt(costumeNo[i])).getCostume_cart_price()*mapper.cread(Integer.parseInt(costumeNo[i])).getCostume_cart_quantity();
+			session.setAttribute("csum", costume_price);
+		}
+		session.setAttribute("point", umapper.read(users_id).getUsers_point());
+		session.setAttribute("plist", packageList);
+		session.setAttribute("clist", costumeList);
+		return "/user/purchase";
+	}
+	
+	@RequestMapping(value="/user/purchase")
+	public void puchase(String users_id, Model model){
+		model.addAttribute("vo", umapper.read(users_id));
+	}
 	
 	@RequestMapping("/cart/totsum")
 	@ResponseBody

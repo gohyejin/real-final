@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public class Costume_CartVO {
+public class Costume_CartVO extends Lend_CostumeVO{
 	private int costume_cart_no;
 	private String costume_cart_id;
 	private String costume_cart_costume_code;

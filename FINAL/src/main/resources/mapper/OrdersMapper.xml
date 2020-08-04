@@ -10,4 +10,12 @@
     <select id="point" resultType="int">
        select users_point from users where users_id=#{users_id}
     </select>
+    <insert id="packageInsert">
+    	insert into package_orders(package_cart_ono, orders_package_quantity, orders_day, orders_paytype)
+    	values(#{package_cart_no}, #{orders_package_quantity}, now(), #{orders_paytype})
+    </insert>
+    <insert id="costumeInsert">
+    	insert into costume_orders(costume_cart_ono, orders_costume_quantity, orders_day, orders_paytype)
+    	values(#{costume_cart_no}, #{orders_costume_quantity}, now(), #{orders_paytype})
+    </insert>
 </mapper>

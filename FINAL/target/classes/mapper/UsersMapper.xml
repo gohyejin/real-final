@@ -16,4 +16,7 @@
     	set users_pass=#{users_pass}, users_name=#{users_name}, users_birthday=#{users_birthday}, users_zipcode=#{users_zipcode}, users_address=#{users_address}, users_phone=#{users_phone}, users_email=#{users_email}
     	where users_id=#{users_id}
     </update>
+    <update id="pointUpdate">
+    	update users set users_point=users_point-#{point} where users_id=#{users_id}
+    </update>
 </mapper>
