@@ -74,16 +74,18 @@
 	display: inline-block;
 	position: absolute;
 	right: 30px;
-	bottom:10px;
+	bottom:23px;
 	padding: 6px 12px;
 	color: #444;
-	font-size: 12px;
+	font-size: 20px;
+	border:none;
+	cursor: pointer;
 }
 
 .layerPopup .layerBox .btnTodayHide {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 600;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 
@@ -100,8 +102,8 @@
 				<img src="display?fileName=popup.jpg" width=500 height=500 style="margin:0px;">
 			</div>
 		<div>
-			<span><a href="javascript:;" class="btnTodayHide">오늘 하루 보지 않기</a></span>
-			<span><button onClick="location.href='javascrfipt:;''" class="btnClose">닫기</button> </span>
+			<a href="javascript:;" class="btnTodayHide">오늘 하루 보지 않기</a>
+			<button onClick="location.href='javascrfipt:;'" class="btnClose">X</button>
 		</div>
 	</div>
 </div>

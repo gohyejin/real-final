@@ -18,50 +18,60 @@
 }
 
 #content {
-   margin-top:none;
-   margin-left:70px;
-   margin-right:70px;
-   padding: 30px margin-top: 10px;
+    display:inline-block;
+    margin:5%;
+   margin-top: 10px;
+   margin-bottom: 40px;
    text-align: center;
+   width: 90%;
+   height:hidden;
 }
 
-#tbl1,#tbl2 {
-    width:50%;
+#tbl1 {
+   width:100%;
    margin:auto;
    overflow: hidden;
    border-collapse:collapse;
+   margin-bottom:50px;
 }
 
-#tbl2 {
-    width:50%;
-   margin:auto;
+#tbl2{
+   float:left;
+   width:48%;
    overflow: hidden;
-   border-collapse:collapse;
+   border-collapse: collapse;
 }
 
 #tbl3 {
-    width:50%;
-   margin:auto;
+   float:right;
+   width:48%;
    overflow: hidden;
-   border-collapse:collapse;
+   border-collapse: collapse;
 }
 
-#tbl22 {
-   width:50%;
-   overflow: hidden;
-   border-collapse:collapse;
-   display:inline-block;
-   float:letf;
+#COSTUME,#PACKAGE{
+   color:#e360f2;
+   font-size: 30px;
+   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-#tbl33 {
-    width:50%;
-   overflow: hidden;
-   border-collapse:collapse;
-   float:left;
-}
 td{
-   padding:15px;
+   padding: 15px;
+   border-bottom:1px solid #e360f2;
+}
+
+th {
+   padding: 15px;
+   font-size: 20px;
+   border-bottom:3px solid #e360f2;
+}
+
+#tbl1 th{
+    width:50%;
+   font-size:40px;
+}
+.row{
+   height: 200px;
 }
 
 .title{
@@ -69,21 +79,28 @@ td{
    text-align:center;
    margin:auto;
 }
-.tbl2Title,.tbl1Title{
-   font-size:40px;
-}
 
 .userUpdate{
    cursor: pointer;
 }
 
 .userUpdate:hover{
+   border-radius: 50px 50px 50px 50px;
    background:#e360f2;
    color:white;
 }
+.img{
+   border:0px;
+}
 .orderday{
-background:black;
-color:white;
+   font-size:13px;
+}
+img:hover{
+   cursor:pointer;
+}
+
+.code{
+	display: none;
 }
 </style>
 </head>
@@ -94,81 +111,80 @@ color:white;
       <div class="title">⊙ MY PAGE ⊙</div>
       <br><br>
       <div id="content">
-         <table id="tbl1" border=1>
-            <tr class="tbl1Title">
-               <td>
-                  <span id="point"></span> POINT
-               </td>
-               <td class="userUpdate">UPDATE</td>
+         <table id="tbl1">
+            <tr>
+               <th>
+                  <span id="point"></span> Point
+               </th>
+               <th class="userUpdate">UPDATE</th>
             </tr>
          </table><br>
-         <div id="tbl22">
-         <table id="tbl2" border=1></table>
+         <table id="tbl2"></table>
          <script id="temp2" type="text/x-handlebars-template">
-            <tr class="tbl2Title">
-               <td colspan=6>PackageOrder LIST</td>
+            <tr>
+               <th colspan=6 id="PACKAGE">PACKAGE ORDER</th>
             </tr>
-            {{#each packagelist}}
-               <tr style="text-align:left">
-                  <td colspan=6 class="orderday">
-                     주문일&nbsp;
-                     <b>{{orders_day}}</b>
-                  </td>
-               <tr>
-               <tr>
-                  <td>대표이미지</td>
-                  <td>패키지</td>
-                  <td>수량</td>
-                  <td>가격</td>
-                  <td>결제방법</td>
-              <td>합계</td>
+         <tr class="th">
+                  <th>IMAGE</th>
+                  <th>PACKAGE</th>
+                  <th></th>
+                  <th>PRICE</th>
+                  <th width=137>PAY TYPE</th>
+                   <th>TOTAL</th>
                </tr>
+            {{#each packagelist}}
                <tr class="row">
-                  <td><img src="../display?fileName={{photo_package_image}}" width=150/></td>
-                  <td>{{photo_package_title}}</td>
-                  <td>{{orders_package_quantity}}</td>
-                  <td>{{package_cart_price}} 원</td>
-                  <td>{{printStyle orders_paytype}}</td>
-              <td>{{total}} 원</td>
+                  <td class="img">
+                <img src="../display?fileName={{photo_package_image}}" width=110/>
+               </td>
+               <td rowspan=3>{{photo_package_title}}</td>
+                  <td rowspan=3>{{orders_package_quantity}}</td>
+                  <td rowspan=3>{{package_cart_price}} 원</td>
+                  <td rowspan=3>{{printStyle orders_paytype}}</td>
+                  <td rowspan=3>{{total}} 원</td>
+               <td class="code">{{photo_package_code}}</td>
+               <tr>
+               <tr>
+                  <td class="orderday">
+                      <b>{{orders_day}}</b>
+                  </td>
                </tr>
             {{/each}}
          </script>
-         </div>
-         <div id="tbl33">
-         <table id="tbl3" border=1></table>
+         <table id="tbl3"></table>
          <script id="temp3" type="text/x-handlebars-template">
-            <tr class="tbl2Title">
-               <td colspan=6>CostumeOrder LIST</td>
+            <tr>
+               <th colspan=6 id="COSTUME">COSTUME ORDER</th>
             </tr>
-            {{#each costumelist}}
-               <tr style="text-align:left">
-                  <td colspan=6 class="orderday">
-                     주문일&nbsp;
-                     <b>{{orders_day}}</b>
-                  </td>
-               <tr>
-               <tr>
-                  <td>대표이미지</td>
-                  <td>코스튬</td>
-                  <td>수량</td>
-                  <td>가격</td>
-                  <td>결제방법</td>
-              <td>합계</td>
+         <tr class="th">
+                  <th>IMAGE</th>
+                  <th>COSTUME</th>
+                  <th></th>
+                  <th>PRICE</th>
+                  <th width=137>PAY TYPE</th>
+                   <th>TOTAL</th>
                </tr>
+            {{#each costumelist}}
                <tr class="row">
-                  <td><img src="../display?fileName={{lend_costume_image}}" width=150/></td>
-                  <td>{{lend_costume_name}}</td>
-              <td>{{orders_costume_quantity}}</td>
-                  <td>{{costume_cart_price}} 원</td>
-                  <td>{{printStyle2 orders_paytype}}</td>
-                  <td>{{total}} 원</td>
+                  <td class="img"><img src="../display?fileName={{lend_costume_image}}" width=110/></td>
+                  <td rowspan=3>{{lend_costume_name}}</td>
+                 <td rowspan=3>{{orders_costume_quantity}}</td>
+                  <td rowspan=3>{{costume_cart_price}} 원</td>
+                  <td rowspan=3>{{printStyle2 orders_paytype}}</td>
+                  <td rowspan=3>{{total}} 원</td>
+             	 <td class="code">{{lend_costume_code}}</td>
+               <tr>
+               <tr>
+                  <td class="orderday">
+               <b>{{orders_day}}</b>
+                  </td>
                </tr>
             {{/each}}
          </script>
          </div>
       </div>
-   </div>
    <jsp:include page="../chat.jsp" />
+	<jsp:include page="../top.jsp" />
 </body>
 <script>
    var users_id="${users_id}";
@@ -243,8 +259,18 @@ color:white;
    
    /*UPDATE클릭 했을때 이동*/
    $(".userUpdate").on("click", function(){
-      location.href="/user/mypageRead";
+      location.href="/user/read";
    })
 
+   
+   $("#tbl2").on("click", ".row img", function(){
+      var code=$(this).parent().parent().find(".code").html();
+      location.href="/packageRead?photo_package_code="+code
+   });
+   
+   $("#tbl3").on("click", ".row img", function(){
+      var code=$(this).parent().parent().find(".code").html();
+      location.href="/costumeRead?lend_costume_code="+code
+   });
 </script>
 </html>

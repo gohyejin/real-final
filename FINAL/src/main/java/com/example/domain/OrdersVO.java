@@ -10,9 +10,10 @@ public class OrdersVO {
    private String orders_package_code;
    private String orders_costume_code;
 
-   @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Seoul")
+   @JsonFormat(pattern = "yy-MM-dd hh:mm:ss", timezone = "Asia/Seoul")
    private Date orders_day;
-   
+   private String photo_package_code;
+   private String lend_costume_code;
    private int orders_paytype;
    private int orders_package_quantity;
    private int orders_costume_quantity;
@@ -137,6 +138,18 @@ public String toString() {
          + ", lend_costume_image=" + lend_costume_image + ", photo_package_title=" + photo_package_title
          + ", lend_costume_name=" + lend_costume_name + ", package_cart_price=" + package_cart_price
          + ", costume_cart_price=" + costume_cart_price + ", total=" + total + "]";
+}
+public String getLend_costume_code() {
+   return lend_costume_code;
+}
+public void setLend_costume_code(String lend_costume_code) {
+   this.lend_costume_code = lend_costume_code;
+}
+public String getPhoto_package_code() {
+   return photo_package_code;
+}
+public void setPhoto_package_code(String photo_package_code) {
+   this.photo_package_code = photo_package_code;
 }
   
    

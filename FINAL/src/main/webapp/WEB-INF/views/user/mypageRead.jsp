@@ -116,7 +116,7 @@ input[type=text],input[type=password] {
 					<span class="btnShowchk"><input type="button" value="SHOW"></span>
 				</div>
 				<div>
-	            	<span id="users_passCHK">비밀번호 확인</span>
+	            	<br><span id="users_passCHK">비밀번호 확인</span>
          		</div>
 				<br>
 				<div class="btn">

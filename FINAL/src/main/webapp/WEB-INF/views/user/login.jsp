@@ -174,13 +174,17 @@ body {
          url:"/user/login",
          data:{"users_id":users_id, "users_pass":users_pass, "ex_chk":ex_chk},
          success:function(data){
-            if(data==0){
-               alert("존재하지 않는 아이디입니다.");
-            }else if(data==1){
-               alert("비밀번호가 일치하지 않습니다.");
-            }else{
-               window.close();
-               opener.parent.location="/index";
+        	 if(data==0){
+                 alert("존재하지 않는 아이디입니다.");
+              }else if(data==1){
+                 alert("비밀번호가 일치하지 않습니다.");
+              }else if(data==3){
+                 alert("탈퇴한 회원입니다.");
+              }else if(data==4){
+                 alert("블랙리스트 처리된 회원입니다.");
+              }else{
+                 window.close();
+                 opener.parent.location="/index";
             }
          }
       });

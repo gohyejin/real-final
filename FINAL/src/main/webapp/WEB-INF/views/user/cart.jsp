@@ -57,6 +57,10 @@ th {
    border-bottom:3px solid #e360f2;
 }
 
+#tbl1,#tbl2{
+ margin-bottom:50px;
+}
+
 .row{
    height: 200px;
 }
@@ -139,7 +143,7 @@ th {
 
 #btnOrder {
    width: 250px;
-   margin-top: 50px;
+   bottom:5%;
    margin-right: 15px;
    height: 50px;
    border: 1px solid #e360f2;
@@ -163,19 +167,6 @@ th {
    border: none;
    border-radius: 3px 3px 3px 3px;
    font-weight:lighter;
-}
-
-.btnUpdate{
-   width: 50px;
-   height: 25px;
-   font-size: 13px;
-   cursor: pointer;
-   background: #e6bbea;
-   color: white;
-   border: none;
-   border-radius: 3px 3px 3px 3px;
-   font-weight:lighter;
-   margin:auto;
 }
 
 input[type="number"]{
@@ -265,7 +256,6 @@ input[type="number"]{
             </tr>
             {{/each}}
          </script>
-		</div>
 		<div id="divFinal">
 			<div id="divSum">
 				<div>
@@ -292,187 +282,213 @@ input[type="number"]{
 				</div>
 			</div>
 		</div>
+		
+		</div>
 		<div class="OrderArea">
-			<button id="btnOrder">예약하기</button>
+			<button id="btnOrder">구매하기</button>
 		</div>
 	</div>
 	<jsp:include page="../chat.jsp" />
 	<jsp:include page="../top.jsp" />
 </body>
 <script>
-	var cart_id="${users_id}";
-	getPlist();
-	getClist();
-	
-	//구매하기 버튼을 클릭했을 때
-	$("#btnOrder").on("click", function(){
-		 var packageCHK = new Array();
-		 var costumeCHK = new Array();
-		 var usersid="${users_id}";
-		 
+   var cart_id="${users_id}";
+   getPlist();
+   getClist();
+   var Pchk=false;
+   var Cchk=false;
+   
+   //구매하기 버튼을 클릭했을 때
+   $("#btnOrder").on("click", function(){
+      
+      if($("input:checkbox[name=packageCHK]").is(":checked")){
+           Pchk=true;
+      }
+      if(!$("input:checkbox[name=packageCHK]").is(":checked")){
+         Pchk=false;
+      }
+      if($("input:checkbox[name=costumeCHK]").is(":checked")){
+           Cchk=true;
+      }
+      if(!$("input:checkbox[name=costumeCHK]").is(":checked")){
+         Cchk=false;
+      }
+      if(!Pchk){
+         alert("한 개 이상의 패키지를 선택해 주세요!");
+         return;
+      }
+      if(!Cchk){
+         alert("한 개 이상의 코스튬을 선택해 주세요!");
+         return;
+      }
+      
+       var packageCHK = new Array();
+       var costumeCHK = new Array();
+       var usersid="${users_id}";
+       
         $("input[name=packageCHK]:checked").each(function() {
-        	var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
-        	packageCHK.push(package_cart_no);
-     	});
+           var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
+           packageCHK.push(package_cart_no);
+        });
         
         $("input[name=costumeCHK]:checked").each(function() {
-        	var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
-        	costumeCHK.push(costume_cart_no);
-     	});
+           var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+           costumeCHK.push(costume_cart_no);
+        });
         
         $.ajax({
-        	type:"get",
-        	url:"/cart/purchase",
-        	data:{"packageChk[]":packageCHK, "costumeChk[]":costumeCHK, "users_id":usersid},
-        	success:function(){
-        		location.href="/user/purchase?users_id="+usersid;
-        	}
+           type:"get",
+           url:"/cart/purchase",
+           data:{"packageChk[]":packageCHK, "costumeChk[]":costumeCHK, "users_id":usersid},
+           success:function(){
+              location.href="/user/purchase?users_id="+usersid;
+           }
         });
-	});
-	
-	// 패키지 read
-	$("#tbl1").on("click", ".image", function(){
-		var package_code=$(this).parent().parent().find(".package_cart_package_code").val();
-		location.href="../packageRead?photo_package_code="+package_code;
-	});
-	
-	// 의상 read
-	$("#tbl2").on("click", ".image", function(){
-		var costume_code=$(this).parent().parent().find(".costume_cart_costume_code").val();
-		location.href="../costumeRead?lend_costume_code="+costume_code;
-	});
-	
-	// 최종 총액
-	function sum(){
+   });
+   
+   // 패키지 read
+   $("#tbl1").on("click", ".image", function(){
+      var package_code=$(this).parent().parent().find(".package_cart_package_code").val();
+      location.href="../packageRead?photo_package_code="+package_code;
+   });
+   
+   // 의상 read
+   $("#tbl2").on("click", ".image", function(){
+      var costume_code=$(this).parent().parent().find(".costume_cart_costume_code").val();
+      location.href="../costumeRead?lend_costume_code="+costume_code;
+   });
+   
+   // 최종 총액
+   function sum(){
        var psum=$("#packageSum").val();
        var csum=$("#costumeSum").val();
        $.ajax({
-	     	 type:"get",
-	     	 url:"/cart/totsum",
-	     	 data:{"psum":psum, "csum":csum},
-	     	 dataType:"json",
-	     	 success:function(data){
-	     		 $("#totalSum").val(data);
-	     	}
+            type:"get",
+            url:"/cart/totsum",
+            data:{"psum":psum, "csum":csum},
+            dataType:"json",
+            success:function(data){
+               $("#totalSum").val(data);
+           }
        });
-	}
-	
-	//패키지 수량 수정
-	$("#tbl1").on("change", ".row .pnumber", function(){
-		var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
-		var package_cart_quantity=$(this).parent().parent().find(".pnumber").val();
-		$.ajax({
-			type:"get",
-			url:"/cart/pupdate",
-			data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
-			success:function(){
-				getPlist();
-			}
-		});
-	});
-	
-	// 의상대여 수량 수정
-	$("#tbl2").on("change", ".row .cnumber", function(){
-		var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
-		var costume_cart_quantity=$(this).parent().parent().find(".cnumber").val();
-		$.ajax({
-			type:"get",
-			url:"/cart/cupdate",
-			data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
-			success:function(){
-				getClist();
-			}
-		});
-	});
-	
-	// 패키지 선택삭제
-	$("#tbl1").on("click", ".totalDel", function(){
-	      if(!confirm("선택한 패키지를 삭제하시겠습니까?")) return;
-	      $("#tbl1 .row .chk:checked").each(function(){
-	    	 var pcart_no=$(this).parent().parent().find(".package_cart_no").val();
-	         $(this).prop("checked", false);
-	         $("#tbl1 .chkAll").prop("checked", false);
-	         $.ajax({
-	               type:"get",
-	               url:"/cart/pdelete",
-	               data:{"package_cart_no":pcart_no},
-	               dataType:"json",
-	               success:function(){}
-	         });
-	      });
-	      alert("삭제되었습니다.");
-	      getPlist();
-	   });
-	
-	// 의상 선택삭제
-	$("#tbl2").on("click", ".totalDel", function(){
-	      if(!confirm("선택한 의상을 삭제하시겠습니까?")) return;
-	      $("#tbl2 .row .chk:checked").each(function(){
-	    	 var ccart_no=$(this).parent().parent().find(".costume_cart_no").val();
-	         $(this).prop("checked", false);
-	         $("#tbl2 .chkAll").prop("checked", false);
-	         $.ajax({
-	               type:"get",
-	               url:"/cart/cdelete",
-	               data:{"costume_cart_no":ccart_no},
-	               dataType:"json",
-	               success:function(){}
-	         });
-	      });
-	      alert("삭제되었습니다.");
-	      getClist();
-	   });
-	
-	// 패키지 삭제
-	$("#tbl1").on("click", ".row .btnDel", function(){
-      	if(!confirm("해당 패키지를 삭제하시겠습니까?")) return;
-      	var cart_no=$(this).parent().parent().find(".package_cart_no").val();
+   }
+   
+   //패키지 수량 수정
+   $("#tbl1").on("change", ".row .pnumber", function(){
+      var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
+      var package_cart_quantity=$(this).parent().parent().find(".pnumber").val();
+      $.ajax({
+         type:"get",
+         url:"/cart/pupdate",
+         data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
+         success:function(){
+            getPlist();
+         }
+      });
+   });
+   
+   // 의상대여 수량 수정
+   $("#tbl2").on("change", ".row .cnumber", function(){
+      var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+      var costume_cart_quantity=$(this).parent().parent().find(".cnumber").val();
+      $.ajax({
+         type:"get",
+         url:"/cart/cupdate",
+         data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
+         success:function(){
+            getClist();
+         }
+      });
+   });
+   
+   // 패키지 선택삭제
+   $("#tbl1").on("click", ".totalDel", function(){
+         if(!confirm("선택한 패키지를 삭제하시겠습니까?")) return;
+         $("#tbl1 .row .chk:checked").each(function(){
+           var pcart_no=$(this).parent().parent().find(".package_cart_no").val();
+            $(this).prop("checked", false);
+            $("#tbl1 .chkAll").prop("checked", false);
+            $.ajax({
+                  type:"get",
+                  url:"/cart/pdelete",
+                  data:{"package_cart_no":pcart_no},
+                  dataType:"json",
+                  success:function(){}
+            });
+         });
+         alert("삭제되었습니다.");
+         getPlist();
+      });
+   
+   // 의상 선택삭제
+   $("#tbl2").on("click", ".totalDel", function(){
+         if(!confirm("선택한 의상을 삭제하시겠습니까?")) return;
+         $("#tbl2 .row .chk:checked").each(function(){
+           var ccart_no=$(this).parent().parent().find(".costume_cart_no").val();
+            $(this).prop("checked", false);
+            $("#tbl2 .chkAll").prop("checked", false);
+            $.ajax({
+                  type:"get",
+                  url:"/cart/cdelete",
+                  data:{"costume_cart_no":ccart_no},
+                  dataType:"json",
+                  success:function(){}
+            });
+         });
+         alert("삭제되었습니다.");
+         getClist();
+      });
+   
+   // 패키지 삭제
+   $("#tbl1").on("click", ".row .btnDel", function(){
+         if(!confirm("해당 패키지를 삭제하시겠습니까?")) return;
+         var cart_no=$(this).parent().parent().find(".package_cart_no").val();
       
-      	$.ajax({
+         $.ajax({
             type:"get",
             url:"/cart/pdelete",
             data:{"package_cart_no":cart_no},
             dataType:"json",
             success:function(){}
-      	});
-      	alert("삭제되었습니다.");
-      	getPlist();
-   	});
-	
-	// 의상 삭제
-	$("#tbl2").on("click", ".row .btnDel", function(){
-      	if(!confirm("해당 의상을 삭제하시겠습니까?")) return;
-      	var cart_no=$(this).parent().parent().find(".costume_cart_no").val();
+         });
+         alert("삭제되었습니다.");
+         getPlist();
+      });
+   
+   // 의상 삭제
+   $("#tbl2").on("click", ".row .btnDel", function(){
+         if(!confirm("해당 의상을 삭제하시겠습니까?")) return;
+         var cart_no=$(this).parent().parent().find(".costume_cart_no").val();
       
-      	$.ajax({
+         $.ajax({
             type:"get",
             url:"/cart/cdelete",
             data:{"costume_cart_no":cart_no},
             dataType:"json",
             success:function(){}
-      	});
-      	alert("삭제되었습니다.");
-      	getClist();
-   	});
+         });
+         alert("삭제되었습니다.");
+         getClist();
+      });
 
-	// 패키지 목록
-	function getPlist(){
-	      $.ajax({
-	         type:"get",
-	         url:"/cart/plist",
-	         data:{"package_cart_id":cart_id},
-	         dataType:"json",
-	         success:function(data){
-	            var temp=Handlebars.compile($("#temp1").html());
-	            $("#tbl1").html(temp(data));
-	            $("#packageSum").val(data.psum);
-	            sum();
-	         }
-	      });
-	   }
+   // 패키지 목록
+   function getPlist(){
+         $.ajax({
+            type:"get",
+            url:"/cart/plist",
+            data:{"package_cart_id":cart_id},
+            dataType:"json",
+            success:function(data){
+               var temp=Handlebars.compile($("#temp1").html());
+               $("#tbl1").html(temp(data));
+               $("#packageSum").val(data.psum);
+               sum();
+            }
+         });
+      }
 
-	// 의상대여 목록
-  	function getClist(){
+   // 의상대여 목록
+     function getClist(){
         $.ajax({
            type:"get",
            url:"/cart/clist",
@@ -486,61 +502,65 @@ input[type="number"]{
            }
         });
      }
-	
-	//각 행에있는 체크버튼을 클릭 했을 때
-	$("#tbl1").on("click", ".row .chk", function() {
-		var isChkAll = true;
-		$("#tbl1 .row .chk").each(function() {
-			if (!$(this).is(":checked")) {
-				isChkAll = false;
-			}
-		});
-		if (isChkAll) {
-			$("#tbl1 .chkAll").prop("checked", true);
-		} else {
-			$("#tbl1 .chkAll").prop("checked", false);
-		}
-	});
+   
+   //각 행에있는 체크버튼을 클릭 했을 때
+   $("#tbl1").on("click", ".row .chk", function() {
+      var isChkAll = true;
+      $("#tbl1 .row .chk").each(function() {
+         if (!$(this).is(":checked")) {
+            isChkAll = false;
+         }
+      });
+      if (isChkAll) {
+         $("#tbl1 .chkAll").prop("checked", true);
+      } else {
+         $("#tbl1 .chkAll").prop("checked", false);
+      }
+   });
 
-	//전체 체크버튼을 클릭 했을때
-	$("#tbl1").on("click", ".chkAll", function() {
-		if ($(this).is(":checked")) {
-			$("#tbl1 .row .chk").each(function() {
-				$(this).prop("checked", true);
-			});
-		} else {
-			$("#tbl1 .row .chk").each(function() {
-				$(this).prop("checked", false);
-			});
-		}
-	});
+   //전체 체크버튼을 클릭 했을때
+   $("#tbl1").on("click", ".chkAll", function() {
+      if ($(this).is(":checked")) {
+         Pchk=true;
+         $("#tbl1 .row .chk").each(function() {
+            $(this).prop("checked", true);
+         });
+      } else {
+         Pchk=false;
+         $("#tbl1 .row .chk").each(function() {
+            $(this).prop("checked", false);
+         });
+      }
+   });
 
-	//각 행에있는 체크버튼을 클릭 했을 때
-	$("#tbl2").on("click", ".row .chk", function() {
-		var isChkAll = true;
-		$("#tbl2 .row .chk").each(function() {
-			if (!$(this).is(":checked")) {
-				isChkAll = false;
-			}
-		});
-		if (isChkAll) {
-			$("#tbl2 .chkAll").prop("checked", true);
-		} else {
-			$("#tbl2 .chkAll").prop("checked", false);
-		}
-	});
+   //각 행에있는 체크버튼을 클릭 했을 때
+   $("#tbl2").on("click", ".row .chk", function() {
+      var isChkAll = true;
+      $("#tbl2 .row .chk").each(function() {
+         if (!$(this).is(":checked")) {
+            isChkAll = false;
+         }
+      });
+      if (isChkAll) {
+         $("#tbl2 .chkAll").prop("checked", true);
+      } else {
+         $("#tbl2 .chkAll").prop("checked", false);
+      }
+   });
 
-	//전체 체크버튼을 클릭 했을때
-	$("#tbl2").on("click", ".chkAll", function() {
-		if ($(this).is(":checked")) {
-			$("#tbl2 .row .chk").each(function() {
-				$(this).prop("checked", true);
-			});
-		} else {
-			$("#tbl2 .row .chk").each(function() {
-				$(this).prop("checked", false);
-			});
-		}
-	});
+   //전체 체크버튼을 클릭 했을때
+   $("#tbl2").on("click", ".chkAll", function() {
+      if ($(this).is(":checked")) {
+         Cchk=true;
+         $("#tbl2 .row .chk").each(function() {
+            $(this).prop("checked", true);
+         });
+      } else {
+         Cchk=false;
+         $("#tbl2 .row .chk").each(function() {
+            $(this).prop("checked", false);
+         });
+      }
+   });
 </script>
 </html>

@@ -35,6 +35,11 @@ public class UsersController {
 	UsersMapper umapper;
 	@Autowired
 	private KakaoAPI kakao;
+	
+	@RequestMapping("/user/login2")
+	   public void login2() {
+	      
+	   }
 
 	@RequestMapping(value="/user/update", method=RequestMethod.POST)
 	public String update(UsersVO vo){
@@ -77,29 +82,35 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
-	@ResponseBody
-	public int loginPost(UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) {
-		int result = 0;
-		String users_id = vo.getUsers_id();
-		String users_pass = vo.getUsers_pass();
-		UsersVO usersVO = umapper.read(users_id);
-		if (usersVO == null) {
-			result = 0;
-		} else if (!usersVO.getUsers_pass().equals(users_pass)) {
-			result = 1;
-		} else {
-			session.setAttribute("users_id", users_id);
-			session.setAttribute("users_note", usersVO.getUsers_note());
-			result = 2;
-			if (ex_chk) {
-				Cookie cookie = new Cookie("users_id", users_id);
-				cookie.setPath("/");
-				cookie.setMaxAge(60 * 60);
-				response.addCookie(cookie);
-			}
-		}
-		return result;
-	}
+	   @ResponseBody
+	   public int loginPost(UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) {
+	      int result = 0;
+	      String users_id = vo.getUsers_id();
+	      String users_pass = vo.getUsers_pass();
+	      UsersVO usersVO = umapper.read(users_id);
+	      if (usersVO == null) {
+	         result = 0;
+	      } else if (!usersVO.getUsers_pass().equals(users_pass)) {
+	         result = 1;
+	      } else if(usersVO.getUsers_note()==2) {
+	         result = 3;
+	      } else if(usersVO.getUsers_note()==3) {
+	         result = 4;
+	      }else {
+	      
+	         session.setAttribute("users_id", users_id);
+	         session.setAttribute("users_note", usersVO.getUsers_note());
+	         result = 2;
+	         if (ex_chk) {
+	            Cookie cookie = new Cookie("users_id", users_id);
+	            cookie.setPath("/");
+	            cookie.setMaxAge(60 * 60);
+	            response.addCookie(cookie);
+	         }
+	      }
+	      return result;
+	   }
+	   
 
 	@RequestMapping("/user/logout")
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
