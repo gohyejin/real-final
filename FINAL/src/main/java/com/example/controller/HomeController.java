@@ -133,6 +133,12 @@ public class HomeController {
 	}
 	
 	/*정은경 커밋 종료------------------------------------------*/
+	/*인덱스상에서 팝업창 구현하기*/
+	@RequestMapping("/popup")
+	public void popup() {
+
+	}
+	
 	@RequestMapping("/index")
 	public void index() {
 

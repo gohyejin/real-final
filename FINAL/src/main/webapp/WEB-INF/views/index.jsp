@@ -220,6 +220,7 @@ img {
 	</div>
 	<jsp:include page="chat.jsp" />
 	<jsp:include page="top.jsp" />
+	<jsp:include page="popup.jsp"/>
 </body>
 <script>
 	$(document).ready(function(){
