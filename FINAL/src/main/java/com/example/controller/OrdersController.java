@@ -23,11 +23,19 @@ public class OrdersController {
    @Autowired
    UsersMapper umapper;
    
-   @RequestMapping("/order/list")
+   @RequestMapping("/order/packagelist")
    @ResponseBody
-   public HashMap<String,Object> list(String orders_id){
+   public HashMap<String,Object> packagelist(String users_id){
       HashMap<String, Object> map=new HashMap<String, Object>();
-      map.put("list", mapper.list(orders_id));
+      map.put("packagelist", mapper.packagelist(users_id));
+      return map;
+   }
+   
+   @RequestMapping("/order/costumelist")
+   @ResponseBody
+   public HashMap<String,Object> costumelist(String users_id){
+      HashMap<String, Object> map=new HashMap<String, Object>();
+      map.put("costumelist", mapper.costumelist(users_id));
       return map;
    }
    

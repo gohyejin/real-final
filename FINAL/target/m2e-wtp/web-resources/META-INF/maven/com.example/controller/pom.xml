@@ -17,6 +17,13 @@
 	</properties>
 	<dependencies>
 		<!-- 새로운 라이브러리 추가 시작 -->
+		<!-- 카카오페이관련 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- 카카오로그인관련 -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
