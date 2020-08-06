@@ -256,6 +256,8 @@ input[type="number"]{
             </tr>
             {{/each}}
          </script>
+         
+		</div>
 		<div id="divFinal">
 			<div id="divSum">
 				<div>
@@ -283,7 +285,6 @@ input[type="number"]{
 			</div>
 		</div>
 		
-		</div>
 		<div class="OrderArea">
 			<button id="btnOrder">구매하기</button>
 		</div>

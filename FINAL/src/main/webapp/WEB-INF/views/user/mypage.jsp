@@ -116,7 +116,7 @@ img:hover{
                <th>
                   <span id="point"></span> Point
                </th>
-               <th class="userUpdate">UPDATE</th>
+               <th class="userUpdate">MY INFO UPDATE</th>
             </tr>
          </table><br>
          <table id="tbl2"></table>
