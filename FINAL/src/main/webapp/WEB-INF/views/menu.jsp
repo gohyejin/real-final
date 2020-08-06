@@ -136,7 +136,7 @@ a {
 	var URL = window.location.pathname;
 	$(".items8").on("click",function(){
 		if(URL!="/index"){
-			location.href="/index";
+			location.href="/packageList";
 		}
 			window.onload = function(){
 			({scrollTop : 3000}, 400);

@@ -153,8 +153,8 @@ public class HomeController {
 
 
 	/* PACKAGE */
-	@RequestMapping("/indexPackageRead")
-	public void indexPackageRead() {
+	@RequestMapping("/packageList")
+	public void packageList() {
 
 	}
 
