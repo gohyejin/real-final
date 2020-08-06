@@ -145,7 +145,7 @@ body {
       <div class="btn"><input type="button" id="btnSignup" value="SIGN UP"/></div>
       <div class="ortxt">or</div>
       <div class="or">
-         <a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin&response_type=code">
+         <a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin2&response_type=code">
             <img class="kakao" src="../display?fileName=kakao.png" width=345>
          </a>
          <!-- 네이버아이디로로그인 버튼 노출 영역 -->
@@ -153,7 +153,7 @@ body {
            
          <!-- //네이버아이디로로그인 버튼 노출 영역 -->
          <script type="text/javascript">
-            var naver_id_login = new naver_id_login("bkD4xjtArMlE7W11ZuTX", "http://localhost:8088/naverlogin");
+            var naver_id_login = new naver_id_login("bkD4xjtArMlE7W11ZuTX", "http://localhost:8088/naverlogin2");
             var state = naver_id_login.getUniqState();
             naver_id_login.setButton("green", 5, 70);
             naver_id_login.setDomain("http://localhost:8088/index");

@@ -68,10 +68,30 @@ public class UsersController {
 		}
 		return "/user/welcome";
 	}
+	
+	@RequestMapping(value = "/kakaoLogin2")
+	public String login2(@RequestParam("code") String code, HttpSession session) {
+		String access_Token = kakao.getAccessToken2(code);
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		System.out.println("login Controller : " + userInfo);
+
+		// 클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+		if (userInfo.get("email") != null) {
+			session.setAttribute("userId", userInfo.get("email"));
+			session.setAttribute("users_id", userInfo.get("nickname"));
+			session.setAttribute("access_Token", access_Token);
+		}
+		return "/index";
+	}
 
 	@RequestMapping("/naverlogin")
 	public String naverlogin() {
 		return "/user/naverlogin";
+	}
+	
+	@RequestMapping("/naverlogin2")
+	public String naverlogin2() {
+		return "/user/naverlogin2";
 	}
 
 	@RequestMapping("/loginNaverResult")
@@ -79,6 +99,13 @@ public class UsersController {
 		session.setAttribute("userId", email);
 		session.setAttribute("users_id", nickname);
 		return "/user/welcome";
+	}
+	
+	@RequestMapping("/loginNaverResult2")
+	public String loginNaverResult2(String email, String nickname, HttpSession session) {
+		session.setAttribute("userId", email);
+		session.setAttribute("users_id", nickname);
+		return "/index";
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)

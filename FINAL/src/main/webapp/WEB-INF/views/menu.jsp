@@ -93,7 +93,7 @@ a {
 		<c:if test="${users_note==1}">
 			[ ${users_id} ] 관리자님
 		</c:if>
-		<c:if test="${users_note==0}">
+		<c:if test="${users_note==0 || users_id!=null}">
 		[ <b>${users_id}</b>님 ]
 		</c:if>
      	<c:if test="${users_id!=null}">
