@@ -190,7 +190,7 @@ input[type=text] {
             <div class="btn">
                <input type="submit" value="SAVE"> <input type="reset"
                   value="RESET" id="reset"> <input type="button"
-                  value="LIST" id="btnList">
+                  value="LIST" id="btnList" onClick="location.href='/costumeList'">
             </div>
          </form>
       </div>
