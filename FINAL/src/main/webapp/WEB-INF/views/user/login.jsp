@@ -138,7 +138,7 @@ body {
 		<div class="or">or</div>
 		<div class="or">
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin&response_type=code">
-				<img class="kakao" src="../display?fileName=kakao.png" width=345>
+				<img class="kakao" src="../display?fileName=kakao.png" width=336>
 			</a>
 		</div>
 		<div class="or">
@@ -149,7 +149,7 @@ body {
 			<script type="text/javascript">
 				var naver_id_login = new naver_id_login("bkD4xjtArMlE7W11ZuTX", "http://localhost:8088/naverlogin");
 				var state = naver_id_login.getUniqState();
-				naver_id_login.setButton("green", 5, 70);
+				naver_id_login.setButton("green", 5, 72);
 				naver_id_login.setDomain("http://localhost:8088/index");
 				naver_id_login.setState(state);
 				naver_id_login.init_naver_id_login();

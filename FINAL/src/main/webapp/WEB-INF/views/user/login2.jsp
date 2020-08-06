@@ -20,14 +20,14 @@ body {
 .title {
    margin-top: 40px;
    text-align: center;
-   font-size: 50px;
+   font-size: 80px;
    margin: auto;
 }
 
 .ortxt {
    text-align: center;
    margin: auto;
-   font-size: 20px;
+   font-size: 30px;
 }
 .or {
    text-align: center;
@@ -37,8 +37,10 @@ body {
 
 
 #id input, #pw input {
-   width: 30%;
-   height: 50px;
+   width: 27.5%;
+   height: 90px;
+   font-size: 30px;
+   padding:20px;
 }
 
 .btn, #id, #pw {
@@ -52,8 +54,8 @@ body {
 
 #btnLogin, #btnSignup {
    width: 30%;
-   height: 60px;
-   font-size: 30px;
+   height: 90px;
+   font-size: 50px;
    margin: 2px;
    cursor: pointer;
    background: #e6bbea;
@@ -146,7 +148,7 @@ body {
       <div class="ortxt">or</div>
       <div class="or">
          <a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin2&response_type=code">
-            <img class="kakao" src="../display?fileName=kakao.png" width=345>
+            <img class="kakao" src="../display?fileName=kakao.png" width=30%>
          </a>
          <!-- 네이버아이디로로그인 버튼 노출 영역 -->
          <div id="naver_id_login"></div>
@@ -155,7 +157,7 @@ body {
          <script type="text/javascript">
             var naver_id_login = new naver_id_login("bkD4xjtArMlE7W11ZuTX", "http://localhost:8088/naverlogin2");
             var state = naver_id_login.getUniqState();
-            naver_id_login.setButton("green", 5, 70);
+            naver_id_login.setButton("green", 5, 120);
             naver_id_login.setDomain("http://localhost:8088/index");
             naver_id_login.setState(state);
             naver_id_login.init_naver_id_login();
