@@ -77,9 +77,11 @@ a {
 		<div class="items3">
 			<b>FAQ</b>
 		</div>
+		<c:if test="${users_note==0}">
 		<div class="items4">
 			<b>CART</b>
 		</div>
+		</c:if>
 		<c:if test="${users_note==0}">
 		<div class="items5">
 			<b>MY PAGE</b>

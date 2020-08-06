@@ -247,6 +247,9 @@ input[type="number"]{
 	</table>
 	<table id="tbl2">
 		<tr>
+            <th colspan=6 id="PACKAGE">PACKAGE ORDER</th>
+        </tr>
+		<tr>
 			<th>NO.</th>
 			<th width=150>TITLE</th>
 			<th>IMAGE</th>
@@ -267,6 +270,9 @@ input[type="number"]{
 		</c:forEach>
 	</table>
 	<table id="tbl3">
+		<tr>
+            <th colspan=6 id="COSTUME">COSTUME ORDER</th>
+        </tr>
 		<tr>
 			<th>NO.</th>
 			<th width=150>TITLE</th>
