@@ -6,41 +6,175 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>회원 정보보기</title>
+	<title>BLACK USER INFO</title>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<style>
+* {
+	font-family: '@여기어때 잘난체'
+}
+
+#page {
+	background: white;
+	margin: 15px;
+	height: hidden;
+}
+
+#content {
+	margin-top: none;
+	margin-left: 70px;
+	margin-right: 70px;
+	padding: 30px margin-top: 10px;
+	text-align: center;
+}
+
+#tbl1 {
+	width: 50%;
+	margin: auto;
+	overflow: hidden;
+	border-collapse: collapse;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.title {
+	font-size: 50px;
+	text-align: center;
+	margin: auto;
+	margin-bottom:10px;
+}
+
+.btn{
+	text-align: center;
+	padding:30px;
+}
+
+td {
+	padding: 15px;
+	border-bottom: 1px solid #e360f2;
+	overflow: hidden;
+}
+
+th {
+	padding: 15px;
+	font-size: 25px;
+	width:15%;
+	border-bottom: 1px solid #e360f2;
+	border-right: 3px solid #e360f2;
+}
+
+#pagination{
+	padding:20px;
+	text-align:center;
+}
+
+.search{
+	margin:auto;
+	text-align:center;
+	padding:20px;
+}
+
+input[type="submit"]:active,input[type=button]:active {
+	background: #cca6cf;
+}
+
+input[type="text"]{
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	padding: 5px;
+}
+
+select{
+	height: 30px;
+	font-size: 20px;
+	border: none;
+}
+
+input[type=submit],input[type=button]{
+	width:250px;
+	height: 60px;
+	font-size: 30px;
+	margin: 2px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border:none;
+	border-radius:3px 3px 3px 3px;
+}
+
+input[type="reset"]{
+	width:250px;
+	height: 60px;
+	font-size: 30px;
+	margin: 2px;
+	cursor: pointer;
+	background: #969596;
+	color: white;
+	border:none;
+	border-radius:3px 3px 3px 3px;
+}
+
+input[type="number"]{
+   width:80px;
+}
+
+input[type="reset"]:active{
+	background: #757575;
+}
+</style>
 </head>
 <body>
-	<h1>회원정보</h1>
+	<jsp:include page="../menu.jsp" />
+	<div id="page">
+		<jsp:include page="../header.jsp" />
+		<div class="title">⊙ BLACK USER INFO ⊙</div>
 	<form id="frm" action="/admin/blackUpdate" method="post">
 	<input type="hidden" value="${vo.users_id}" name="users_id">
 	<input type="hidden" name="page" value="${param.page}">
-	<table border=1 id="tbl">
+	<table id="tbl1">
 		<tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>생일</th>
-			<th>우편번호</th>
-			<th>상세주소</th>
-			<th>연락처</th>
-			<th>이메일</th>
-			<th>포인트</th>
-			<th>성별</th>
-			<th>가입일</th>
-			<th>권한</th>
+			<th>ID</th>
+			<td>${vo.users_id}</td>
 		</tr>
 		<c:forEach items="vo">
-		<tr class="row">
-			<td>${vo.users_id}</td>
+		<tr>
+			<th>NAME</th>
 			<td>${vo.users_name}</td>
+		</tr>
+		<tr>
+			<th>BIRTHDAY</th>
 			<td><fmt:formatDate value="${vo.users_birthday}" pattern="yyyy년MM월dd일"/></td>
-			<td>${vo.users_zipcode}</td>
+		</tr>
+		<tr>
+			<th>ADDRESS</th>
 			<td>${vo.users_address}</td>
+		</tr>
+		<tr>
+			<th>TEL</th>
 			<td>${vo.users_phone}</td>
+		</tr>
+		<tr>
+			<th>E-MAIL</th>
 			<td>${vo.users_email}</td>
-			<td><fmt:formatNumber value="${vo.users_point}" pattern="#,### Point"/></td>
+		</tr>
+		<tr>
+			<th>POINT</th>
+			<td>
+				<fmt:formatNumber value="${vo.users_point}" pattern="#,### Point"/>
+			</td>
+		</tr>
+		<tr>
+			<th>GENDER</th>
 			<td>${vo.users_gender}</td>
+		</tr>
+		<tr>
+			<th>SUBSCRIPTION DATE</th>
 			<td><fmt:formatDate value="${vo.users_regdate}" pattern="yyyy년MM월dd일"/></td>
+		</tr>
+		<tr>
+			<th>TYPE</th>
 			<td>
 				<select name="users_note">
 					<option value="0" <c:out value="${vo.users_note=='0'?'selected':''}"/>>회원</option>
@@ -51,17 +185,17 @@
 		</tr>
 		</c:forEach>
 	</table>
-	
-	<input type="submit" value="수정">
-	<input type="reset" value="취소">
-	<input type="button" value="목록" id="btnList">
-	
+	<div class="btn">
+		<input type="submit" value="UPDATE">
+		<input type="reset" value="RESET">
+		<input type="button" value="LIST" id="btnList">
+	</div>
 	</form>
+	</div>
+		<jsp:include page="../chat.jsp"/>
+	<jsp:include page="../top.jsp"/>
 </body>
 <script>
-	
-	
-	
 	$(frm).submit(function(e){
 		e.preventDefault();
 		if(!confirm("수정하시겠습니까?")) return;

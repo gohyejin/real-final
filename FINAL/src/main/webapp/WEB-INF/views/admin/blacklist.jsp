@@ -115,6 +115,12 @@ hr{
 	color: hotpink;
 }
 
+.row:hover {
+	background:hotpink;
+	cursor: pointer;
+	color:#fff;
+}
+
 </style>
 </head>
 <body>
@@ -190,7 +196,7 @@ hr{
 	</div>
 </body>
 <script>
-	$("#tbl").on("click", ".row", function(){
+	$("#tbl1").on("click", ".row", function(){
 		var users_id=$(this).find(".users_id").html();
 		var page=$("#page2").val();
 		location.href="/admin/blackread?users_id="+users_id+"&page="+page;
