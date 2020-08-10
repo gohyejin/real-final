@@ -12,8 +12,6 @@ public interface CartMapper {
 	public void cdelete(int costume_cart_no); // 의상 삭제
 	public void pUpdate(Package_CartVO package_cartVO); // 패키지 수량변경
 	public void cUpdate(Costume_CartVO costume_cartVO); // 의상 수량변경
-	public int psum(String package_cart_id); // 패키지 총액
-	public int csum(String costume_cart_id); // 의상 총액
 	public void pinsert(Package_CartVO vo); // 패키지 장바구니 담기
 	public void cinsert(Costume_CartVO vo); // 의상대여 장바구니 담기
 	public Package_CartVO pread(int package_cart_no);

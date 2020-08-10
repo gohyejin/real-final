@@ -211,9 +211,7 @@ input[type="number"]{
 				</td>
                <td><img src="../display?fileName={{photo_package_image}}" width=110 class="image"/></td>
                <td class="photo_package_title" width=80>{{photo_package_title}}</td>
-               <td>
-                  <span class="photo_package_price">{{photo_package_price}}</span>
-				</td>
+               <td class="photo_package_price">{{photo_package_price}}</td>
 				<td>
                   <span><input type="hidden" value={{package_cart_no}} size=3 name="package_cart_no" class="package_cart_no"></span>
                   <span><input type="number" value="{{package_cart_quantity}}" min="1" class="pnumber"></span>
@@ -244,9 +242,7 @@ input[type="number"]{
 				</td>
                <td><img src="../display?fileName={{lend_costume_image}}" width=110 class="image"/></td>
                <td class="photo_package_title" width=80>{{lend_costume_name}}/{{costume_size}}</td>
-               <td>
-                  <span class="lend_costume_price">{{lend_costume_price}}</span>
-				</td>
+               <td><span class="lend_costume_price">{{lend_costume_price}}</span></td>
 				<td>
                   <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>
                   <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="cnumber"></span>
@@ -293,15 +289,102 @@ input[type="number"]{
 	<jsp:include page="../top.jsp" />
 </body>
 <script>
-   var cart_id="${users_id}";
-   getPlist();
-   getClist();
-   var Pchk=false;
-   var Cchk=false;
+	var cart_id="${users_id}";
+	getPlist();
+	getClist();
+	var Pchk=false;
+	var Cchk=false;
+	var packageSum=0;
+	var costumeSum=0;
+	var totalSum=0;
+	
+	//전체 체크버튼을 클릭 했을때
+	$("#tbl2").on("click", ".chkAll", function() {
+		if ($(this).is(":checked")) {
+			Cchk=true;
+			if(Cchk==true){
+				$("#tbl2 .row .chk").each(function() {
+					var costume_price=$(this).parent().parent().find(".lend_costume_price").html();
+					costumeSum = parseInt(costumeSum) + parseInt(costume_price);  
+				});
+				$("#costumeSum").val(costumeSum);
+				totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+				$("#totalSum").val(totalSum);
+				costumeSum=0;
+				costume_price=0;
+	     	}
+			$("#tbl2 .row .chk").each(function() {
+				$(this).prop("checked", true);
+			});
+		} else {
+			costumeSum=0;
+			$("#costumeSum").val(costumeSum);
+			totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+			$("#totalSum").val(totalSum);
+			Cchk=false;
+			$("#tbl2 .row .chk").each(function() {
+				$(this).prop("checked", false);
+			});
+		}
+	});
+	
+	//전체 체크버튼을 클릭 했을때
+	$("#tbl1").on("click", ".chkAll", function() {
+		if ($(this).is(":checked")) {
+			Pchk=true;
+			if(Pchk==true){
+				$("#tbl1 .row .chk").each(function() {
+					var package_price=$(this).parent().parent().find(".photo_package_price").html();
+					packageSum = parseInt(packageSum) + parseInt(package_price); 
+				});
+				$("#packageSum").val(packageSum);
+				totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+				$("#totalSum").val(totalSum);
+				packageSum=0;
+	     		package_price=0;
+	     	}
+	         $("#tbl1 .row .chk").each(function() {
+	            $(this).prop("checked", true);
+	         });
+	      } else {
+	    	 packageSum=0;
+			 $("#packageSum").val(packageSum);
+			 totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+			 $("#totalSum").val(totalSum);
+	         Pchk=false;
+	         $("#tbl1 .row .chk").each(function() {
+	            $(this).prop("checked", false);
+	         });
+	      }
+	   });
+	
+	
+	//선택 체크버튼
+	$("#tbl1").on("click", ".row .chk", function(){
+		$("#tbl1 .row .chk:checked").each(function() {
+			var package_price=$(this).parent().parent().find(".photo_package_price").html();
+			packageSum = parseInt(packageSum) + parseInt(package_price); 
+		});
+		$("#packageSum").val(packageSum);
+		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+		$("#totalSum").val(totalSum);
+		packageSum=0;
+		package_price=0;
+	});
+	$("#tbl2").on("click", ".row .chk", function(){
+		$("#tbl2 .row .chk:checked").each(function() {
+			var costume_price=$(this).parent().parent().find(".lend_costume_price").html();
+			costumeSum = parseInt(costumeSum) + parseInt(costume_price); 
+		});
+		$("#costumeSum").val(costumeSum);
+		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+		$("#totalSum").val(totalSum);
+		costumeSum=0;
+		costume_price=0;
+	});
    
    //구매하기 버튼을 클릭했을 때
    $("#btnOrder").on("click", function(){
-      
       if($("input:checkbox[name=packageCHK]").is(":checked")){
            Pchk=true;
       }
@@ -358,21 +441,6 @@ input[type="number"]{
       var costume_code=$(this).parent().parent().find(".costume_cart_costume_code").val();
       location.href="../costumeRead?lend_costume_code="+costume_code;
    });
-   
-   // 최종 총액
-   function sum(){
-       var psum=$("#packageSum").val();
-       var csum=$("#costumeSum").val();
-       $.ajax({
-            type:"get",
-            url:"/cart/totsum",
-            data:{"psum":psum, "csum":csum},
-            dataType:"json",
-            success:function(data){
-               $("#totalSum").val(data);
-           }
-       });
-   }
    
    //패키지 수량 수정
    $("#tbl1").on("change", ".row .pnumber", function(){
@@ -482,8 +550,6 @@ input[type="number"]{
             success:function(data){
                var temp=Handlebars.compile($("#temp1").html());
                $("#tbl1").html(temp(data));
-               $("#packageSum").val(data.psum);
-               sum();
             }
          });
       }
@@ -498,8 +564,6 @@ input[type="number"]{
            success:function(data){
               var temp=Handlebars.compile($("#temp2").html());
               $("#tbl2").html(temp(data));
-              $("#costumeSum").val(data.csum);
-              sum();
            }
         });
      }
@@ -518,22 +582,7 @@ input[type="number"]{
          $("#tbl1 .chkAll").prop("checked", false);
       }
    });
-
-   //전체 체크버튼을 클릭 했을때
-   $("#tbl1").on("click", ".chkAll", function() {
-      if ($(this).is(":checked")) {
-         Pchk=true;
-         $("#tbl1 .row .chk").each(function() {
-            $(this).prop("checked", true);
-         });
-      } else {
-         Pchk=false;
-         $("#tbl1 .row .chk").each(function() {
-            $(this).prop("checked", false);
-         });
-      }
-   });
-
+   
    //각 행에있는 체크버튼을 클릭 했을 때
    $("#tbl2").on("click", ".row .chk", function() {
       var isChkAll = true;
@@ -548,20 +597,6 @@ input[type="number"]{
          $("#tbl2 .chkAll").prop("checked", false);
       }
    });
-
-   //전체 체크버튼을 클릭 했을때
-   $("#tbl2").on("click", ".chkAll", function() {
-      if ($(this).is(":checked")) {
-         Cchk=true;
-         $("#tbl2 .row .chk").each(function() {
-            $(this).prop("checked", true);
-         });
-      } else {
-         Cchk=false;
-         $("#tbl2 .row .chk").each(function() {
-            $(this).prop("checked", false);
-         });
-      }
-   });
+   
 </script>
 </html>

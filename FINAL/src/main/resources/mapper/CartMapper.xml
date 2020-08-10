@@ -28,17 +28,6 @@
     <update id="cUpdate">
 		update costume_cart set costume_cart_quantity=#{costume_cart_quantity} where costume_cart_no=#{costume_cart_no}
     </update>
-    <!-- 장바구니 총액 합계 -->
-    <select id="psum" resultType="int">
-    	select sum(cart.package_cart_quantity*p.photo_package_price)
-		from photo_package p, package_cart cart
-		where photo_package_code=package_cart_package_code and package_cart_id=#{package_cart_id};
-    </select>
-    <select id="csum" resultType="int">
-    	select sum(cart.costume_cart_quantity*c.lend_costume_price)
-		from lend_costume c, costume_cart cart
-		where lend_costume_code=costume_cart_costume_code and costume_cart_id=#{costume_cart_id};
-    </select>
     <insert id="pinsert">
     	insert into package_cart(package_cart_id, package_cart_package_code, package_cart_quantity, package_cart_price)
 		values(#{package_cart_id}, #{package_cart_package_code}, 1, #{package_cart_price});

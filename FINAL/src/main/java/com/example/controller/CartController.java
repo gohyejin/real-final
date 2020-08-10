@@ -60,19 +60,11 @@ public class CartController {
 		model.addAttribute("vo", umapper.read(users_id));
 	}
 	
-	@RequestMapping("/cart/totsum")
-	@ResponseBody
-	public int totsum(@RequestParam("psum") int psum, @RequestParam("csum") int csum){
-		int totsum=psum+csum;
-		return totsum;
-	}
-	
 	@RequestMapping("/cart/plist")
 	@ResponseBody
 	public HashMap<String, Object> plist(String package_cart_id){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("plist", mapper.plist(package_cart_id));
-		map.put("psum", mapper.psum(package_cart_id));
 		return map;
 	}
 	
@@ -81,7 +73,6 @@ public class CartController {
 	public HashMap<String, Object> clist(String costume_cart_id){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("clist", mapper.clist(costume_cart_id));
-		map.put("csum", mapper.csum(costume_cart_id));
 		return map;
 	}
 	
