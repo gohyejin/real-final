@@ -7,7 +7,14 @@ public class Costume_CartVO extends Lend_CostumeVO{
 	private int costume_cart_quantity;
 	private int costume_cart_price;
 	private String costume_size;
+	private int costume_cart_status;
 	
+	public int getCostume_cart_status() {
+		return costume_cart_status;
+	}
+	public void setCostume_cart_status(int costume_cart_status) {
+		this.costume_cart_status = costume_cart_status;
+	}
 	public String getCostume_size() {
 		return costume_size;
 	}
@@ -44,11 +51,11 @@ public class Costume_CartVO extends Lend_CostumeVO{
 	public void setCostume_cart_price(int costume_cart_price) {
 		this.costume_cart_price = costume_cart_price;
 	}
-	
 	@Override
 	public String toString() {
 		return "Costume_CartVO [costume_cart_no=" + costume_cart_no + ", costume_cart_id=" + costume_cart_id
 				+ ", costume_cart_costume_code=" + costume_cart_costume_code + ", costume_cart_quantity="
-				+ costume_cart_quantity + ", costume_cart_price=" + costume_cart_price + "]";
+				+ costume_cart_quantity + ", costume_cart_price=" + costume_cart_price + ", costume_size="
+				+ costume_size + ", costume_cart_status=" + costume_cart_status + "]";
 	}
 } // class

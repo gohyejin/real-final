@@ -6,7 +6,14 @@ public class Package_CartVO extends Photo_PackageVO{
 	private String package_cart_package_code;
 	private int package_cart_quantity;
 	private int package_cart_price;
+	private int package_cart_status;
 	
+	public int getPackage_cart_status() {
+		return package_cart_status;
+	}
+	public void setPackage_cart_status(int package_cart_status) {
+		this.package_cart_status = package_cart_status;
+	}
 	public int getPackage_cart_no() {
 		return package_cart_no;
 	}
@@ -37,11 +44,11 @@ public class Package_CartVO extends Photo_PackageVO{
 	public void setPackage_cart_price(int package_cart_price) {
 		this.package_cart_price = package_cart_price;
 	}
-	
 	@Override
 	public String toString() {
 		return "Package_CartVO [package_cart_no=" + package_cart_no + ", package_cart_id=" + package_cart_id
 				+ ", package_cart_package_code=" + package_cart_package_code + ", package_cart_quantity="
-				+ package_cart_quantity + ", package_cart_price=" + package_cart_price + "]";
+				+ package_cart_quantity + ", package_cart_price=" + package_cart_price + ", package_cart_status="
+				+ package_cart_status + "]";
 	}
 } // class

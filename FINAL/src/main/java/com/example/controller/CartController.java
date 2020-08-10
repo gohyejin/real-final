@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Costume_CartVO;
+import com.example.domain.OrdersVO;
 import com.example.domain.Package_CartVO;
 import com.example.mapper.CartMapper;
+import com.example.mapper.OrdersMapper;
 import com.example.mapper.UsersMapper;
 
 @Controller
@@ -24,6 +26,8 @@ public class CartController {
 	CartMapper mapper;
 	@Autowired
 	UsersMapper umapper;
+	@Autowired
+	OrdersMapper omapper;
 	
 	@RequestMapping(value="/cart/purchase")
 	public String purchase(String users_id, HttpSession session, HttpServletRequest request){
@@ -108,12 +112,32 @@ public class CartController {
 	@RequestMapping("/cart/pinsert")
 	@ResponseBody
 	public void pinsert(Package_CartVO vo){
-		mapper.pinsert(vo);
+		Package_CartVO Pchk = mapper.PackageCartRead(vo);
+		if(Pchk!=null){
+			mapper.packageQuantityUpdate(Pchk);
+		}else{
+			mapper.pinsert(vo);
+		}
+		OrdersVO PCHK=omapper.PackageOrdersCheck(Pchk.getPackage_cart_no());
+		if(PCHK!=null){
+			mapper.pinsert(vo);
+		}
 	}
 	
 	@RequestMapping("/cart/cinsert")
 	@ResponseBody
 	public void cinsert(Costume_CartVO vo){
-		mapper.cinsert(vo);
+		System.out.println(vo);
+		Costume_CartVO Cchk= mapper.CostumeCartRead(vo);
+		System.out.println(Cchk);
+		if(Cchk!=null){
+			mapper.costumeQuantityUpdate(Cchk);
+		}else{
+			mapper.cinsert(vo);
+		}
+		OrdersVO CCHK=omapper.CostumeOrdersCheck(Cchk.getCostume_cart_no());
+		if(CCHK!=null){
+			mapper.cinsert(vo);
+		}
 	}
 }

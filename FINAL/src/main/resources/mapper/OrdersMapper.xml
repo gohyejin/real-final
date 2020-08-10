@@ -22,10 +22,16 @@
     </select>
     <insert id="packageInsert">
     	insert into package_orders(package_cart_ono, orders_package_quantity, orders_day, orders_paytype)
-    	values(#{package_cart_no}, #{orders_package_quantity}, now(), #{orders_paytype})
+    	values(#{package_cart_ono}, #{orders_package_quantity}, now(), #{orders_paytype})
     </insert>
     <insert id="costumeInsert">
     	insert into costume_orders(costume_cart_ono, orders_costume_quantity, orders_day, orders_paytype)
-    	values(#{costume_cart_no}, #{orders_costume_quantity}, now(), #{orders_paytype})
+    	values(#{costume_cart_ono}, #{orders_costume_quantity}, now(), #{orders_paytype})
     </insert>
+    <select id="PackageOrdersCheck" resultType="com.example.domain.OrdersVO">
+    	select * from package_orders where package_cart_ono=#{package_cart_no}
+    </select>
+    <select id="CostumeOrdersCheck" resultType="com.example.domain.OrdersVO">
+    	select * from costume_orders where costume_cart_ono=#{costume_cart_no}
+    </select>
 </mapper>

@@ -263,7 +263,7 @@ input[type="number"]{
 				<td>${vo.photo_package_code}</td>
 				<td>${vo.photo_package_title}</td>
 				<td><img class="img" src="/display?fileName=${vo.photo_package_image}" width=110 onClick="location.href='/costumeRead?id=${vo.photo_package_code}'"></td>
-				<td>${vo.package_cart_quantity}개</td>
+				<td class="quantity">${vo.package_cart_quantity}</td>
 				<td>${vo.package_cart_price}원</td>
 				<td>${vo.package_cart_price*vo.package_cart_quantity}원</td>
 			</tr>
@@ -287,7 +287,7 @@ input[type="number"]{
 				<td>${v.lend_costume_code}</td>
 				<td>${v.lend_costume_name}</td>
 				<td><img class="img" src="/display?fileName=${v.lend_costume_image}" width=110 onClick="location.href='costumeRead?id=${v.lend_costume_code}'"></td>
-				<td>${v.costume_cart_quantity}개</td>
+				<td class="quantity">${v.costume_cart_quantity}</td>
 				<td>${v.costume_cart_price}원</td>
 				<td>${v.costume_cart_price*v.costume_cart_quantity}원</td>
 			</tr>
@@ -346,6 +346,7 @@ input[type="number"]{
    $("#tbl3 .no").hide();
    var point="0";
    
+   /*포인트 사용*/
    $("#btn").on("click", function(){
       var totalSum=parseInt($("#totalSum").val());
       var myPoint=parseInt($("#myPoint").html());
@@ -371,7 +372,7 @@ input[type="number"]{
    
    /*카카오페이*/
    $("#btnKakao").on("click", function() {
-      var totalSum = $("#totalSum").val();
+	  var totalSum = $("#totalSum").val();
       var IMP = window.IMP;
       
       IMP.init("imp56975225");
@@ -390,23 +391,32 @@ input[type="number"]{
          if (rsp.success) {
             var packageNO = new Array();
             var costumeNO = new Array();
+            var packageQuantity = new Array();
+            var costumeQuantity = new Array();
             var users_id = "${users_id}";
             var orders_paytype="0";
             
-            $("#tbl1 .row .no").each(function() {
+            $("#tbl2 .row .no").each(function() {
                var package_cart_no=$(this).parent().find(".no").html();
+               var package_quantity=$(this).parent().find(".quantity").html();
                packageNO.push(package_cart_no);
+               packageQuantity.push(package_quantity);
             });
             
-            $("#tbl2 .row .no").each(function() {
+            $("#tbl3 .row .no").each(function() {
                var costume_cart_no=$(this).parent().find(".no").html();
+               var costume_quantity=$(this).parent().find(".quantity").html();
                costumeNO.push(costume_cart_no);
+               costumeQuantity.push(costume_quantity);
             });
             
             $.ajax({
                type : "post",
                url : "/order/insert",
-               data : {"packageNO[]":packageNO, "costumeNO[]":costumeNO, "orders_paytype":orders_paytype, "orders_id":users_id, "point":point},
+               data : {"packageNO[]":packageNO, "costumeNO[]":costumeNO, 
+            	   "packageQuantity[]":packageQuantity, "costumeQuantity[]":costumeQuantity,
+            	   "orders_paytype":orders_paytype, "orders_id":users_id, 
+            	   "point":point},
                success : function() {
                   location.href="/user/mypage?users_id="+users_id;
                }

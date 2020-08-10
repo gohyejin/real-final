@@ -18,4 +18,10 @@ public interface CartMapper {
 	public void cinsert(Costume_CartVO vo); // 의상대여 장바구니 담기
 	public Package_CartVO pread(int package_cart_no);
 	public Costume_CartVO cread(int costume_cart_no);
+	public Package_CartVO PackageCartRead(Package_CartVO vo);
+	public Costume_CartVO CostumeCartRead(Costume_CartVO vo);
+	public void packageQuantityUpdate(Package_CartVO vo);
+	public void costumeQuantityUpdate(Costume_CartVO vo);
+	public void PackageStatusUpdate(int packageCartNo);
+	public void CostumeStatusUpdate(int costumeCartNo);
 }

@@ -10,4 +10,6 @@ public interface OrdersMapper {
     public int point(String users_id);
     public void packageInsert(OrdersVO ordersVO);
     public void costumeInsert(OrdersVO ordersVO);
+    public OrdersVO PackageOrdersCheck(int package_cart_no);
+    public OrdersVO CostumeOrdersCheck(int costume_cart_no);
 }

@@ -44,17 +44,30 @@ public class OrdersController {
 	   ordersVO.setOrders_id(orders_id);
 	   ordersVO.setOrders_paytype(orders_paytype);
 	   String[] packageNo = request.getParameterValues("packageNO[]");
-	   String[] costumeNo = request.getParameterValues("costumeNO[]");	   
+	   String[] costumeNo = request.getParameterValues("costumeNO[]");
+	   String[] packageQuantity = request.getParameterValues("packageQuantity[]");
+	   String[] costumeQuantity = request.getParameterValues("costumeQuantity[]");
+	   
 	   for (int i = 0; i < packageNo.length; i++) {
-		   ordersVO.setPackage_cart_no(Integer.parseInt(packageNo[i]));
-		   ordersVO.setOrders_package_quantity(cmapper.pread(Integer.parseInt(packageNo[i])).getPackage_cart_quantity());
+		   ordersVO.setPackage_cart_ono(Integer.parseInt(packageNo[i]));
+		   ordersVO.setOrders_package_quantity(Integer.parseInt(packageQuantity[i]));
 		   mapper.packageInsert(ordersVO);
+		   
+		   if(Integer.parseInt(packageQuantity[i])==cmapper.pread(Integer.parseInt(packageNo[i])).getPackage_cart_quantity()){
+			   int packageCartNo=Integer.parseInt(packageNo[i]);
+			   cmapper.PackageStatusUpdate(packageCartNo);
+	       }
 	   }
 		
 	   for (int i = 0; i < costumeNo.length; i++) {
-		   ordersVO.setCostume_cart_no(Integer.parseInt(costumeNo[i]));
-		   ordersVO.setOrders_costume_quantity(cmapper.cread(Integer.parseInt(costumeNo[i])).getCostume_cart_quantity());
+		   ordersVO.setCostume_cart_ono(Integer.parseInt(costumeNo[i]));
+		   ordersVO.setOrders_costume_quantity(Integer.parseInt(costumeQuantity[i]));
 		   mapper.costumeInsert(ordersVO);
+		   
+		   if(Integer.parseInt(costumeQuantity[i])==cmapper.cread(Integer.parseInt(costumeNo[i])).getCostume_cart_quantity()){
+			   int costumeCartNo=Integer.parseInt(costumeNo[i]);
+			   cmapper.CostumeStatusUpdate(costumeCartNo);
+		   }
 	   }
 	   umapper.pointUpdate(orders_id, point);
 

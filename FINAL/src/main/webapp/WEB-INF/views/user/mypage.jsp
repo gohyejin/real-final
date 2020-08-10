@@ -127,7 +127,7 @@ img:hover{
          <tr class="th">
                   <th>IMAGE</th>
                   <th>PACKAGE</th>
-                  <th></th>
+                  <th>QUANTITY</th>
                   <th>PRICE</th>
                   <th width=137>PAY TYPE</th>
                    <th>TOTAL</th>
@@ -159,7 +159,7 @@ img:hover{
          <tr class="th">
                   <th>IMAGE</th>
                   <th>COSTUME</th>
-                  <th></th>
+                  <th>QUANTITY</th>
                   <th>PRICE</th>
                   <th width=137>PAY TYPE</th>
                    <th>TOTAL</th>
