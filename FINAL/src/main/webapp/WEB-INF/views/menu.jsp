@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.net.URLDecoder"%> 
 <!DOCTYPE html>
 <style>
 * {
@@ -61,6 +61,35 @@ a {
 }
 
 </style>
+<%
+Cookie[] cookies=request.getCookies();
+if(cookies != null) {
+   for(Cookie cookie : cookies) {
+      if(cookie.getName().equals("users_id")) {
+         session.setAttribute("users_id", cookie.getValue());
+      }
+   }
+}
+
+Cookie[] cookies2=request.getCookies();
+if(cookies2 != null) {
+   for(Cookie cookie2 : cookies2) {
+      if(cookie2.getName().equals("users_note")) {
+         session.setAttribute("users_note", cookie2.getValue());
+      }
+   }
+}
+
+Cookie[] cookies3=request.getCookies();
+if(cookies3 != null) {
+   for(Cookie cookie3 : cookies3) {
+      if(cookie3.getName().equals("users_name")) {
+         session.setAttribute("users_name", URLDecoder.decode(cookie3.getValue(), "UTF-8"));
+
+      }
+   }
+}
+%>
 	<div id="menu">
 		<div class="items1">
 			<b>HOME</b>
@@ -77,11 +106,9 @@ a {
 		<div class="items3">
 			<b>FAQ</b>
 		</div>
-		<c:if test="${users_note==0}">
 		<div class="items4">
 			<b>CART</b>
 		</div>
-		</c:if>
 		<c:if test="${users_note==0}">
 		<div class="items5">
 			<b>MY PAGE</b>
@@ -95,7 +122,7 @@ a {
 		<c:if test="${users_note==1}">
 			[ ${users_id} ] 관리자님
 		</c:if>
-		<c:if test="${users_note==0 && users_id!=null}">
+		<c:if test="${users_note==0}">
 		[ <b>${users_id}</b>님 ]
 		</c:if>
      	<c:if test="${users_id!=null}">

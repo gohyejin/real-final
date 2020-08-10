@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -109,47 +111,70 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
-	   @ResponseBody
-	   public int loginPost(UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) {
-	      int result = 0;
-	      String users_id = vo.getUsers_id();
-	      String users_pass = vo.getUsers_pass();
-	      UsersVO usersVO = umapper.read(users_id);
-	      if (usersVO == null) {
-	         result = 0;
-	      } else if (!usersVO.getUsers_pass().equals(users_pass)) {
-	         result = 1;
-	      } else if(usersVO.getUsers_note()==2) {
-	         result = 3;
-	      } else if(usersVO.getUsers_note()==3) {
-	         result = 4;
-	      }else {
-	      
-	         session.setAttribute("users_id", users_id);
-	         session.setAttribute("users_note", usersVO.getUsers_note());
-	         result = 2;
-	         if (ex_chk) {
-	            Cookie cookie = new Cookie("users_id", users_id);
-	            cookie.setPath("/");
-	            cookie.setMaxAge(60 * 60);
-	            response.addCookie(cookie);
-	         }
-	      }
-	      return result;
-	   }
-	   
+    @ResponseBody
+    public int loginPost(UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
+       int result = 0;
+       String users_id = vo.getUsers_id();
+       String users_pass = vo.getUsers_pass();
+       UsersVO usersVO = umapper.read(users_id);
+       if (usersVO == null) {
+          result = 0;
+       } else if (!usersVO.getUsers_pass().equals(users_pass)) {
+          result = 1;
+       } else if(usersVO.getUsers_note()==2) {
+          result = 3;
+       } else if(usersVO.getUsers_note()==3) {
+          result = 4;
+       }else {
+       
+          session.setAttribute("users_id", users_id);
+          session.setAttribute("users_note", usersVO.getUsers_note());
+          session.setAttribute("users_name", usersVO.getUsers_name());
+          result = 2;
+          if (ex_chk) {
+             Cookie cookie = new Cookie("users_id", users_id);
+             Cookie cookie2 = new Cookie("users_note", Integer.toString(usersVO.getUsers_note()));
+             Cookie cookie3 = new Cookie("users_name", URLEncoder.encode(usersVO.getUsers_name(), "UTF-8"));
+             cookie.setPath("/");
+             cookie.setMaxAge(60 * 60);
+             cookie2.setPath("/");
+             cookie2.setMaxAge(60 * 60);
+             cookie3.setPath("/");
+             cookie3.setMaxAge(60 * 60);
+             response.addCookie(cookie);
+             response.addCookie(cookie2);
+             response.addCookie(cookie3);
 
-	@RequestMapping("/user/logout")
-	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		session.invalidate();
-		Cookie cookie = WebUtils.getCookie(request, "users_id");
-		if (cookie != null) {
-			cookie.setPath("/");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-		}
-		return "redirect:/index";
-	}
+          }
+          
+       }
+       return result;
+    }
+    
+
+ @RequestMapping("/user/logout")
+ public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    session.invalidate();
+    Cookie cookie = WebUtils.getCookie(request, "users_id");
+    if (cookie != null) {
+       cookie.setPath("/");
+       cookie.setMaxAge(0);
+       response.addCookie(cookie);
+    }
+    Cookie cookie2 = WebUtils.getCookie(request, "users_note");
+    if (cookie2 != null) {
+       cookie2.setPath("/");
+       cookie2.setMaxAge(0);
+       response.addCookie(cookie2);
+    }
+    Cookie cookie3 = WebUtils.getCookie(request, "users_name");
+    if (cookie3 != null) {
+       cookie3.setPath("/");
+       cookie3.setMaxAge(0);
+       response.addCookie(cookie3);
+    }
+    return "redirect:/index";
+ }
 
 	@RequestMapping("/user/check")
 	@ResponseBody
