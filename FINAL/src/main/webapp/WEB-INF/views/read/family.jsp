@@ -167,6 +167,9 @@ img {
 var src1="../display?fileName=family-";
 var src2=".jpg";
 var page;
+$("#imgButton").on("click",function(){
+    location.href="/calendar";
+});
 
 $(".box").on("click", "img", function() {
     var src = $(this).attr("src");

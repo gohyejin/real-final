@@ -40,6 +40,7 @@
 	<interceptors>    
          <interceptor>        
             <mapping path="/user/cart"/>  <!-- 이거 복사해서 경로만 바꾸면 여러가지 가능 --> 
+            <mapping path="/calendar"/>
             <beans:bean id="AuthInterceptor" class="com.example.interceptor.AuthInterceptor"/>
          </interceptor> 
       </interceptors>

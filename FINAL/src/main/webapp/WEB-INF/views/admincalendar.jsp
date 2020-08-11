@@ -17,94 +17,102 @@
    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
-
-/* pc 화면 */
-@media ( min-width : 768px) {
-   #button {
-      position: fixed;
-      z-index: 999;
-      right: 30px; /* 화면 오른쪽으로부터의 거리 */
-      bottom: 90px; /* 화면 아래쪽으로부터의 거리 */
-   }
-}
-/* 모바일 화면 */
-@media ( max-width :767px) {
-   #button {
-      position: fixed;
-      z-index: 999;
-      right: 15px; /* 화면 오른쪽으로부터의 거리 */
-      bottom: 45px; /* 화면 아래쪽으로부터의 거리 */
-   }
+* {
+	font-family: '@여기어때 잘난체'
 }
 
-#button{
-   cursor:pointer;
-   }
-#external-events {
-    position: fixed;
-    z-index: 2;
-    top: 300px;
-    left: 140px;
-    width: 150px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    background: #eee;
-  }
- 
-  .demo-topbar + #external-events { /* will get stripped out */
-    top: 60px;
-  }
- 
-  #external-events .fc-event {
-    margin: 1em 0;
-    cursor: move;
-  }
- 
-  #calendar-container {
-    position: relative;
-    z-index: 1;
-    margin-left: 200px;
-  }
- 
-  #calendar {
-    max-width: 900px;
-    margin: 20px auto;
-    padding-left:50px;
-    float:left;
-  }
-  #reservation {
-     
-     
-  }
-  
+#page {
+	background: white;
+	margin: 15px;
+	height: hidden;
+}
 
+#content {
+	margin-left: 70px;
+	margin-right: 70px;
+	padding: 30px;
+	margin-top: 10px;
+	text-align: center;
+	width: 90%;
+	margin: auto;
+	height: 800px;
+}
+
+#tbl1 {
+	width: 40%;
+	float: right;
+	overflow: hidden;
+	border-collapse: collapse;
+}
+
+.title {
+	font-size: 50px;
+	text-align: center;
+	margin: auto;
+}
+
+td {
+	padding: 15px;
+	border-bottom: 1px solid #e360f2;
+}
+
+th {
+	padding: 15px;
+	font-size: 20px;
+	border-bottom: 3px solid #e360f2;
+}
+
+#button {
+	cursor: pointer;
+}
+
+#calendar {
+	width: 60%;
+	float: left;
+}
+
+.X {
+	float: right;
+	border: none;
+	font-size: 20px;
+	margin-botton: 5px;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
+	<jsp:include page="menu.jsp" />
+	<div id="page">
+		<jsp:include page="header.jsp" />
+		<div class="title">⊙ RESERVATION ⊙</div><br><br>
+		<div id="content">
    <div class="container calendar-container">
        <div id="calendar" style="max-width: 900px; margin: 40px auto;"></div>
    </div>
    <div id="reservation2">
-         <table id="tbl" border=1></table>    
+         <table id="tbl1"></table>    
             <script id="temp" type="text/x-handlebars-template"> 
                <tr>
                   <th>예약번호</th>
                   <th>아이디</th>
                   <th>이름</th>
                   <th>예약시간</th>
-                  <th>삭제</th>
                </tr>
                {{#each list}}
                <tr class="row">
                   <td class="reno">{{reservation_reno}}</td>
                   <td>{{reservation_id}}</td>
                   <td>{{users_name}}</td>
-                  <td>{{reservation_redate}}</td>
-                  <td><button>삭제</button></td>
+                  <td>
+					{{reservation_redate}}
+					<button class="X">X</button>
+				  </td>
                </tr>
                {{/each}}
             </script>
-   </div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 
@@ -115,27 +123,26 @@ $(document).ready(function() {
   header:{
    left: 'prevYear,prev,next,nextYear,today',
    center: 'title',
-   right:'month,agendaWeek,agendaDay'
+   right:'none'
   },
   timeFormat: 'H(:mm)시',         
   events: function (title, start, timezone, callback) {
-   $.ajax({
-      type :"get" //"POST", "GET"
-     ,url :"/reservationlist" //Request URL
-     ,dataType :"json"//jSonCalList에 json정보 담기
-     ,success : function(data) {
-    var json = data.list;
-    var events = [];
-      $.each(json,function(i,obj){
-      
-         events.push({
-            "title": json[i].users_name, 
-            "start": json[i].reservation_redate
-            });
-      }); 
-      callback(events);
-     }
-      });
+	$.ajax({
+		type : "get" /* "POST", "GET" */,
+		url : "/reservationlist" /* Request URL */,
+		dataType : "json"/* jSonCalList에 json정보 담기 */,
+     	success : function(data) {
+  			var json = data.list;
+		    var events = [];
+			$.each(json,function(i,obj){
+        		events.push({
+					"title": json[i].users_name, 
+            		"start": json[i].reservation_redate
+           		});
+      		}); 
+      	callback(events);
+     	}
+    });
   }
  });
 });
@@ -156,13 +163,13 @@ function getList() {
          dataType : "json",
          success : function(data) {
             var temp = Handlebars.compile($("#temp").html());
-            $("#tbl").html(temp(data));
+            $("#tbl1").html(temp(data));
             }
          });
       }
       
       
-   $("#tbl").on("click", ".row button", function(){
+   $("#tbl1").on("click", ".row .X", function(){
       var reservation_reno=$(this).parent().parent().find(".reno").html()
       $.ajax({
          type : "post",
@@ -170,7 +177,7 @@ function getList() {
          data:{"reservation_reno":reservation_reno},
          success : function() {
             alert("삭제 되었습니다.");
-            location.href="/admincalender";
+            getList();
             }
          });
    });

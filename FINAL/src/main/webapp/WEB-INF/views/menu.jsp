@@ -31,7 +31,7 @@
 	background-color:rgba(255,255,255,0.3);
 }
 
-.items0,.items1,.items2,.items3,.items4,.items5,.items6,.items7,.items8,.items5-1{
+.items0,.items1,.items2,.items3,.items4,.items5,.items6,.items7,.items8,.items5-1,.items9,.items10{
 	color: black;
 	font-size: 30px;
 	cursor: pointer;
@@ -51,7 +51,7 @@
 	background-color:rgba(0.7);
 }
 
-.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover,.items1-1:hover,.items2-1:hover,.items3-1:hover,.items4-1:hover,.items2-2:hover{
+.items4:hover ,.items0:hover,.items1:hover,.items2:hover,.items3:hover,.items5:hover,.items6:hover,.items7:hover,.items8:hover,.items5-1:hover,.items1-1:hover,.items2-1:hover,.items3-1:hover,.items4-1:hover,.items2-2:hover,.items9:hover,.items10:hover{
 	color: #e360f2;
 }
 
@@ -106,12 +106,22 @@ if(cookies3 != null) {
 		<div class="items3">
 			<b>FAQ</b>
 		</div>
+		<c:if test="${users_note==0}">
 		<div class="items4">
 			<b>CART</b>
 		</div>
+		<div class="items9">
+			<b>RESERVATION</b>
+		</div>
+		</c:if>
 		<c:if test="${users_note==0}">
 		<div class="items5">
 			<b>MY PAGE</b>
+		</div>
+		</c:if>
+		<c:if test="${users_note==1}">
+		<div class="items10">
+			<b>RESERVATION</b>
 		</div>
 		</c:if>
 		<c:if test="${users_id==null}">
@@ -123,7 +133,7 @@ if(cookies3 != null) {
 			[ ${users_id} ] 관리자님
 		</c:if>
 		<c:if test="${users_note==0}">
-		[ <b>${users_id}</b>님 ]
+			[ <b>${users_id}</b>님 ]
 		</c:if>
      	<c:if test="${users_id!=null}">
          <div class="items7">
@@ -215,6 +225,16 @@ if(cookies3 != null) {
 	/*MY PGAE메뉴*/
 	$(".items5").on("click",function(){
 		location.href="/user/mypage";
+	})
+	
+	/*RESERVATION 메뉴*/
+	$(".items9").on("click",function(){
+		location.href="/calendar";
+	})
+	
+	/*RESERVATION 메뉴*/
+	$(".items10").on("click",function(){
+		location.href="/admincalendar";
 	})
 	
 	/*LOGIN메뉴*/

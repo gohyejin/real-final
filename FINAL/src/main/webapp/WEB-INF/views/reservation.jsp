@@ -38,6 +38,9 @@
 	</div>
 </body>
 <script>
-	
+
+$("#button").on("click",function(){
+    location.href="/calendar";
+});
 </script>
 </html>
