@@ -141,8 +141,9 @@ if(cookies3 != null) {
         </div>
 		</c:if>
 	</div>
-	<div id="menu1">
+	
 	<c:if test="${users_note==1}">
+	<div id="menu1">
 		<div class="items1-1">
 			<b>USER LIST</b>
 		</div>
@@ -158,8 +159,8 @@ if(cookies3 != null) {
 		<div class="items4-1">
 			<b>COSTUME INSERT</b>
 		</div>
-      </c:if>
 	</div>
+      </c:if>
 <script>
 	/*HOME메뉴*/
 	$(".items1").on("click",function(){
