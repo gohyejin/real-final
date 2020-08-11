@@ -66,6 +66,8 @@ public class UsersController {
 		if (userInfo.get("email") != null) {
 			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("users_id", userInfo.get("nickname"));
+			session.setAttribute("users_name", userInfo.get("nickname"));
+			session.setAttribute("users_note", 0);
 			session.setAttribute("access_Token", access_Token);
 		}
 		return "/user/welcome";
@@ -81,6 +83,8 @@ public class UsersController {
 		if (userInfo.get("email") != null) {
 			session.setAttribute("userId", userInfo.get("email"));
 			session.setAttribute("users_id", userInfo.get("nickname"));
+			session.setAttribute("users_name", userInfo.get("nickname"));
+			session.setAttribute("users_note", 0);
 			session.setAttribute("access_Token", access_Token);
 		}
 		return "/index";
@@ -100,6 +104,8 @@ public class UsersController {
 	public String loginNaverResult(String email, String nickname, HttpSession session) {
 		session.setAttribute("userId", email);
 		session.setAttribute("users_id", nickname);
+		session.setAttribute("users_name", nickname);
+		session.setAttribute("users_note", 0);
 		return "/user/welcome";
 	}
 	
@@ -107,6 +113,8 @@ public class UsersController {
 	public String loginNaverResult2(String email, String nickname, HttpSession session) {
 		session.setAttribute("userId", email);
 		session.setAttribute("users_id", nickname);
+		session.setAttribute("users_name", nickname);
+		session.setAttribute("users_note", 0);
 		return "/index";
 	}
 

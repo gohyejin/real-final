@@ -196,7 +196,9 @@ input[type=number] {
 						<input type="submit" value="수정">
 					</c:if>
 					<input type="button" value="LIST" id="btnList" onClick="location.href='costumeList'">
-					<input type="button" value="장바구니에 담기" class="cart">
+					<c:if test="${users_note!=1}">
+						<input type="button" value="장바구니에 담기" class="cart">
+					</c:if>
 				</div>
 			</form>
 		</div>
