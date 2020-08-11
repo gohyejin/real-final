@@ -68,8 +68,8 @@ img {
 }
 
 #lightbox {
-   width:90%;
-   height:1500px;
+   width:1200px;
+   height:900px;
    margin: 20px auto;
    padding: 15px;
    border: 1px solid #333333;
@@ -77,17 +77,6 @@ img {
    background: white;
    box-shadow: 0px 5px 5px rgba(34, 25, 25, 0.4);
    text-align: center;
-}
-#perPage{
-   border:none;
-   background:white;
-   font-size:60px;
-}
-
-#nextPage{
-   border:none;
-   background:white;
-   font-size:60px;
 }
 
 #btnClose {
@@ -97,20 +86,27 @@ img {
     cursor: pointer;
 }
 
-#perPage {
+#perPage{
 	float:left;
-   margin-top:500px;
+   margin-top:400px;
    cursor: pointer;
+   border:none;
+   background:white;
+   font-size:60px;
 }
 
-#nextPage {
+#nextPage{
 	float:right;
-   margin-top:500px;
+   margin-top:400px;
    cursor: pointer;
+   border:none;
+   background:white;
+   font-size:60px;
 }
 
-#lightImg{
-	width:50%;
+#lightbox img{
+	 position: relative;
+	 top:50px;
 }
 
 </style>

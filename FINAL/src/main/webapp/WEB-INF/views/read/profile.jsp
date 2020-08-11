@@ -68,23 +68,29 @@ img {
 }
 
 #lightbox {
-   width:90%;
-   height:1500px;
+   width:1200px;
+   height:900px;
    margin: 20px auto;
-   padding: 15px;
+   padding: 10px;
    border: 1px solid #333333;
    border-radius: 5px;
    background: white;
    box-shadow: 0px 5px 5px rgba(34, 25, 25, 0.4);
-   text-align: center;
+   /* text-align: center; */
 }
 #perPage{
+	float:left;
+   margin-top:400px;
+   cursor: pointer;
    border:none;
    background:white;
    font-size:60px;
 }
 
 #nextPage{
+	float:right;
+   margin-top:400px;
+   cursor: pointer;
    border:none;
    background:white;
    font-size:60px;
@@ -97,22 +103,12 @@ img {
     cursor: pointer;
 }
 
-#perPage {
-	float:left;
-   margin-top:500px;
-   cursor: pointer;
+#lightbox img{
+	 position: relative;
+	 top:355px;
+	 left:44%;
+     transform: translate(-50%, -50%);
 }
-
-#nextPage {
-	float:right;
-   margin-top:500px;
-   cursor: pointer;
-}
-
-#lightImg{
-	width:50%;
-}
-
 
 </style>
 </head>
