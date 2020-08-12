@@ -172,7 +172,7 @@ input[type="submit"]:active {
 	            	<td rowspan=2><span id="btnShow"><button>SHOW</button></span></td>
 	            </tr>
 	            <tr>
-					<td><input type="password" size=28 placeholder="　　PASSWORD CHECK" maxlength="20" id="users_passChk" required/></td>
+					<td><input type="password" size=28 placeholder="　　PASSWORD CHECK" maxlength="20" id="users_passChk" name="users_passChk" value="${users_passChk}" required/></td>
 	            </tr>
 	            <tr>
 	            	<th colspan=2><span id="users_passCHK">비밀번호 확인</span></th>
