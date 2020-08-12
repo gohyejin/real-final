@@ -23,6 +23,7 @@
 	background: white;
 	margin: 15px;
 	height: hidden;
+	padding:30px;
 }
 
 #content {
@@ -41,6 +42,7 @@
 	float: right;
 	overflow: hidden;
 	border-collapse: collapse;
+	margin-bottom:10px;
 }
 
 .title {
@@ -106,7 +108,8 @@ th {
 }
 
 #calendar {
-	width: 60%;
+	width: 61%;
+	height: 60%;
 	float: left;
 }
 
@@ -116,6 +119,11 @@ th {
 	font-size: 20px;
 	margin-botton: 5px;
 	cursor: pointer;
+	color:red;
+}
+
+.active {
+	color: hotpink;
 }
 </style>
 </head>
@@ -180,7 +188,8 @@ th {
                </tr>
                {{/each}}
             </script>
-			</div>
+		<div id="pagination"></div>
+		</div>
 		</div>
 	</div>
 </body>
@@ -216,24 +225,48 @@ $(document).ready(function(){
 	});
 </script>
 <script>
-
+var page=1;
 
 var users_id="${users_id}";
 
 getList();
 
 function getList() {
-   $.ajax({
-         type : "get",
-         url : "/ReservationPrivateList",
-         data:{"users_id":users_id},
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#temp").html());
-            $("#tbl1").html(temp(data));
-            }
-         });
-      }
+	   $.ajax({
+	         type : "get",
+	         url : "/ReservationPrivateList",
+	         data:{"users_id":users_id, "page":page},
+	         dataType : "json",
+	         success : function(data) {
+	            var temp = Handlebars.compile($("#temp").html());
+	            $("#tbl1").html(temp(data));
+	            $("#count").html(data.count);
+	            
+	            //페이지 리스트 출력
+	              var str="";
+	              if(data.pm.prev){
+	                  str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
+	              }
+	              for(var i=data.pm.startPage; i<= data.pm.endPage; i++){
+	                  if(data.pm.cri.page == i){
+	                      str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
+	                  }else{
+	                      str += " [<a href='" + i + "'>" + i + "</a>]";
+	                  }
+	              }
+	              if(data.pm.next){
+	                  str += "<a href='" + (data.pm.endPage+1)  +  "'>▶</a>"
+	              }
+	              $("#pagination").html(str);
+	            }
+	         });
+	       //페이지 번호를 클릭했을 경우
+	         $("#pagination").on("click", "a", function(event){
+	             event.preventDefault();
+	             page = $(this).attr("href");
+	             getList();
+	         });
+	      }
       
       
    $("#tbl1").on("click", ".row .X", function(){
@@ -272,12 +305,16 @@ function getList() {
           success : function(data) {
              if(data==1) {
              alert("저장 되었습니다.");
-             getList();
+             location.href="/reservation/calendar";
+             
              } else {
                 alert("이미 예약되어있는 시간입니다.");
              }
              }
           });
+       window.onload = function(){
+  			({scrollTop : 1000}, 300);
+          }
    });
    
 </script>

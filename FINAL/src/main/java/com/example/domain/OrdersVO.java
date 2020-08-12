@@ -10,7 +10,7 @@ public class OrdersVO {
 	private String orders_package_code;
 	private String orders_costume_code;
 
-	@JsonFormat(pattern = "yy-MM-dd hh:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date orders_day;
 	private String photo_package_code;
 	private String lend_costume_code;

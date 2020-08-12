@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-<!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><!DOCTYPE html>
 <html>
 <head>
-   <title>예약하기</title>
+   <title>RESERVATION</title>
    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
    <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
    <link
@@ -39,10 +36,12 @@
 }
 
 #tbl1 {
-	width: 40%;
+	width: 45%;
 	float: right;
 	overflow: hidden;
 	border-collapse: collapse;
+	margin-bottom:10px;
+	margin-top:80px;
 }
 
 .title {
@@ -67,7 +66,8 @@ th {
 }
 
 #calendar {
-	width: 60%;
+	width: 100%;
+	height: 60%;
 	float: left;
 }
 
@@ -77,6 +77,10 @@ th {
 	font-size: 20px;
 	margin-botton: 5px;
 	cursor: pointer;
+	color:red;
+}
+.active {
+	color: hotpink;
 }
 </style>
 </head>
@@ -111,6 +115,7 @@ th {
                {{/each}}
             </script>
 			</div>
+             <div id="pagination"></div>
 		</div>
 	</div>
 </body>
@@ -150,30 +155,55 @@ $(document).ready(function() {
 
 </script>
 <script>
-
+var page=1;
 
 var users_id="${users_id}";
 
 getList();
 
 function getList() {
-   $.ajax({
-         type : "get",
-         url : "reservationlist",
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#temp").html());
-            $("#tbl1").html(temp(data));
-            }
-         });
-      }
+	   $.ajax({
+	         type : "get",
+	         url : "/reservationlistpage",
+	         data : {"page":page},
+	         dataType : "json",
+	         success : function(data) {
+	            var temp = Handlebars.compile($("#temp").html());
+	            $("#tbl1").html(temp(data));
+	            $("#count").html(data.count);
+	            
+	          //페이지 리스트 출력
+	            var str="";
+	            if(data.pm.prev){
+	                str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
+	            }
+	            for(var i=data.pm.startPage; i<= data.pm.endPage; i++){
+	                if(data.pm.cri.page == i){
+	                    str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
+	                }else{
+	                    str += " [<a href='" + i + "'>" + i + "</a>]";
+	                }
+	            }
+	            if(data.pm.next){
+	                str += "<a href='" + (data.pm.endPage+1)  +  "'>▶</a>"
+	            }
+	            $("#pagination").html(str);
+	            }
+	         });
+	       //페이지 번호를 클릭했을 경우
+	         $("#pagination").on("click", "a", function(event){
+	             event.preventDefault();
+	             page = $(this).attr("href");
+	             getList();
+	         });
+	      }
       
       
    $("#tbl1").on("click", ".row .X", function(){
       var reservation_reno=$(this).parent().parent().find(".reno").html()
       $.ajax({
          type : "post",
-         url : "redelete",
+         url : "/redelete",
          data:{"reservation_reno":reservation_reno},
          success : function() {
             alert("삭제 되었습니다.");

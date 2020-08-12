@@ -39,6 +39,18 @@ public class OrdersController {
       return map;
    }
    
+   @RequestMapping("/order/packageStatusUp")
+   @ResponseBody
+   public void pup(int orders_no){
+      mapper.pup(orders_no);
+   }
+   
+   @RequestMapping("/order/costumeStatusUp")
+   @ResponseBody
+   public void cup(int orders_no){
+      mapper.cup(orders_no);
+   }
+   
    @RequestMapping("/order/insert")
    public String insert(int point, int orders_paytype, String orders_id, OrdersVO ordersVO, HttpServletRequest request){
 	   ordersVO.setOrders_id(orders_id);

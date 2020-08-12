@@ -152,7 +152,9 @@
                <c:if test="${users_note==1}">
                   <input type="submit" value="수정">
                </c:if>
+               <c:if test="${users_note!=1}">
                <input type="button" value="장바구니에 담기" id="btnCart">
+               </c:if>
             </div>
          </div>
       </div>
@@ -176,6 +178,7 @@ $("#btnCart").on("click", function(){
    var id="${users_id}";
    var package_code="${vo.photo_package_code}";
    var price="${vo.photo_package_price}";
+   if(id!="") {
    if(!confirm(title + " 패키지를 장바구니에 담으시겠습니까?")) return;
    $.ajax({
       type:"get",
@@ -185,6 +188,11 @@ $("#btnCart").on("click", function(){
    });
    if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
    location.href="/user/cart";
+   } else {
+      alert("로그인후 이용해주세요.");
+      var options = 'width=500, height=700, top=30, left=30, resizable=no, scrollbars=no, location=no';
+      window.open('/user/login', 'LOGIN', options);
+   }
 });
 
 //수정버튼

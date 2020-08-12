@@ -193,7 +193,7 @@ button {
 						str += "[<a href='" + i + "' class='active'>" + i
 								+ "</a>]";
 					} else {
-						str += "[<a href='" + i + "'>" + i + "</a>]";
+						str += " [<a href='" + i + "'>" + i + "</a>]";
 					}
 				}
 				if (data.pm.next) {

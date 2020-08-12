@@ -221,22 +221,28 @@ input[type=number] {
 	
 	//장바구니 버튼을 클릭했을 때
 	$(".cart").on("click", function(){
-		var title="${vo.lend_costume_name}";
-		var id="${users_id}";
-		var code="${vo.lend_costume_code}";
-		var quantity=$("#quantity").val();
-		var price="${vo.lend_costume_price}";
-		var size=$("#size").val();
-		if(!confirm(title + " 의상을 장바구니에 담으시겠습니까?")) return;
-		$.ajax({
-			type:"get",
-			url:"/cart/cinsert",
-			data:{"costume_cart_id":id, "costume_cart_costume_code":code, "costume_cart_quantity":quantity, "costume_cart_price":price, "costume_size":size},
-			success:function(){}
-		});
-		if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
-		location.href="/user/cart";
-	});
+      var title="${vo.lend_costume_name}";
+      var id="${users_id}";
+      var code="${vo.lend_costume_code}";
+      var quantity=$("#quantity").val();
+      var price="${vo.lend_costume_price}";
+      var size=$("#size").val();
+      if(id != "") {
+      if(!confirm(title + " 의상을 장바구니에 담으시겠습니까?")) return;
+      $.ajax({
+         type:"get",
+         url:"/cart/cinsert",
+         data:{"costume_cart_id":id, "costume_cart_costume_code":code, "costume_cart_quantity":quantity, "costume_cart_price":price, "costume_size":size},
+         success:function(){}
+      });
+      if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
+      location.href="/user/cart";
+      } else {
+         alert("로그인후 이용해주세요.");
+         var options = 'width=500, height=700, top=30, left=30, resizable=no, scrollbars=no, location=no';
+         window.open('/user/login', 'LOGIN', options);
+      }
+   });
 	
 	//수정버튼을 눌렀을 대
 	$(frm).submit(function(e){

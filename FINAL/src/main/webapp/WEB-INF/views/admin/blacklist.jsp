@@ -7,7 +7,121 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BLACK LIST</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="/resources/css/style.css">
+<style>
+* {
+	font-family: '@여기어때 잘난체'
+}
+
+#page {
+	background: white;
+	margin: 15px;
+	height: hidden;
+}
+
+#content {
+	margin-top: none;
+	margin-left: 70px;
+	margin-right: 70px;
+	padding: 30px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+#tbl1 {
+	width: 70%;
+	margin: auto;
+	overflow: hidden;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.title {
+	font-size: 50px;
+	text-align: center;
+	margin: auto;
+	margin-top:10px;
+}
+
+td {
+	padding: 15px;
+	border-bottom: 1px solid #e360f2;
+}
+
+th {
+	padding: 15px;
+	font-size: 25px;
+	border-bottom: 3px solid #e360f2;
+}
+
+#btnInsert {
+	text-align: center;
+}
+
+#pagination{
+	padding:20px;
+	text-align:center;
+}
+
+.search{
+	margin:auto;
+	text-align:center;
+	padding:20px;
+}
+
+input[type="submit"]{
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+}
+
+
+input[type="submit"]:active {
+	background: #cca6cf;
+}
+
+input[type="text"]::placeholder {
+	text-align: center;
+}
+
+input[type="text"]{
+	height: 25px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	padding: 5px;
+}
+
+select{
+	height: 30px;
+	font-size: 20px;
+	border: none;
+}
+
+hr{
+	border: 2px solid #e360f2;
+	width:70%;
+}
+
+#total{
+	text-align:center;
+}
+
+.active {
+	color: hotpink;
+}
+
+.row:hover {
+	background:hotpink;
+	cursor: pointer;
+	color:#fff;
+}
+
+</style>
 </head>
 <body>
 	<jsp:include page="../index_include/menu.jsp" />

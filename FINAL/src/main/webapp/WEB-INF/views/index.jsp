@@ -15,7 +15,6 @@
 	padding-bottom:30px;
 	height: 3200px;
 }
-
 #content {
 	margin-top:none;
 	margin-left:70px;
@@ -60,7 +59,8 @@ img {
 }
 
 .image{
-
+	width: 250px;
+	height: 200px;
 	cursor: pointer;
 }
 
@@ -85,6 +85,19 @@ img {
    margin: auto;
    margin-top:50px;
 }
+
+#tbl1 img,#tbl2 img,#tbl3 img{
+	width:500px;
+}
+#img3{
+	height:280px;
+}
+#img11,#img-11{
+	height:810px;
+}
+#img-8{
+	height:459px;
+}
 </style>
 </head>
 <body id="body">
@@ -95,71 +108,71 @@ img {
 			<table id="tbl1">
 				<tr>
 					<td>
-						<img id="img1" src="display?fileName=jpg5.jpg" width=500>
-						<img id="img-1" src="display?fileName=COUPLE.jpg" width=500>
+						<img id="img1" src="display?fileName=jpg5.jpg">
+						<img id="img-1" src="display?fileName=COUPLE.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img2" src="display?fileName=jpg2.jpg" width=500>
-						<img id="img-2" src="display?fileName=PET.jpg" width=500>
+						<img id="img2" src="display?fileName=jpg2.jpg">
+						<img id="img-2" src="display?fileName=PET.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img3" src="display?fileName=gif5.gif" width=500 height=280>
+						<img id="img3" src="display?fileName=gif5.gif">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img4" src="display?fileName=jpg7.jpg" width=500>
+						<img id="img4" src="display?fileName=jpg7.jpg">
 					</td>
 				</tr>
 			</table>
 			<table id="tbl2">
 				<tr>
 					<td>
-						<img id="img5" src="display?fileName=jpg6.jpg" width=500>
-						<img id="img-5" src="display?fileName=FAMILY.jpg" width=500>
+						<img id="img5" src="display?fileName=jpg6.jpg">
+						<img id="img-5" src="display?fileName=FAMILY.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img6" src="display?fileName=jpg10.jpg" width=500>
+						<img id="img6" src="display?fileName=jpg10.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img7" src="display?fileName=gif1.gif" width=500>
+						<img id="img7" src="display?fileName=gif1.gif">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img8" src="display?fileName=jpg1.jpg" width=500>
-						<img id="img-8" src="display?fileName=PROFILE.jpg" width=500 height=459>
+						<img id="img8" src="display?fileName=jpg1.jpg">
+						<img id="img-8" src="display?fileName=PROFILE.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img9" src="display?fileName=jpg3.jpg" width=500>
+						<img id="img9" src="display?fileName=jpg3.jpg">
 					</td>
 				</tr>
 			</table>
 			<table id="tbl3">
 				<tr>
 					<td>
-						<img id="img10" src="display?fileName=gif2.gif" width=500>
+						<img id="img10" src="display?fileName=gif2.gif">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img11" src="display?fileName=jpg8.jpg" width=500 height=810>
-						<img id="img-11" src="display?fileName=FRIEND.jpg" width=500 height=810>
+						<img id="img11" src="display?fileName=jpg8.jpg">
+						<img id="img-11" src="display?fileName=FRIEND.jpg">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<img id="img12" src="display?fileName=jpg4.jpg" width=500>
+						<img id="img12" src="display?fileName=jpg4.jpg">
 					</td>
 				</tr>
 			</table>
@@ -170,7 +183,7 @@ img {
 					<div class="title">⊙ PACKAGE ⊙</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=family_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'" width=250 height=200>
+								<img class="image" src="display?fileName=family_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=A1">가족사진</a>
@@ -179,7 +192,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=couple_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'"  width=250 height=200>
+								<img class="image" src="display?fileName=couple_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=A2">커플사진</a>
@@ -188,7 +201,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=profile_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'"  width=250 height=200>
+								<img class="image" src="display?fileName=profile_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'" >
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=B2">프로필사진</a>
@@ -197,7 +210,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=pet_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'"  width=250 height=200>
+								<img class="image" src="display?fileName=pet_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=C1">펫사진</a>
@@ -206,7 +219,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=friend_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'"  width=250 height=200>
+								<img class="image" src="display?fileName=friend_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=B1">우정사진</a>
@@ -233,7 +246,7 @@ img {
 	});
 	
 	$("#img14").on("click",function(){
-		location.href="introduce";
+		location.href="/index_include/introduce";
 	})
 	
 	/*read페이지로이동--------------------------------------------------*/

@@ -184,7 +184,7 @@ body {
                  alert("블랙리스트 처리된 회원입니다.");
               }else{
                  window.close();
-                 opener.parent.location="/index";
+                 opener.parent.location.reload();
             }
          }
       });

@@ -114,6 +114,9 @@ button {
 	text-align:center;
 	margin:auto;
 }
+.board_reply button{
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -179,7 +182,7 @@ Handlebars.registerHelper("printStyle",function(writer){
                     if(data.pm.cri.page == i){
                         str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
                     }else{
-                        str += "[<a href='" + i + "'>" + i + "</a>]";
+                        str += " [<a href='" + i + "'>" + i + "</a>]";
                     }
                 }
                 if(data.pm.next){

@@ -99,9 +99,23 @@ img:hover{
    cursor:pointer;
 }
 
-.code{
-	display: none;
+.code, .no{
+   display: none;
 }
+
+.pdele{
+	float: right;
+	border: none;
+	font-size: 20px;
+	margin-botton: 5px;
+	cursor: pointer;
+	color:red;
+}
+.orderday{
+	padding-bottom:8px;
+	font-size:15px;
+}
+
 </style>
 </head>
 <body>
@@ -122,15 +136,16 @@ img:hover{
          <table id="tbl2"></table>
          <script id="temp2" type="text/x-handlebars-template">
             <tr>
-               <th colspan=6 id="PACKAGE">PACKAGE ORDER</th>
+               <th colspan=7 id="PACKAGE">PACKAGE ORDER</th>
             </tr>
          <tr class="th">
                   <th>IMAGE</th>
-                  <th>PACKAGE</th>
-                  <th>QUANTITY</th>
+                  <th width=150>PACKAGE</th>
+					<th width=50></th>
                   <th>PRICE</th>
                   <th width=137>PAY TYPE</th>
-                   <th>TOTAL</th>
+                  <th>TOTAL</th>
+					<th width=30></th>
                </tr>
             {{#each packagelist}}
                <tr class="row">
@@ -138,11 +153,13 @@ img:hover{
                 <img src="../display?fileName={{photo_package_image}}" width=110/>
                </td>
                <td rowspan=3>{{photo_package_title}}</td>
-                  <td rowspan=3>{{orders_package_quantity}}</td>
+                  <td rowspan=3>{{orders_package_quantity}}개</td>
                   <td rowspan=3>{{package_cart_price}} 원</td>
                   <td rowspan=3>{{printStyle orders_paytype}}</td>
                   <td rowspan=3>{{total}} 원</td>
+					<td rowspan=3><button class="pdele">X</button></td>
                <td class="code">{{photo_package_code}}</td>
+            	<td class="no">{{orders_no}}</td>
                <tr>
                <tr>
                   <td class="orderday">
@@ -154,29 +171,32 @@ img:hover{
          <table id="tbl3"></table>
          <script id="temp3" type="text/x-handlebars-template">
             <tr>
-               <th colspan=6 id="COSTUME">COSTUME ORDER</th>
+               <th colspan=7 id="COSTUME">COSTUME ORDER</th>
             </tr>
          <tr class="th">
                   <th>IMAGE</th>
-                  <th>COSTUME</th>
-                  <th>QUANTITY</th>
+                  <th width=150>COSTUME</th>
+					<th width=50></th>
                   <th>PRICE</th>
                   <th width=137>PAY TYPE</th>
                    <th>TOTAL</th>
+					<th width=30></th>
                </tr>
             {{#each costumelist}}
                <tr class="row">
                   <td class="img"><img src="../display?fileName={{lend_costume_image}}" width=110/></td>
                   <td rowspan=3>{{lend_costume_name}}</td>
-                 <td rowspan=3>{{orders_costume_quantity}}</td>
+                 <td rowspan=3>{{orders_costume_quantity}}개</td>
                   <td rowspan=3>{{costume_cart_price}} 원</td>
                   <td rowspan=3>{{printStyle2 orders_paytype}}</td>
                   <td rowspan=3>{{total}} 원</td>
-             	 <td class="code">{{lend_costume_code}}</td>
+					<td rowspan=3><button class="pdele">X</button></td>
+                 <td class="code">{{lend_costume_code}}</td>
+             <td class="no">{{orders_no}}</td>
                <tr>
                <tr>
                   <td class="orderday">
-               <b>{{orders_day}}</b>
+                     <b>{{orders_day}}</b>
                   </td>
                </tr>
             {{/each}}
@@ -187,6 +207,7 @@ img:hover{
 	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
+$("#tbl2 .row .no").hide();
    var users_id="${users_id}";
    getpackageList();
    getcostumeList();
@@ -207,6 +228,34 @@ img:hover{
       });
    
   
+   $("#tbl2").on("click", ".row button",function(){
+      var orders_no=$(this).parent().parent().find(".no").html();
+      
+        $.ajax({
+            type:"get",
+            url:"/order/packageStatusUp",
+            data:{"orders_no":orders_no},
+            success:function(){
+            	getpackageList();
+              alert("내역이 삭제되었습니다.");
+            }
+         }); 
+   });
+   
+$("#tbl3").on("click", ".row button",function(){
+   var orders_no=$(this).parent().parent().find(".no").html();
+      
+       $.ajax({
+            type:"get",
+            url:"/order/costumeStatusUp",
+            data:{"orders_no":orders_no},
+            success:function(){
+            	getcostumeList();
+              alert("내역이 삭제되었습니다.");
+            }
+         }); 
+   });
+   
 
    Handlebars.registerHelper("printStyle2",function(type){
          var src;

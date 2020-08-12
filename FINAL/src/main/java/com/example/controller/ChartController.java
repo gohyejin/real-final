@@ -62,80 +62,80 @@ public class ChartController {
 	}
 	
 	@RequestMapping("/packagechartt")
-	@ResponseBody
-	public List<ChartsVO> packagechartt(int month){
-		ArrayList arrList=new ArrayList();
-		ArrayList arr=new ArrayList();
-		arr.add("패키지명");
-		arr.add("패키지별 매출총합");
-		arrList.add(arr);
-		List<ChartsVO> list=mapper.packagechart(month);
-		for(ChartsVO vo:list) {
-			arr=new ArrayList();
-			arr.add(vo.getName());
-			arr.add(vo.getValue());
-			arrList.add(arr);
-		}
-		return arrList;
-	}
-	
-	@RequestMapping("/packagechartt2")
-	@ResponseBody
-	public List<ChartsVO> packagechartt2(int month){
-		ArrayList arrList=new ArrayList();
-		ArrayList arr=new ArrayList();
-		arr.add("패키지명");
-		arr.add("패키지별 판매수");
-		arrList.add(arr);
-		List<ChartsVO> list=mapper.packagechart2(month);
-		for(ChartsVO vo:list) {
-			arr=new ArrayList();
-			arr.add(vo.getName());
-			arr.add(vo.getValue());
-			arrList.add(arr);
-		}
-		return arrList;
-	}
-	
-	
-	@RequestMapping("/admin/costumechart")
-	public void costumechart() {
-		
-	}
-	
-	@RequestMapping("/costumechartt")
-	@ResponseBody
-	public List<ChartsVO> costumechartt(int month){
-		ArrayList arrList=new ArrayList();
-		ArrayList arr=new ArrayList();
-		arr.add("코스튬명");
-		arr.add("코스튬별 매출총합");
-		arrList.add(arr);
-		List<ChartsVO> list=mapper.costumechart(month);
-		for(ChartsVO vo:list) {
-			arr=new ArrayList();
-			arr.add(vo.getName());
-			arr.add(vo.getValue());
-			arrList.add(arr);
-		}
-		return arrList;
-	}
-	
-	@RequestMapping("/costumechartt2")
-	@ResponseBody
-	public List<ChartsVO> costumechartt2(int month){
-		ArrayList arrList=new ArrayList();
-		ArrayList arr=new ArrayList();
-		arr.add("코스튬명");
-		arr.add("코스튬별 판매수");
-		arrList.add(arr);
-		List<ChartsVO> list=mapper.costumechart2(month);
-		for(ChartsVO vo:list) {
-			arr=new ArrayList();
-			arr.add(vo.getName());
-			arr.add(vo.getValue());
-			arrList.add(arr);
-		}
-		return arrList;
-	}
+	   @ResponseBody
+	   public List<ChartsVO> packagechartt(int month, int year){
+	      ArrayList arrList=new ArrayList();
+	      ArrayList arr=new ArrayList();
+	      arr.add("패키지명");
+	      arr.add("패키지별 매출총합");
+	      arrList.add(arr);
+	      List<ChartsVO> list=mapper.packagechart(month, year);
+	      for(ChartsVO vo:list) {
+	         arr=new ArrayList();
+	         arr.add(vo.getName());
+	         arr.add(vo.getValue());
+	         arrList.add(arr);
+	      }
+	      return arrList;
+	   }
+	   
+	   @RequestMapping("/packagechartt2")
+	   @ResponseBody
+	   public List<ChartsVO> packagechartt2(int month, int year){
+	      ArrayList arrList=new ArrayList();
+	      ArrayList arr=new ArrayList();
+	      arr.add("패키지명");
+	      arr.add("패키지별 판매수");
+	      arrList.add(arr);
+	      List<ChartsVO> list=mapper.packagechart2(month, year);
+	      for(ChartsVO vo:list) {
+	         arr=new ArrayList();
+	         arr.add(vo.getName());
+	         arr.add(vo.getValue());
+	         arrList.add(arr);
+	      }
+	      return arrList;
+	   }
+	   
+	   
+	   @RequestMapping("/admin/costumechart")
+	   public void costumechart() {
+	      
+	   }
+	   
+	   @RequestMapping("/costumechartt")
+	   @ResponseBody
+	   public List<ChartsVO> costumechartt(int month, int year){
+	      ArrayList arrList=new ArrayList();
+	      ArrayList arr=new ArrayList();
+	      arr.add("코스튬명");
+	      arr.add("코스튬별 매출총합");
+	      arrList.add(arr);
+	      List<ChartsVO> list=mapper.costumechart(month, year);
+	      for(ChartsVO vo:list) {
+	         arr=new ArrayList();
+	         arr.add(vo.getName());
+	         arr.add(vo.getValue());
+	         arrList.add(arr);
+	      }
+	      return arrList;
+	   }
+	   
+	   @RequestMapping("/costumechartt2")
+	   @ResponseBody
+	   public List<ChartsVO> costumechartt2(int month, int year){
+	      ArrayList arrList=new ArrayList();
+	      ArrayList arr=new ArrayList();
+	      arr.add("코스튬명");
+	      arr.add("코스튬별 판매수");
+	      arrList.add(arr);
+	      List<ChartsVO> list=mapper.costumechart2(month, year);
+	      for(ChartsVO vo:list) {
+	         arr=new ArrayList();
+	         arr.add(vo.getName());
+	         arr.add(vo.getValue());
+	         arrList.add(arr);
+	      }
+	      return arrList;
+	   }
 }
