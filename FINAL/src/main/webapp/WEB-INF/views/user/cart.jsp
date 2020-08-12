@@ -304,7 +304,7 @@ input[type="number"]{
 			Cchk=true;
 			if(Cchk==true){
 				$("#tbl2 .row .chk").each(function() {
-					var costume_price=$(this).parent().parent().find(".lend_costume_price").html();
+					var costume_price=$(this).parent().parent().find(".totprice").html();
 					costumeSum = parseInt(costumeSum) + parseInt(costume_price);  
 				});
 				$("#costumeSum").val(costumeSum);
@@ -334,7 +334,7 @@ input[type="number"]{
 			Pchk=true;
 			if(Pchk==true){
 				$("#tbl1 .row .chk").each(function() {
-					var package_price=$(this).parent().parent().find(".photo_package_price").html();
+					var package_price=$(this).parent().parent().find(".totprice").html();
 					packageSum = parseInt(packageSum) + parseInt(package_price); 
 				});
 				$("#packageSum").val(packageSum);
@@ -362,7 +362,7 @@ input[type="number"]{
 	//선택 체크버튼
 	$("#tbl1").on("click", ".row .chk", function(){
 		$("#tbl1 .row .chk:checked").each(function() {
-			var package_price=$(this).parent().parent().find(".photo_package_price").html();
+			var package_price=$(this).parent().parent().find(".totprice").html();
 			packageSum = parseInt(packageSum) + parseInt(package_price); 
 		});
 		$("#packageSum").val(packageSum);
@@ -373,7 +373,7 @@ input[type="number"]{
 	});
 	$("#tbl2").on("click", ".row .chk", function(){
 		$("#tbl2 .row .chk:checked").each(function() {
-			var costume_price=$(this).parent().parent().find(".lend_costume_price").html();
+			var costume_price=$(this).parent().parent().find(".totprice").html();
 			costumeSum = parseInt(costumeSum) + parseInt(costume_price); 
 		});
 		$("#costumeSum").val(costumeSum);
