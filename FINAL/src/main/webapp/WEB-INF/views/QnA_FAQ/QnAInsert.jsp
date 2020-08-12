@@ -112,7 +112,7 @@ input[type="submit"]:active,#btnList:active {
 		<div class="title">⊙ Q&A INSERT ⊙</div>
 		<br><br>
 		<div id="content">
-			<form name="frm" action="QnAInsert" method="post">
+			<form name="frm" action="/QnAInsert" method="post">
 				<input type="hidden" name="page" value="${param.page}">
 				<table id="tbl1">
 					<tr>

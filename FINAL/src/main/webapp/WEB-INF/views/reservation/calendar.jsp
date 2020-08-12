@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +16,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
 * {
-	font-family: '@여기어때 잘난체'
+	font-family: '@여기어때 잘난체';
 }
 
 #page {
@@ -188,7 +186,7 @@ th {
 </body>
 <script type="text/javascript">
 
-$(document).ready(function() {
+$(document).ready(function(){
  $('#calendar').fullCalendar({
   header:{
    left: 'prevYear,prev,next,nextYear,today',
@@ -227,7 +225,7 @@ getList();
 function getList() {
    $.ajax({
          type : "get",
-         url : "ReservationPrivateList",
+         url : "/ReservationPrivateList",
          data:{"users_id":users_id},
          dataType : "json",
          success : function(data) {
@@ -242,7 +240,7 @@ function getList() {
       var reservation_reno=$(this).parent().parent().find(".reno").html()
       $.ajax({
          type : "post",
-         url : "redelete",
+         url : "/redelete",
          data:{"reservation_reno":reservation_reno},
          success : function() {
             alert("삭제 되었습니다.");
@@ -269,7 +267,7 @@ function getList() {
    
        $.ajax({
           type : "post",
-          url : "reinsert",
+          url : "/reinsert",
           data:{"reservation_id":id, "reservation_redate":trueDate},
           success : function(data) {
              if(data==1) {

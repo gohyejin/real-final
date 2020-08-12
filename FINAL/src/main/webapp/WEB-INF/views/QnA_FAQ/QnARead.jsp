@@ -129,7 +129,7 @@ input[type="submit"]:active,#btnList:active {
 		<div class="title">⊙ Q&A READ ⊙</div>
 		<br><br>
 		<div id="content">
-			<form name="frm" action="QnAUpdate" method="post">
+			<form name="frm" action="/QnAUpdate" method="post">
 				<input type="hidden" name="page" value="${param.page}"> <input
 					type="hidden" value="${vo.board_bno}" name="board_bno">
 				<table id="tbl1">
@@ -194,7 +194,7 @@ input[type="submit"]:active,#btnList:active {
 	
 	$("#btnDel").on("click", function(){
 		if(!confirm("삭제하시겠습니까?")) return; 
-		frm.action="QnADelete";
+		frm.action="/QnADelete";
 		frm.submit();
 		alert("게시글이 삭제되었습니다!");
 	});

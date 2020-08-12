@@ -38,7 +38,7 @@ public class HomeController {
 	Costume_ReplyMapper cmapper;
 	
 	/*COSTUME_Reply---------------------------------------------------------------------*/
-	@RequestMapping("/costumeReply/reply")
+	@RequestMapping("/costume/costumeReply/reply")
 	@ResponseBody
 	public HashMap<String, Object> clist(String costume_reply_code,Criteria cri) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
@@ -55,31 +55,31 @@ public class HomeController {
 		map.put("clist", cmapper.clist(paraMap));
 		return map;
 	}
-	@RequestMapping("/costumeReply")
+	@RequestMapping("/costume/costumeReply")
 	public String reply() {
-		return "/costumeReply";
+		return "/costume/costumeReply";
 	}
 	
-	@RequestMapping("/costumeInsert")
+	@RequestMapping("/costume/costumeInsert")
 	public String costumInsert() {
-		return "/costumeInsert";
+		return "/costume/costumeInsert";
 	}
 	
-	@RequestMapping(value="/costumeReplyInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/costume/costumeReplyInsert",method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(Costume_ReplyVO vo) {
 		System.out.println(vo.toString());
 		cmapper.insert(vo);
 	}
 	
-	@RequestMapping(value="/costumeReplyDelete")
+	@RequestMapping(value="/costume/costumeReplyDelete")
 	@ResponseBody
 	public void delete(int costume_reply_rno) {
 		cmapper.delete(costume_reply_rno);
 	}
 	
 	/*COSTUME---------------------------------------------------------------------------------------------------------*/
-	@RequestMapping("/costumeList")
+	@RequestMapping("/costume/costumeList")
 	public String list(Model model,Criteria cri) {
 		cri.setPerPageNum(9);
 		
@@ -90,16 +90,16 @@ public class HomeController {
 		model.addAttribute("cri", cri);
 		model.addAttribute("pm",pm);
 		model.addAttribute("list", lmapper.list(cri));
-		return "/costumeList";
+		return "/costume/costumeList";
 	}
 	
-	@RequestMapping("/costumeRead")
+	@RequestMapping("/costume/costumeRead")
 	public void costumeRead(Model model,String lend_costume_code) {
 		model.addAttribute("vo",lmapper.read(lend_costume_code));
 		
 	}
 	
-	@RequestMapping(value="/costumeInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/costume/costumeInsert",method=RequestMethod.POST)
 	public String costumeInsertPost(Lend_CostumeVO vo,MultipartHttpServletRequest multi) throws Exception{
 		MultipartFile file=multi.getFile("file");
 		//대표파일업로드
@@ -110,10 +110,10 @@ public class HomeController {
 				}
 				lmapper.insert(vo);
 		
-		return "redirect:/costumeList";
+		return "redirect:/costume/costumeList";
 	}
 	
-	@RequestMapping(value="/costumeUpdate",method=RequestMethod.POST)
+	@RequestMapping(value="/costume/costumeUpdate",method=RequestMethod.POST)
 	public String updatePost(Lend_CostumeVO vo,MultipartHttpServletRequest multi)throws Exception {
 		MultipartFile file=multi.getFile("file");	//"file"은 form에서의 이름
 				//파일업로드
@@ -129,12 +129,12 @@ public class HomeController {
 				
 				lmapper.update(vo);
 				System.out.println(vo.toString());
-				return "redirect:/costumeList";
+				return "redirect:/costume/costumeList";
 	}
 	
 	/*정은경 커밋 종료------------------------------------------*/
 	/*인덱스상에서 팝업창 구현하기*/
-	@RequestMapping("/popup")
+	@RequestMapping("/index_include/popup")
 	public void popup() {
 
 	}
@@ -153,7 +153,7 @@ public class HomeController {
 
 
 	/* PACKAGE */
-	@RequestMapping("/packageList")
+	@RequestMapping("/package/packageList")
 	public void packageList() {
 
 	}
@@ -215,7 +215,7 @@ public class HomeController {
 	}
 
 	/* 소개페이지로 이동 */
-	@RequestMapping("/introduce")
+	@RequestMapping("/index_include/introduce")
 	public void introduce() {
 
 	}
@@ -237,10 +237,5 @@ public class HomeController {
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		}
 		return result;
-	}
-	
-	@RequestMapping("/cal")
-	public void callist(){
-		
 	}
 }

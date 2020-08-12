@@ -184,7 +184,7 @@ $("#btnCart").on("click", function(){
       success:function(){}
    });
    if(!confirm("담겼습니다. 장바구니로 이동하시겠습니까?")) return;
-   location.href="user/cart";
+   location.href="/user/cart";
 });
 
 //수정버튼

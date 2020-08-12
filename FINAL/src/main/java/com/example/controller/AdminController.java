@@ -42,7 +42,7 @@ public class AdminController {
     public String userUpdate(AdminVO vo, int page) {
     	mapper.userinfoUpdate(vo);
     	
-    	return "redirect:userlist?page="+page;
+    	return "redirect:/admin/userlist?page="+page;
     }
 	
 	@RequestMapping("/admin/blacklist")
@@ -68,6 +68,6 @@ public class AdminController {
     public String blackUpdate(AdminVO vo, int page) {
     	mapper.blackUpdate(vo);
     	
-    	return "redirect:blacklist?page="+page;
+    	return "redirect:/admin/blacklist?page="+page;
     }
 }

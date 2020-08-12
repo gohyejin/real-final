@@ -169,14 +169,14 @@ if(cookies3 != null) {
 	
 	/*COSTUME메뉴*/
 	$(".items0").on("click",function(){
-		location.href="/costumeList";
+		location.href="/costume/costumeList";
 	})
 	
 	/*PACKAGE메뉴*/
 	var URL = window.location.pathname;
 	$(".items8").on("click",function(){
 		if(URL!="/index"){
-			location.href="/packageList";
+			location.href="/package/packageList";
 		}
 			window.onload = function(){
 			({scrollTop : 3000}, 400);
@@ -205,17 +205,17 @@ if(cookies3 != null) {
 	
 	/*ADMIN COSTUM INSERT메뉴*/
 	$(".items4-1").on("click",function(){
-		location.href="/costumeInsert";
+		location.href="/costume/costumeInsert";
 	})
 	
 	/*Q&A메뉴*/
 	$(".items2").on("click",function(){
-		location.href="/QnA";
+		location.href="/QnA_FAQ/QnA";
 	})
 	
 	/*FAQ메뉴*/
 	$(".items3").on("click",function(){
-		location.href="/FAQ";
+		location.href="/QnA_FAQ/FAQ";
 	})
 	
 	/*CART메뉴*/
@@ -230,12 +230,12 @@ if(cookies3 != null) {
 	
 	/*RESERVATION 메뉴*/
 	$(".items9").on("click",function(){
-		location.href="/calendar";
+		location.href="/reservation/calendar";
 	})
 	
 	/*RESERVATION 메뉴*/
 	$(".items10").on("click",function(){
-		location.href="/admincalendar";
+		location.href="/reservation/admincalendar";
 	})
 	
 	/*LOGIN메뉴*/

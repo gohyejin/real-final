@@ -162,7 +162,7 @@ Handlebars.registerHelper("printStyle",function(writer){
 	function getList(){
 		$.ajax({
 			type:"get",
-			url:"QnAReply.json",
+			url:"/QnAReply.json",
 			data:{"board_reply_bno":board_reply_bno, "page":page},
 			dataType:"json",
 			success:function(data){
@@ -218,7 +218,7 @@ Handlebars.registerHelper("printStyle",function(writer){
 		
 		$.ajax({
 			type:"post",
-			url:"ReplyInsert",
+			url:"/ReplyInsert",
 			data:{"board_reply_bno":board_reply_bno, "board_reply":board_reply , "board_reply_replyer":board_reply_replyer},
 			success:function(){
 				alert("댓글이 입력되었습니다.");
@@ -236,7 +236,7 @@ Handlebars.registerHelper("printStyle",function(writer){
 		if(!confirm(board_reply_rno + " 번의 댓글을 삭제하시겠습니까?")) return;
 		$.ajax({
 			type:"post",
-			url:"ReplyDelete",
+			url:"/ReplyDelete",
 			data:{"board_reply_rno":board_reply_rno},
 			success:function(){
 				alert("삭제되었습니다.");

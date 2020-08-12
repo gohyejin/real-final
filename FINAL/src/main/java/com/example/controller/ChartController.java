@@ -27,7 +27,6 @@ public class ChartController {
 	@RequestMapping("/admin/pchart")
 	public void PordersList(Model model, Criteria cri)  {
 		
-		 
 		cri.setPerPageNum(5);
     	PageMaker pm=new PageMaker();
     	pm.setCri(cri);

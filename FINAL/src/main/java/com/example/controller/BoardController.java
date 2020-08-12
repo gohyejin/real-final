@@ -25,19 +25,13 @@ import com.example.service.BoardService;
 @Controller
 public class BoardController {
 	
-	
-	/*Q&A ¹ÚÇÑºó Ä¿¹Ô   */
 	@Autowired
-    BoardMapper mapper;  
-	
-	
+    BoardMapper mapper; 
 
 	@Autowired
 	BoardService service;
-	
-	
     
-    @RequestMapping("/QnA")
+    @RequestMapping("/QnA_FAQ/QnA")
     public String QnAList(Model model, Criteria cri, HttpServletRequest request) {
     	Cookie cookie=WebUtils.getCookie(request, "users_id");
 		if(cookie != null) {
@@ -51,49 +45,49 @@ public class BoardController {
     	
     	model.addAttribute("pm", pm);
     	model.addAttribute("QnAList", mapper.QnAList(cri));
-    	return "/QnA";
+    	return "/QnA_FAQ/QnA";
     }
     
-    @RequestMapping("/QnARead")
+    @RequestMapping("/QnA_FAQ/QnARead")
     public void QnARead(Model model, int board_bno) {
     	model.addAttribute("vo", service.QnARead(board_bno));
     }
     
-    @RequestMapping("/QnAInsert")
+    @RequestMapping("/QnA_FAQ/QnAInsert")
     public void QnAInsert() {
     	
     }
     
-    @RequestMapping(value="QnAInsert", method=RequestMethod.POST)
+    @RequestMapping(value="/QnAInsert", method=RequestMethod.POST)
     public String QnAInsert(BoardVO vo) {
     	
     	mapper.QnAInsert(vo);
     	
-    	return "redirect:QnA";
+    	return "redirect:/QnA_FAQ/QnA";
     }
     
-    @RequestMapping(value="QnAUpdate", method=RequestMethod.POST)
+    @RequestMapping(value="/QnAUpdate", method=RequestMethod.POST)
     public String QnAUpdate(BoardVO vo, int page) {
     	System.out.println(vo.toString());
     	mapper.QnAUpdate(vo);
     	
-    	return "redirect:QnA?page="+page;
+    	return "redirect:/QnA_FAQ/QnA?page="+page;
     }
     
-    @RequestMapping(value="QnADelete", method=RequestMethod.POST)
+    @RequestMapping(value="/QnADelete", method=RequestMethod.POST)
     public String QnADelete(int board_bno, int page) {
     	
     	mapper.QnADelete(board_bno);
     	
-    	return "redirect:QnA?page="+page;
+    	return "redirect:/QnA_FAQ/QnA?page="+page;
     }
     
-    @RequestMapping("/FAQ")
+    @RequestMapping("/QnA_FAQ/FAQ")
     public void FAQList(Model model) {
     	model.addAttribute("FAQList", mapper.FAQList());
     }
     
-    @RequestMapping("/FAQRead")
+    @RequestMapping("/QnA_FAQ/FAQRead")
     public void FAQRead(Model model, int board_bno) {
     	model.addAttribute("vo", mapper.FAQRead(board_bno));
     }
@@ -105,12 +99,12 @@ public class BoardController {
     @Autowired
     BoardReplyService brservice;
   
-    @RequestMapping("/QnAReply")
+    @RequestMapping("/QnA_FAQ/QnAReply")
     public void QnAReply() {
     	
     }
     
-    @RequestMapping(value="QnAReply.json")
+    @RequestMapping(value="/QnAReply.json")
     @ResponseBody
     public HashMap<String , Object> QnAList(int board_reply_bno, Criteria cri) {
     	HashMap<String , Object> map=new HashMap<String , Object>();
@@ -131,13 +125,13 @@ public class BoardController {
     	return map;
     }
     
-    @RequestMapping(value="ReplyInsert", method=RequestMethod.POST)
+    @RequestMapping(value="/ReplyInsert", method=RequestMethod.POST)
     @ResponseBody
     public void ReplyInsert(BoardReplyVO vo) {
     	brservice.ReplyInsert(vo);
     }
     
-    @RequestMapping(value="ReplyDelete")
+    @RequestMapping(value="/ReplyDelete")
     @ResponseBody
     public void ReplyDelete(int board_reply_rno) {
     	brservice.ReplyDelete(board_reply_rno);

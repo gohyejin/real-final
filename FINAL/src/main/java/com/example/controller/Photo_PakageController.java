@@ -29,7 +29,7 @@ public class Photo_PakageController {
    public void insert() {
    }
    
-   @RequestMapping("/packageRead")
+   @RequestMapping("/package/packageRead")
    public void read(String photo_package_code, Model model)throws Exception {
       model.addAttribute("vo", mapper.read(photo_package_code));
       model.addAttribute("list", mapper.getAttach(photo_package_code));
@@ -70,6 +70,6 @@ public class Photo_PakageController {
             mapper.addAttach(image, vo.getPhoto_package_code());
          }
       }
-      return "redirect:/packageRead?photo_package_code="+vo.getPhoto_package_code();
+      return "redirect:/package/packageRead?photo_package_code="+vo.getPhoto_package_code();
    }
 }

@@ -17,19 +17,19 @@ public class ReservationController {
    @Autowired
    ReservationMapper mapper;
    
-   @RequestMapping("/calendar")
+   @RequestMapping("/reservation/calendar")
    public void calmain() {
 	   
    }
    
-   @RequestMapping("admincalendar")
+   @RequestMapping("/reservation/admincalendar")
    public void admincalmain() {
 
    }
    
    
    
-   @RequestMapping("reservationlist")
+   @RequestMapping("/reservationlist")
    @ResponseBody
    public HashMap<String , Object> reservationlist() {
       HashMap<String , Object> map=new HashMap<String , Object>();
@@ -38,7 +38,7 @@ public class ReservationController {
       return map;
    }
    
-   @RequestMapping("ReservationPrivateList")
+   @RequestMapping("/ReservationPrivateList")
    @ResponseBody
    public HashMap<String , Object> ReservationPrivateList(String users_id) {
       HashMap<String , Object> map=new HashMap<String , Object>();
@@ -48,13 +48,13 @@ public class ReservationController {
    
    
    
-   @RequestMapping(value="redelete", method=RequestMethod.POST)
+   @RequestMapping(value="/redelete", method=RequestMethod.POST)
    @ResponseBody
    public void redelete(int reservation_reno) {
       mapper.redelete(reservation_reno);
    }
    
-   @RequestMapping(value="reinsert", method=RequestMethod.POST)
+   @RequestMapping(value="/reinsert", method=RequestMethod.POST)
    @ResponseBody
    public int reinsert(ReservationVO vo) {
       int b=0;
