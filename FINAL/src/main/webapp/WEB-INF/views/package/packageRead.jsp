@@ -139,7 +139,7 @@
                      </c:if>
                         <div id="listFile">
                            <c:forEach items="${list}" var="image">
-                              <img src="display?fileName=${image}" width=150 class="smallImage" id="image">
+                              <img src="../display?fileName=${image}" width=150 class="smallImage" id="image">
                            </c:forEach>
                         </div>
                       </div>

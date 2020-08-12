@@ -171,7 +171,7 @@ button {
 	function getList() {
 		$.ajax({
 			type : "get",
-			url : "/costumeReply/reply",
+			url : "/costume/costumeReply/reply",
 			data : {
 				"costume_reply_code" : costume_reply_code,
 				"page" : page

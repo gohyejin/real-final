@@ -65,14 +65,14 @@ public class HomeController {
 		return "/costume/costumeInsert";
 	}
 	
-	@RequestMapping(value="/costume/costumeReplyInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/costumeReplyInsert",method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(Costume_ReplyVO vo) {
 		System.out.println(vo.toString());
 		cmapper.insert(vo);
 	}
 	
-	@RequestMapping(value="/costume/costumeReplyDelete")
+	@RequestMapping(value="/costumeReplyDelete")
 	@ResponseBody
 	public void delete(int costume_reply_rno) {
 		cmapper.delete(costume_reply_rno);
@@ -99,7 +99,7 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value="/costume/costumeInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/costumeInsert",method=RequestMethod.POST)
 	public String costumeInsertPost(Lend_CostumeVO vo,MultipartHttpServletRequest multi) throws Exception{
 		MultipartFile file=multi.getFile("file");
 		//대표파일업로드
@@ -113,7 +113,7 @@ public class HomeController {
 		return "redirect:/costume/costumeList";
 	}
 	
-	@RequestMapping(value="/costume/costumeUpdate",method=RequestMethod.POST)
+	@RequestMapping(value="/costumeUpdate",method=RequestMethod.POST)
 	public String updatePost(Lend_CostumeVO vo,MultipartHttpServletRequest multi)throws Exception {
 		MultipartFile file=multi.getFile("file");	//"file"은 form에서의 이름
 				//파일업로드

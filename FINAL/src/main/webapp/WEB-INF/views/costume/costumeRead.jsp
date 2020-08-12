@@ -156,7 +156,7 @@ input[type=number] {
 						<td rowspan=6 width=500><input type="file" name="file">
 							<c:if
 								test="${vo.lend_costume_image!=null && vo.lend_costume_image!=''}">
-								<img id="image" src="/display?fileName=${vo.lend_costume_image}"
+								<img id="image" src="../display?fileName=${vo.lend_costume_image}"
 									width=400 />
 							</c:if> <c:if
 								test="${vo.lend_costume_image==null || vo.lend_costume_image==''}">
