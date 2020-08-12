@@ -150,9 +150,9 @@ hr{
 </style>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-	<jsp:include page="../header.jsp" />
+	<jsp:include page="../index_include/header.jsp" />
 	<div id="total">ORDERS COUNT : ${pm.totalCount}</div>
 	<div class="title">⊙ COSTUME ORDER ⊙</div>
 	<div class="a">
@@ -220,8 +220,8 @@ hr{
     	</div>
 	</div>
 	</div>
-		<jsp:include page="../chat.jsp"/>
-	<jsp:include page="../top.jsp"/>
+		<jsp:include page="../index_include/chat.jsp"/>
+	<jsp:include page="../index_include/top.jsp"/>
 	
 </body>
 <script>

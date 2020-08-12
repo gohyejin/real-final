@@ -122,9 +122,9 @@ th {
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ RESERVATION ⊙</div><br><br>
 		<div id="content">
 			<div class="container calendar-container">

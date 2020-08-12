@@ -112,9 +112,9 @@ img {
 </style>
 </head>
 <body id="body">
-<jsp:include page="../menu.jsp" />
+<jsp:include page="../index_include/menu.jsp" />
    <div id="page">
-      <jsp:include page="../header.jsp" />
+      <jsp:include page="../index_include/header.jsp" />
       <div class="title">⊙ FAMILY ⊙</div>
       <br>
       <div id="content">
@@ -159,9 +159,9 @@ img {
       </div>
    </div>
    
-   <jsp:include page="../reservation.jsp" />
-   <jsp:include page="../chat.jsp" />
-   <jsp:include page="../top.jsp" />
+   <jsp:include page="../reservation/reservation.jsp" />
+   <jsp:include page="../index_include/chat.jsp" />
+   <jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
 var src1="../display?fileName=family-";

@@ -147,9 +147,9 @@ input[type=text] {
 </style>
 </head>
 <body>
-   <jsp:include page="menu.jsp" />
+   <jsp:include page="../index_include/menu.jsp" />
    <div id="page">
-      <jsp:include page="header.jsp" />
+      <jsp:include page="../index_include/header.jsp" />
       <div class="title">⊙ COSTUME INSERT ⊙</div>
       <br> <br>
       <div id="content">
@@ -195,7 +195,7 @@ input[type=text] {
          </form>
       </div>
    </div>
-   <jsp:include page="chat.jsp" />
+   <jsp:include page="../index_include/chat.jsp" />
 </body>
 <script>
    //유효성 검사추가 08.04

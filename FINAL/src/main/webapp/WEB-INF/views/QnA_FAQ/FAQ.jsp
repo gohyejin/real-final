@@ -105,9 +105,9 @@
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ FAQ ⊙</div>
 		<br><br>
 		<div id="closeAll"><button>전체 닫기</button></div>
@@ -225,8 +225,8 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="chat.jsp" />
-	<jsp:include page="top.jsp" />
+	<jsp:include page="../index_include/chat.jsp" />
+	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
 	

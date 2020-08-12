@@ -91,9 +91,9 @@ th {
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ Q&A ⊙</div>
 		<br><div id="insert"><button id="btnInsert">글쓰기</button></div><br>
 		<div id="content">
@@ -137,7 +137,7 @@ th {
     		<input type="hidden" id="page2" value="${pm.cri.page}">
 		</div>
 	</div>
-	<jsp:include page="chat.jsp" />
+	<jsp:include page="../index_include/chat.jsp" />
 </body>
 <script>
 	  

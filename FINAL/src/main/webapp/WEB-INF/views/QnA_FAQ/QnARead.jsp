@@ -123,9 +123,9 @@ input[type="submit"]:active,#btnList:active {
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ Q&A READ ⊙</div>
 		<br><br>
 		<div id="content">
@@ -176,8 +176,8 @@ input[type="submit"]:active,#btnList:active {
 			<jsp:include page="QnAReply.jsp"/>
 		</div>
 		</div>
-	<jsp:include page="chat.jsp"/>
-	<jsp:include page="top.jsp"/>
+	<jsp:include page="../index_include/chat.jsp"/>
+	<jsp:include page="../index_include/top.jsp"/>
 </body>
 <script>
 	$("#btnList").on("click", function(){

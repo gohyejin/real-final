@@ -126,9 +126,9 @@ input[type="reset"]:active{
 </style>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="../header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ USER INFO ⊙</div>
 	<form id="frm" action="/admin/userUpdate" method="post">
 	<input type="hidden" value="${vo.users_id}" name="users_id">
@@ -193,8 +193,8 @@ input[type="reset"]:active{
 	</div>
 	</form>
 	</div>
-		<jsp:include page="../chat.jsp"/>
-	<jsp:include page="../top.jsp"/>
+		<jsp:include page="../index_include/chat.jsp"/>
+	<jsp:include page="../index_include/top.jsp"/>
 </body>
 <script>
 	

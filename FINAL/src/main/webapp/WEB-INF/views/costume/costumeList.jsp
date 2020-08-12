@@ -166,9 +166,9 @@ input[type="text"] {
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div id="total">
 			COUNT: <span>${pm.totalCount}</span>건
 		</div>
@@ -231,8 +231,8 @@ input[type="text"] {
 			</div>
 		</div>
 	</div>
-	<jsp:include page="chat.jsp" />
-	<jsp:include page="top.jsp" />
+	<jsp:include page="../index_include/chat.jsp" />
+	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
 	//페이지를 클릭했을 때

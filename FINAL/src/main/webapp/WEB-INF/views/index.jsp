@@ -88,9 +88,9 @@ img {
 </style>
 </head>
 <body id="body">
-<jsp:include page="menu.jsp" />
+<jsp:include page="index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="index_include/header.jsp" />
 		<div id="content">
 			<table id="tbl1">
 				<tr>
@@ -218,9 +218,9 @@ img {
 		</div>
 		
 	</div>
-	<jsp:include page="chat.jsp" />
-	<jsp:include page="top.jsp" />
-	<jsp:include page="popup.jsp"/>
+	<jsp:include page="index_include/chat.jsp" />
+	<jsp:include page="index_include/top.jsp" />
+	<jsp:include page="index_include/popup.jsp"/>
 </body>
 <script>
 	$(document).ready(function(){
@@ -254,6 +254,25 @@ img {
 	});
 	
 	$("#img-8").on("click",function(){
+		location.href="/read/profile";
+	});
+	$("#img1").on("click",function(){
+		location.href="/read/couple";
+	});
+	
+	$("#img5").on("click",function(){
+		location.href="/read/family";
+	});
+	
+	$("#img2").on("click",function(){
+		location.href="/read/pet";
+	});
+	
+	$("#img11").on("click",function(){
+		location.href="/read/friend";
+	});
+	
+	$("#img8").on("click",function(){
 		location.href="/read/profile";
 	});
 	

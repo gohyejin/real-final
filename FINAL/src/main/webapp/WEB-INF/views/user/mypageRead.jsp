@@ -94,9 +94,9 @@ input[type=text],input[type=password] {
 </style>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="../header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ MY PAGE ⊙</div>
 		<br><br>
 		<div id="content">
@@ -153,7 +153,7 @@ input[type=text],input[type=password] {
 			</form>
 		</div>
 	</div>
-	<jsp:include page="../chat.jsp" />
+	<jsp:include page="../index_include/chat.jsp" />
 
 </body>
 <script>

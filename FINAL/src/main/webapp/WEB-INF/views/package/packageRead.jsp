@@ -118,10 +118,10 @@
 </style>
 </head>
 <body>  
-   <jsp:include page="menu.jsp" />
+   <jsp:include page="../index_include/menu.jsp" />
    <div id="page">
       <form name="frm" action="update" method="post" enctype="multipart/form-data">
-      <jsp:include page="header.jsp" />
+      <jsp:include page="../index_include/header.jsp" />
       <div class="title">⊙ PACKAGE ⊙</div>
       <br><br>
       <div id="content">
@@ -159,7 +159,7 @@
       </form>
    </div>
    
-   <jsp:include page="chat.jsp" />
+   <jsp:include page="../index_include/chat.jsp" />
 </body>
 
 <script>

@@ -49,9 +49,9 @@
 
 </style>
 </head>
-<body><jsp:include page="../menu.jsp" />
+<body><jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="../header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ CHART ⊙</div>
 		<div id="content">
 			<div id="Pchart"><jsp:include page="../admin/packagechart.jsp" /></div>

@@ -136,9 +136,9 @@ input[type=number] {
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../index_include/menu.jsp" />
 	<div id="page">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../index_include/header.jsp" />
 		<div class="title">⊙ COSTUME ⊙</div>
 		<br>
 		<br>
@@ -204,8 +204,8 @@ input[type=number] {
 		</div>
 		<jsp:include page="costumeReply.jsp" />
 	</div>
-	<jsp:include page="chat.jsp" />
-	<jsp:include page="top.jsp" />
+	<jsp:include page="../index_include/chat.jsp" />
+	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
 	//이미지 클릭했을떄
