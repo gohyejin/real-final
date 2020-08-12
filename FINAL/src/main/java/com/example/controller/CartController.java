@@ -118,10 +118,9 @@ public class CartController {
 	@RequestMapping("/cart/cinsert")
 	@ResponseBody
 	public void cinsert(Costume_CartVO vo){
-		System.out.println(vo);
 		Costume_CartVO Cchk= mapper.CostumeCartRead(vo);
-		System.out.println(Cchk);
 		if(Cchk!=null){
+			Cchk.setCostume_cart_quantity(vo.getCostume_cart_quantity());
 			mapper.costumeQuantityUpdate(Cchk);
 		}else{
 			mapper.cinsert(vo);

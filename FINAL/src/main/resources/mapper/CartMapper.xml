@@ -56,7 +56,7 @@
     	update package_cart set package_cart_quantity=package_cart_quantity+1 where package_cart_no=#{package_cart_no}
     </update>
     <update id="costumeQuantityUpdate">
-    	update costume_cart set costume_cart_quantity=costume_cart_quantity+1 where costume_cart_no=#{costume_cart_no}
+    	update costume_cart set costume_cart_quantity=costume_cart_quantity+#{costume_cart_quantity} where costume_cart_no=#{costume_cart_no}
     </update>
     <update id="PackageStatusUpdate">
     	update package_cart set package_cart_status=1 where package_cart_no=#{packageCartNo}
