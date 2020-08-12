@@ -112,7 +112,7 @@
 .sImage{
    width:100%;
    text-align:center;
-   height:200px;
+   padding-bottom:20px;
 }
 
 </style>
@@ -144,7 +144,7 @@
                         </div>
                       </div>
                    
-            </div><br>
+            </div>
                   <hr>
              
              <div class="price">

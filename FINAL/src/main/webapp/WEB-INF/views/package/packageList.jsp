@@ -79,7 +79,7 @@
 				<div class="box">
 					<div>
 						<img class="image" src="../display?fileName=couple_package.jpg"
-							onClick="location.href=/package/packageRead?photo_package_code=A2'"
+							onClick="location.href='/package/packageRead?photo_package_code=A2'"
 							width=250 height=200>
 					</div>
 					<div>

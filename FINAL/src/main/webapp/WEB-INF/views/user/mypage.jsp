@@ -99,23 +99,9 @@ img:hover{
    cursor:pointer;
 }
 
-.code, .no{
-   display: none;
+.code{
+	display: none;
 }
-
-.pdele{
-	float: right;
-	border: none;
-	font-size: 20px;
-	margin-botton: 5px;
-	cursor: pointer;
-	color:red;
-}
-.orderday{
-	padding-bottom:8px;
-	font-size:15px;
-}
-
 </style>
 </head>
 <body>
