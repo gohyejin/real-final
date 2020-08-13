@@ -153,7 +153,7 @@ input[type=text] {
       <div class="title">⊙ COSTUME INSERT ⊙</div>
       <br> <br>
       <div id="content">
-         <form name="frm" method="post" action="costumeInsert"
+         <form name="frm" method="post" action="/costumeInsert"
             enctype="multipart/form-data">
             <table id="tbl1">
                <tr>

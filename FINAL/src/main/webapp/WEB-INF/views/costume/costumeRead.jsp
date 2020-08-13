@@ -70,9 +70,9 @@ select option {
 	text-align-last: center;
 }
 
-.btnDelete,.cart,#btnList,input[type=submit] {
-	width: 300px;
-	height: 100px;
+.cart,#btnList,input[type=submit] {
+	width:200px;
+	height: 60px;
 	font-size: 35px;
 	margin: 2px;
 	cursor: pointer;
@@ -81,7 +81,17 @@ select option {
 	border: none;
 	border-radius: 3px 3px 3px 3px;
 }
-
+.btnDelete{
+	width:200px;
+	height: 60px;
+	font-size: 30px;
+	margin: 2px;
+	cursor: pointer;
+	background: #969596;
+	color: white;
+	border:none;
+	border-radius:3px 3px 3px 3px;
+}
 .cart:active,#btnList:active {
 	background: #cca6cf;
 }
@@ -193,14 +203,14 @@ input[type=number] {
 				</table>
 				<div class="btn">
 					<c:if test="${users_note==1}">
-						<input type="submit" value="수정">
+						<input type="submit" value="UPDATE">
 					</c:if>
 					<input type="button" value="LIST" id="btnList" onClick="location.href='costumeList'">
 					<c:if test="${users_note!=1}">
 						<input type="button" value="장바구니에 담기" class="cart">
 					</c:if>
 					<c:if test="${users_note==1}">
-						<input type="button" value="삭제" class="btnDelete">
+						<input type="button" value="DELETE" class="btnDelete">
 					</c:if>
 				</div>
 			</form>
