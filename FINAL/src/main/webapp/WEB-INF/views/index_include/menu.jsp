@@ -21,11 +21,11 @@
 
 #menu1 {
 	width: 1780px;
-	padding: 10px;
+	padding: 0px 10px 10px 10px;
 	color: black;
 	position: fixed;
 	right: 50px;
-	top: 100px;
+	top: 102px;
 	text-align:right;
 	background:white;
 	background-color:rgba(255,255,255,0.3);

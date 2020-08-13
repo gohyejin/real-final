@@ -138,6 +138,7 @@ body {
 </head>
 <body>
    <div id="divLoginPage">
+   	<jsp:include page="../index_include/menu.jsp" />
       <jsp:include page="../index_include/header.jsp" />
       <br><div class="title"><b>⊙ LOGIN ⊙</b></div><br>
       <div id="id"><input type="text" id="users_id" placeholder="　　ID" maxlength="20"/></div><br>

@@ -105,7 +105,8 @@
 	}
 	#menu1 {
 		width: 770px;
-		padding: 5px;
+		padding:5px;
+		padding-top:0px;
 		color: black;
 		position: fixed;
 		right: 50px;

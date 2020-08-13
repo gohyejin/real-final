@@ -50,7 +50,7 @@
 	<br>
 </div>
 <script>
-	$("#logoimg,h2").on("click", function() {
+	$("#logoimg,p").on("click", function() {
 		location.href = "/index";
 	})
 </script>
