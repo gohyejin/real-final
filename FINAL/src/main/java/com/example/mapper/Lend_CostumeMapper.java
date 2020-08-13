@@ -11,5 +11,5 @@ public interface Lend_CostumeMapper {
     public Lend_CostumeVO read(String lend_costume_code);
     public int totalCount(Criteria cri);
     public void update(Lend_CostumeVO vo);
-    
+    public void delete(String lend_costume_code);
 }

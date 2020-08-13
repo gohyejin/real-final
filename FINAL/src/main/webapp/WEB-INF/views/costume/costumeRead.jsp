@@ -70,7 +70,7 @@ select option {
 	text-align-last: center;
 }
 
-.cart,#btnList,input[type=submit] {
+.btnDelete,.cart,#btnList,input[type=submit] {
 	width: 300px;
 	height: 100px;
 	font-size: 35px;
@@ -199,6 +199,9 @@ input[type=number] {
 					<c:if test="${users_note!=1}">
 						<input type="button" value="장바구니에 담기" class="cart">
 					</c:if>
+					<c:if test="${users_note==1}">
+						<input type="button" value="삭제" class="btnDelete">
+					</c:if>
 				</div>
 			</form>
 		</div>
@@ -208,6 +211,27 @@ input[type=number] {
 	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
+	//삭제 버튼을 클릭했을 때
+	$(".btnDelete").on("click", function(){
+		var code="${vo.lend_costume_code}";
+		var title="${vo.lend_costume_name}";
+		if(!confirm(title + " 의상을 삭제하시겠습니까?")) return;
+		$.ajax({
+	         type:"get",
+	         url:"/costume/costumeDelete",
+	         data:{"lend_costume_code":code, "costume_reply_code":code, "costume_cart_costume_code":code},
+	         dataType:"json",
+	         success:function(cnt){
+	        	 if(cnt==0){
+	        		 alert("삭제되었습니다.");
+	 	         	location.href="/costume/costumeList";
+	        	 }else if(cnt!=0){
+	        		alert("장바구니에 담겨있어 삭제할 수 없습니다."); 
+	        	 }
+	         }
+	      });
+	});
+	
 	//이미지 클릭했을떄
 	$("#image").on("click", function() { //이미지클릭할때 file클릭한거처럼 됨
 		$(frm.file).click();

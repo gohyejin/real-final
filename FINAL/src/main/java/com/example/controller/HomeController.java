@@ -23,8 +23,10 @@ import com.example.domain.Costume_ReplyVO;
 import com.example.domain.Criteria;
 import com.example.domain.Lend_CostumeVO;
 import com.example.domain.PageMaker;
+import com.example.mapper.CartMapper;
 import com.example.mapper.Costume_ReplyMapper;
 import com.example.mapper.Lend_CostumeMapper;
+import com.example.service.CostumeService;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +38,10 @@ public class HomeController {
 	Lend_CostumeMapper lmapper;
 	@Autowired
 	Costume_ReplyMapper cmapper;
+	@Autowired
+	CostumeService service;
+	@Autowired
+	CartMapper cartMapper;
 	
 	/*COSTUME_Reply---------------------------------------------------------------------*/
 	@RequestMapping("/costume/costumeReply/reply")
@@ -79,6 +85,16 @@ public class HomeController {
 	}
 	
 	/*COSTUME---------------------------------------------------------------------------------------------------------*/
+	@RequestMapping("/costume/costumeDelete")
+	@ResponseBody
+	public int delete(String lend_costume_code, String costume_reply_code, String costume_cart_costume_code){
+		int cnt=cartMapper.costumeCnt(costume_cart_costume_code);
+		if(cnt==0){
+			service.delete(lend_costume_code, costume_reply_code);
+		}
+		return cnt;
+	}
+	
 	@RequestMapping("/costume/costumeList")
 	public String list(Model model,Criteria cri) {
 		cri.setPerPageNum(9);

@@ -26,4 +26,7 @@
     	lend_costume_price=#{lend_costume_price},lend_costume_content=#{lend_costume_content} 
     	where lend_costume_code=#{lend_costume_code}
     </update>
+    <delete id="delete">
+    	delete from lend_costume where lend_costume_code=#{lend_costume_code}
+    </delete>
 </mapper>

@@ -64,4 +64,7 @@
     <update id="CostumeStatusUpdate">
     	update costume_cart set costume_cart_status=1 where costume_cart_no=#{costumeCartNo}
     </update>
+    <select id="costumeCnt" resultType="int">
+    	select count(*) from costume_cart where costume_cart_costume_code=#{costume_cart_costume_code}
+    </select>
 </mapper>

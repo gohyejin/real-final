@@ -22,4 +22,5 @@ public interface CartMapper {
 	public void costumeQuantityUpdate(Costume_CartVO vo);
 	public void PackageStatusUpdate(int packageCartNo);
 	public void CostumeStatusUpdate(int costumeCartNo);
+	public int costumeCnt(String costume_cart_costume_code);
 }

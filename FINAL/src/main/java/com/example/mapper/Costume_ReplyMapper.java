@@ -12,5 +12,5 @@ public interface Costume_ReplyMapper {
 	public int replyCount(String costume_reply_code);
 	public void insert(Costume_ReplyVO vo);
 	public void delete(int costume_reply_rno);
-	
+	public void cdelete(String costume_reply_code);
 }

@@ -17,4 +17,7 @@
     <delete id="delete">
     	delete from costume_reply where costume_reply_rno=#{costume_reply_rno} 
     </delete>
+    <delete id="cdelete">
+    	delete from costume_reply where costume_reply_code=#{costume_reply_code}
+    </delete>
 </mapper>
