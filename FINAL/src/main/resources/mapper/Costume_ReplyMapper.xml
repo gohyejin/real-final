@@ -4,7 +4,7 @@
     <select id="clist" resultType="com.example.domain.Costume_ReplyVO">
         select * from costume_reply 
         where costume_reply_code=#{costume_reply_code} 
-        order by costume_reply_rno desc 
+        order by costume_reply_replyDate desc 
          limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
     <select id="replyCount" resultType="int">
