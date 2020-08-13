@@ -4,7 +4,7 @@
 <mapper namespace="com.example.mapper.BoardMapper">
 
     <select id="QnAList" resultType="com.example.domain.BoardVO">
-        select * from board order by board_bno desc limit #{pageStart}, #{perPageNum}
+        select * from board order by board_regdate desc limit #{pageStart}, #{perPageNum}
     </select>
     
     <select id="FAQList" resultType="com.example.domain.BoardVO">
