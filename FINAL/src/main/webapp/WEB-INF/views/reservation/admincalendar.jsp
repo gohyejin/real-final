@@ -36,7 +36,7 @@
 }
 
 #tbl1 {
-	width: 45%;
+	width: 38%;
 	float: right;
 	overflow: hidden;
 	border-collapse: collapse;
@@ -66,7 +66,7 @@ th {
 }
 
 #calendar {
-	width: 100%;
+	width: 61%;
 	height: 60%;
 	float: left;
 }
@@ -91,7 +91,7 @@ th {
 		<div class="title">⊙ RESERVATION ⊙</div><br><br>
 		<div id="content">
    <div class="container calendar-container">
-       <div id="calendar" style="max-width: 900px; margin: 40px auto;"></div>
+       <div id="calendar"></div>
    </div>
    <div id="reservation2">
          <table id="tbl1"></table>    

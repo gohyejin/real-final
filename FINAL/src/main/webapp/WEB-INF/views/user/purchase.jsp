@@ -262,7 +262,7 @@ input[type="number"]{
 				<td class="no">${vo.package_cart_no}</td>
 				<td>${vo.photo_package_code}</td>
 				<td>${vo.photo_package_title}</td>
-				<td><img class="img" src="/display?fileName=${vo.photo_package_image}" width=110 onClick="location.href='/costumeRead?id=${vo.photo_package_code}'"></td>
+				<td><img class="img" src="../display?fileName=${vo.photo_package_image}" width=110 onClick="location.href='/costume/costumeRead?id=${vo.photo_package_code}'"></td>
 				<td class="quantity">${vo.package_cart_quantity}</td>
 				<td>${vo.package_cart_price}원</td>
 				<td>${vo.package_cart_price*vo.package_cart_quantity}원</td>
@@ -286,7 +286,7 @@ input[type="number"]{
 				<td class="no">${v.costume_cart_no}</td>
 				<td>${v.lend_costume_code}</td>
 				<td>${v.lend_costume_name}</td>
-				<td><img class="img" src="/display?fileName=${v.lend_costume_image}" width=110 onClick="location.href='costumeRead?id=${v.lend_costume_code}'"></td>
+				<td><img class="img" src="../display?fileName=${v.lend_costume_image}" width=110 onClick="location.href='/costume/costumeRead?id=${v.lend_costume_code}'"></td>
 				<td class="quantity">${v.costume_cart_quantity}</td>
 				<td>${v.costume_cart_price}원</td>
 				<td>${v.costume_cart_price*v.costume_cart_quantity}원</td>

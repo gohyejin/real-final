@@ -204,7 +204,7 @@ input[type="submit"]:active {
          </div><br>
          <div class="btn"><input type="text" size=40 placeholder="　　PHONE NUMBER" name="users_phone" value="${users_phone}" required/></div><br>
          <div class="btn">
-            <input type="text" size=28 placeholder="　　E-MAIL" name="users_email" value="${users_email}"required/>
+            <input type="text" size=28 placeholder="　　E-MAIL" name="users_email" value="${users_email}" required/>
             <input type="button" id="emailSendInjeung" value="이메일 인증">
          </div><br>
          <input type="hidden" id="idCHK" name="idCHK" value="${idCHK}">
@@ -346,9 +346,11 @@ input[type="submit"]:active {
    //mouseOver   
    $("#btnShow").mouseover(function(){
       $(".btn #users_pass").prop("type", "text");
+      $(".btn #users_passChk").prop("type", "text");
    });
    $("#btnShow").mouseout(function(){
       $(".btn #users_pass").prop("type", "password");
+      $(".btn #users_passChk").prop("type", "password");
    });
    
    $("#reset").on("click",function(){

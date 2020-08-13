@@ -433,13 +433,13 @@ input[type="number"]{
    // 패키지 read
    $("#tbl1").on("click", ".image", function(){
       var package_code=$(this).parent().parent().find(".package_cart_package_code").val();
-      location.href="../packageRead?photo_package_code="+package_code;
+      location.href="../package/packageRead?photo_package_code="+package_code;
    });
    
    // 의상 read
    $("#tbl2").on("click", ".image", function(){
       var costume_code=$(this).parent().parent().find(".costume_cart_costume_code").val();
-      location.href="../costumeRead?lend_costume_code="+costume_code;
+      location.href="../package/costumeRead?lend_costume_code="+costume_code;
    });
    
    //패키지 수량 수정
