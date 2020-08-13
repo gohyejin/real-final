@@ -90,14 +90,18 @@ public class CartController {
 	
 	@RequestMapping("/cart/pupdate")
 	@ResponseBody
-	public void pupdate(Package_CartVO package_cartVO){
+	public int pupdate(Package_CartVO package_cartVO){
 		mapper.pUpdate(package_cartVO);
+		int totalPrice=package_cartVO.getPackage_cart_quantity()*mapper.pread(package_cartVO.getPackage_cart_no()).getPackage_cart_price();
+		return totalPrice;
 	}
 	
 	@RequestMapping("/cart/cupdate")
 	@ResponseBody
-	public void cupdate(Costume_CartVO costume_cartVO){
+	public int cupdate(Costume_CartVO costume_cartVO){
 		mapper.cUpdate(costume_cartVO);
+		int totalPrice=costume_cartVO.getCostume_cart_quantity()*mapper.cread(costume_cartVO.getCostume_cart_no()).getCostume_cart_price();
+		return totalPrice;
 	}
 	
 	@RequestMapping("/cart/pinsert")

@@ -214,8 +214,8 @@ input[type="number"]{
                <td class="photo_package_price">{{photo_package_price}}</td>
 				<td>
                   <span><input type="hidden" value={{package_cart_no}} size=3 name="package_cart_no" class="package_cart_no"></span>
-                  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="pnumber"></span>
-               </td>
+				  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="pnumber"></span>
+			   </td>
                <td class="totprice">{{totprice}}</td>
                <td><button class="btnDel">X</button></td>
             </tr>
@@ -244,9 +244,9 @@ input[type="number"]{
                <td class="photo_package_title" width=80>{{lend_costume_name}}/{{costume_size}}</td>
                <td><span class="lend_costume_price">{{lend_costume_price}}</span></td>
 				<td>
-                  <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>
-                  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="cnumber"></span>
-               </td>
+                  <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>                
+				  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="cnumber"></span>
+				</td>
                <td class="totprice">{{totprice}}</td>
                <td><button class="btnDel">X</button></td>
             </tr>
@@ -358,9 +358,8 @@ input[type="number"]{
 	      }
 	   });
 	
-	
 	//선택 체크버튼
-	$("#tbl1").on("click", ".row .chk", function(){
+	$("#tbl1").on("click", ".row .chk", function(){	
 		$("#tbl1 .row .chk:checked").each(function() {
 			var package_price=$(this).parent().parent().find(".totprice").html();
 			packageSum = parseInt(packageSum) + parseInt(package_price); 
@@ -446,12 +445,27 @@ input[type="number"]{
    $("#tbl1").on("change", ".row .pnumber", function(){
       var package_cart_no=$(this).parent().parent().find(".package_cart_no").val();
       var package_cart_quantity=$(this).parent().parent().find(".pnumber").val();
+      var a=$(this).parent().parent().parent();
+      
       $.ajax({
          type:"get",
          url:"/cart/pupdate",
          data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
-         success:function(){
-            getPlist();
+         success:function(data){
+        	 a.children().eq(5).html(data);
+        	 
+        	 $("#tbl1 .row .chk:checked").each(function() {
+       			var package_price=$(this).parent().parent().find(".totprice").html();
+       			packageSum = parseInt(packageSum) + parseInt(package_price); 
+       		 });
+        	 
+        	 if($("#tbl1 .row .chk:checked")){
+        		 $("#packageSum").val(packageSum);
+        		 totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+          		 $("#totalSum").val(totalSum);
+          		 packageSum=0;
+        		 package_price=0;
+        	 }
          }
       });
    });
@@ -460,12 +474,26 @@ input[type="number"]{
    $("#tbl2").on("change", ".row .cnumber", function(){
       var costume_cart_no=$(this).parent().parent().find(".costume_cart_no").val();
       var costume_cart_quantity=$(this).parent().parent().find(".cnumber").val();
+      var a=$(this).parent().parent().parent();
+      
       $.ajax({
          type:"get",
          url:"/cart/cupdate",
          data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
-         success:function(){
-            getClist();
+         success:function(data){
+        	 a.children().eq(5).html(data);
+        	 
+        	 $("#tbl2 .row .chk:checked").each(function() {
+     			var costume_price=$(this).parent().parent().find(".totprice").html();
+     			costumeSum = parseInt(costumeSum) + parseInt(costume_price); 
+     		 });
+        	 if($("#tbl2 .row .chk:checked")){
+        		$("#costumeSum").val(costumeSum);
+          		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+          		$("#totalSum").val(totalSum);
+          		costumeSum=0;
+          		costume_price=0;
+        	 }
          }
       });
    });
