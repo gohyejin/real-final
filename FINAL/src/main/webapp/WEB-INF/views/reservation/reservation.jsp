@@ -40,7 +40,7 @@
 <script>
 
 $("#button").on("click",function(){
-    location.href="/calendar";
+    location.href="/reservation/calendar";
 });
 </script>
 </html>

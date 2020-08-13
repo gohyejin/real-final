@@ -88,6 +88,7 @@ button {
 	font-size: 20px;
 	border: none;
 	cursor: pointer;
+	padding-top:10px;
 }
 
 .replyDate {
@@ -119,6 +120,14 @@ button {
 	text-align:center;
 	width:100%;
 }
+#Rcontent{
+	display:inline-block; 
+	width:80%;
+	padding:10px;
+}
+.reply{
+	text-align:center;
+}
 </style>
 </head>
 <body>
@@ -139,7 +148,7 @@ button {
 			</div><br>
 			<div class="reply" >
 				<button costume_reply_rno={{costume_reply_rno}} style="{{printStyle costume_reply_replyer}}">X</button>
-				{{costume_reply}}
+				<span id="Rcontent">{{costume_reply}}</span>
 			</div>
 		</div>
 	{{/each}}

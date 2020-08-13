@@ -116,6 +116,13 @@ button {
 }
 .board_reply button{
 	color:red;
+	padding-top:10px;
+}
+
+#Rcontent{
+	display:inline-block; 
+	width:80%;
+	padding:10px;
 }
 </style>
 </head>
@@ -137,7 +144,7 @@ button {
 			</div><br>
 			<div class="board_reply" >
 				<button rno={{board_reply_rno}} style="{{printStyle board_reply_replyer}}">X</button>
-				{{board_reply}}
+				<span id="Rcontent">{{board_reply}}</span>
 			</div>
 		</div>
 	{{/each}}

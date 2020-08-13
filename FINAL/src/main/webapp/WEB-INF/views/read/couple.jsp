@@ -169,7 +169,7 @@ var src1="../display?fileName=couple-";
 var src2=".jpg";
 var page;
 $("#imgButton").on("click",function(){
-    location.href="/calendar";
+    location.href="/reservation/calendar";
 });
 
    $(".box").on("click", "img", function() {

@@ -143,7 +143,7 @@ input[type=number] {
 		<br>
 		<br>
 		<div id="content">
-			<form name="frm" action="costumeUpdate" method="post"
+			<form name="frm" action="/costumeUpdate" method="post"
 				enctype="multipart/form-data">
 				<!-- <input type="hidden" value="${users_id}"> -->
 				<table id="tbl1">
