@@ -159,7 +159,7 @@ var page=1;
 
 Handlebars.registerHelper("printStyle",function(writer){
 	   var src;
-	   if(board_reply_replyer!=writer && users_note != 1) {
+	   if(board_reply_replyer!=writer && users_note != 1 || board_reply_replyer=="GUEST") {
 		   src="display:none;";
 	   } else if(users_note == 1) {
 		   src="color:red;";

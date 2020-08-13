@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>E-MAIL</title>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <style>
 #e-mail{
    text-align:center;
@@ -58,7 +59,7 @@ input::placeholder {
 </head>
 <body>
 <div id="e-maliPage1">
-   <form action="/emailCheckInjeung" method="post">
+   <form action="/emailCheckInjeungUpdate" method="post" name="frm">
    <div id="e-mail">
       
       <img id="logoimg" src="../display?fileName=gif7.gif" width=200>
@@ -69,26 +70,20 @@ input::placeholder {
          <input type="hidden" value="${dice}" name="dice">
       <br><br>
       <div>
-         <input type="hidden" name="users_id" value="${users_id}">
-         <input type="hidden" name="users_pass" value="${users_pass}">
-         <input type="hidden" name="users_passChk" value="${users_passChk}">
-         <input type="hidden" name="users_name" value="${users_name}">
-         <input type="hidden" name="users_birthday" value="${users_birthday}">
-         <input type="hidden" name="users_birthdayYear" value="${users_birthdayYear}">
-         <input type="hidden" name="users_birthdayMonth" value="${users_birthdayMonth}">
-         <input type="hidden" name="users_birthdayDay" value="${users_birthdayDay}">
-         <input type="hidden" name="users_gender" value="${users_gender}">
-         <input type="hidden" name="users_zipcode" value="${users_zipcode}">
-         <input type="hidden" name="users_address" value="${users_address}">
-         <input type="hidden" name="users_addresss" value="${users_addresss}">
-         <input type="hidden" name="users_addressDetail" value="${users_addressDetail}">
-         <input type="hidden" name="users_phone" value="${users_phone}">
-         <input type="hidden" name="users_email" value="${users_email}">
-         <input type="hidden" name="idCHK" value="${idCHK}">
+         
+         <input type="hidden" name="users_email" value="${email}">
+
       </div>
       <button type="submit">인증번호 입력</button>
       </div>
    </form>
    </div>
 </body>
+<script>
+
+    var users_email="${email}";
+   $(frm).submit(function(){
+      opener.parent.$("#users_email").val(users_email);
+   });
+</script>
 </html>

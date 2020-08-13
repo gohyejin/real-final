@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +30,17 @@
    height:hidden;
 }
 
-#tbl1{
+#tbl1,.null{
    float:left;
    width:48%;
    margin: 2px;
-   overflow: hidden;
    border-collapse: collapse;
 }
 
-#tbl2 {
+#tbl2,.null1{
    float:right;
    width:48%;
    margin: 2px;
-   overflow: hidden;
    border-collapse: collapse;
    height: 100px;
 }
@@ -97,6 +96,7 @@ th {
    margin: auto;
    height:300px;
    padding-left:12%;
+   overflow:hidden;
 }
 
 #divSum, #divShipping, #divtotalSum {
@@ -180,7 +180,20 @@ input[type="number"]{
 .image{
 	cursor: pointer;
 }
-
+.null button,.null1 button{
+	cursor: pointer;
+	width: 300px;
+	height: 50px;
+	font-size: 25px;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	text-align: center;
+}
+.null,.null1{
+	margin-top:100px;
+}
 </style>
 </head>
 <body>
@@ -190,7 +203,15 @@ input[type="number"]{
 		<div class="title">⊙CART⊙</div>
 		<br><br>
 		<div id="content">
-         <table id="tbl1"></table>
+		<div class="null">
+			<h2>PACKAGE 장바구니가 비었습니다.</h2>
+			<button onClick="location.href='/package/packageList'">PACKAGE LIST</button>
+		</div>
+		<div class="null1">
+			<h2>COSTUME 장바구니가 비었습니다.</h2>
+			<button onClick="location.href='/costume/costumeList'">COSTUME LIST</button>
+		</div>
+        <table id="tbl1"></table>
          <script id="temp1" type="text/x-handlebars-template">
             <tr>
                <th><button class="totalDel">선택삭제</button></th>
@@ -549,7 +570,7 @@ input[type="number"]{
             success:function(){}
          });
          alert("삭제되었습니다.");
-         getPlist();
+         location.href="/user/cart";
       });
    
    // 의상 삭제
@@ -565,9 +586,15 @@ input[type="number"]{
             success:function(){}
          });
          alert("삭제되었습니다.");
-         getClist();
+         location.href="/user/cart";
       });
-
+   
+   $(".null").hide();
+   $(".null1").hide();
+   $("#tbl1").hide();
+   $("#tbl2").hide();
+   $("#divFinal").hide();
+   $("#btnOrder").hide();
    // 패키지 목록
    function getPlist(){
          $.ajax({
@@ -576,8 +603,16 @@ input[type="number"]{
             data:{"package_cart_id":cart_id},
             dataType:"json",
             success:function(data){
-               var temp=Handlebars.compile($("#temp1").html());
-               $("#tbl1").html(temp(data));
+            	var temp=Handlebars.compile($("#temp1").html());
+                $("#tbl1").html(temp(data));
+         	   var Pdata = $("#tbl1 .row .package_cart_no").val();
+         	   if(Pdata!=null){
+         		   $("#tbl1").show();
+         		   $("#divFinal").show();
+         		   $("#btnOrder").show();
+             	}else if(Pdata==null){
+             		$(".null").show();
+             	}
             }
          });
       }
@@ -590,8 +625,17 @@ input[type="number"]{
            data:{"costume_cart_id":cart_id},
            dataType:"json",
            success:function(data){
-              var temp=Handlebars.compile($("#temp2").html());
-              $("#tbl2").html(temp(data));
+        	   var temp=Handlebars.compile($("#temp2").html());
+               $("#tbl2").html(temp(data));
+        	   var Cdata = $("#tbl2 .row .costume_cart_no").val();
+        	   if(Cdata!=null){
+        		   $("#tbl2").show();
+         		   $("#divFinal").show();
+         		   $("#btnOrder").show();
+            	}else if(Cdata==null){
+            		$(".null1").show();
+            	}
+              
            }
         });
      }

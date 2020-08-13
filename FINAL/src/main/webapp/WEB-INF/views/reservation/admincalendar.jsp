@@ -32,7 +32,7 @@
 	text-align: center;
 	width: 90%;
 	margin: auto;
-	height: 800px;
+	height: 900px;
 }
 
 #tbl1 {
@@ -207,10 +207,12 @@ function getList() {
          data:{"reservation_reno":reservation_reno},
          success : function() {
             alert("삭제 되었습니다.");
-            getList();
-            }
-         });
+           	location.href="/reservation/admincalendar";
+         }
+      });
    });
-   
+   $(document).ready(function() {
+		window.scrollTo({top:400, behavior:'smooth'});
+	});
 </script>
 </html>

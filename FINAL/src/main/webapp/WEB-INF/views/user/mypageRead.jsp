@@ -50,9 +50,10 @@ input[type=text],input[type=password] {
 	height: 50px;
 }
 
-.btnShow input[type=button],.btnShowchk input[type=button],#btnCode{
+.btnShow input[type=button],.btnShowchk input[type=button],#btnCode,#emailSendInjeung{
 	height: 55px;
 	width:90px;
+	overflow:hidden;
 }
 
 #previousPage{
@@ -141,7 +142,8 @@ input[type=text],input[type=password] {
 				</div>
 				<br>
 				<div class="btn">
-					<input type="text" size=60 placeholder="　　E-MAIL" value="${vo.users_email}" name="users_email" id="users_email" readonly />
+					<input type="text" size=48 placeholder="　　E-MAIL" value="${vo.users_email}" name="users_email" id="users_email" readonly />
+					<input type="button" id="emailSendInjeung" value="UPDATE">
 				</div>
 				<br>
 				<div class="btn">
@@ -157,6 +159,17 @@ input[type=text],input[type=password] {
 
 </body>
 <script>
+var email="${email}";
+
+$("#emailSendInjeung").on("click", function(){
+   var options = 'width=500, height=500, top=30, left=30, resizable=no, scrollbars=no, location=no';
+    window.open('/user/emailUpdate', 'Update', options);
+   /*  frm.action="/user/emailUpdate";
+     frm.method="get";
+     frm.submit(); */
+    
+   });
+   
 	passChk();
 	
 	// 우편번호

@@ -102,6 +102,16 @@ img:hover{
 .code{
 	display: none;
 }
+.no{
+	display: none;
+}
+.X{
+	float: right;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -143,7 +153,7 @@ img:hover{
                   <td rowspan=3>{{package_cart_price}} 원</td>
                   <td rowspan=3>{{printStyle orders_paytype}}</td>
                   <td rowspan=3>{{total}} 원</td>
-					<td rowspan=3><button class="pdele">X</button></td>
+					<td rowspan=3><button class="X">X</button></td>
                <td class="code">{{photo_package_code}}</td>
             	<td class="no">{{orders_no}}</td>
                <tr>
@@ -176,7 +186,7 @@ img:hover{
                   <td rowspan=3>{{costume_cart_price}} 원</td>
                   <td rowspan=3>{{printStyle2 orders_paytype}}</td>
                   <td rowspan=3>{{total}} 원</td>
-					<td rowspan=3><button class="pdele">X</button></td>
+					<td rowspan=3><button class="X">X</button></td>
                  <td class="code">{{lend_costume_code}}</td>
              <td class="no">{{orders_no}}</td>
                <tr>
@@ -193,7 +203,6 @@ img:hover{
 	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
-$("#tbl2 .row .no").hide();
    var users_id="${users_id}";
    getpackageList();
    getcostumeList();

@@ -167,7 +167,7 @@ button {
 	//삭제버튼 조건 주기(댓글작성자 = 로그인한 유저 & 관리자 권한이 1인경우만 삭제버튼 보이기)
 	Handlebars.registerHelper("printStyle", function(users_id) {
 		var src;
-		if (costume_reply_replyer != users_id && users_note != 1) {
+		if (costume_reply_replyer!=users_id && users_note != 1 || costume_reply_replyer=="GUEST") {
 			src = "display:none;";
 		}else if(users_note==1){
 			src = "color:red;";

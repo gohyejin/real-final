@@ -58,12 +58,6 @@ th {
 	text-align: center;
 }
 
-.row:hover {
-	background:hotpink;
-	cursor: pointer;
-	color:#fff;
-}
-
 #pagination{
 	padding:20px;
 	text-align:center;

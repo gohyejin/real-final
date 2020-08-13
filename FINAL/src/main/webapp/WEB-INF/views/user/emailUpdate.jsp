@@ -59,7 +59,7 @@ input::placeholder {
 </head>
 <body>
 <div id="e-maliPage">
-   <form action="/emailSendInjeung" method="post">
+   <form action="/emailSendInjeungUpdate" method="post" name="frm">
       <div id="e-mail">
          <img id="logoimg" src="../display?fileName=gif7.gif" width=200>
          <h1>E-MAIL 인증</h1>
@@ -68,25 +68,12 @@ input::placeholder {
           <input type="text" name="emailSendInjeung" value="" size=40 placeholder="E-MAIL">
       <br><br>
       <div>
-         <input type="hidden" name="users_id" value="${users_id}">
-         <input type="hidden" name="users_pass" value="${users_pass}">
-         <input type="hidden" name="users_passChk" value="${users_passChk}">
-         <input type="hidden" name="users_name" value="${users_name}">
-         <input type="hidden" name="users_birthday" value="${users_birthday}">
-         <input type="hidden" name="users_birthdayYear" value="${users_birthdayYear}">
-         <input type="hidden" name="users_birthdayMonth" value="${users_birthdayMonth}">
-         <input type="hidden" name="users_birthdayDay" value="${users_birthdayDay}">
-         <input type="hidden" name="users_gender" value="${users_gender}">
-         <input type="hidden" name="users_zipcode" value="${users_zipcode}">
-         <input type="hidden" name="users_address" value="${users_address}">
-         <input type="hidden" name="users_addresss" value="${users_addresss}">
-         <input type="hidden" name="users_addressDetail" value="${users_addressDetail}">
-         <input type="hidden" name="users_phone" value="${users_phone}">
-         <input type="hidden" name="idCHK" value="${idCHK}">
+         <input type="hidden" name="users_email" value="${email}">
          <button type="submit">전송</button>
       </div>
       </div>
    </form>
    </div>
 </body>
+
 </html>

@@ -34,7 +34,7 @@
 	text-align: center;
 	width: 90%;
 	margin: auto;
-	height: 800px;
+	height: 900px;
 }
 
 #tbl1, #tbl2 {
@@ -277,7 +277,7 @@ function getList() {
          data:{"reservation_reno":reservation_reno},
          success : function() {
             alert("삭제 되었습니다.");
-            getList();
+            location.href="/reservation/calendar";
             }
          });
    });
@@ -305,17 +305,17 @@ function getList() {
           success : function(data) {
              if(data==1) {
              alert("저장 되었습니다.");
-             location.href="/reservation/calendar";
-             
+             	location.href="/reservation/calendar";
              } else {
                 alert("이미 예약되어있는 시간입니다.");
              }
-             }
-          });
-       window.onload = function(){
-  			({scrollTop : 1000}, 300);
           }
+       });
    });
+
+   $(document).ready(function() {
+		window.scrollTo({top:400, behavior:'smooth'});
+	});
    
 </script>
 </html>
