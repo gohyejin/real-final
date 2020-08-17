@@ -95,12 +95,17 @@
 
 .bigPig{
    width:30%;
-   height:700px;
+   height:900px;
    display: table-cell;
    padding:20px;
    text-align: center;
    vertical-align: middle;
 }
+
+.bigPig img{
+   height:750px;
+}
+
 .sImageDiv{
    margin: auto;
    cursor: pointer;
@@ -128,8 +133,8 @@
          <div id="tbl1">
             <div class="tTitle"><${vo.photo_package_title}></div>
                <div class="bigPig">
-                  <img src="../display?fileName=${vo.photo_package_image}" width=500 id="bigPig"/>
-                  <img src="" width=500 id="bigImage"/>
+                  <img src="../display?fileName=${vo.photo_package_image}" id="bigPig"/>
+                  <img src="" id="bigImage"/>
                </div><br>
               <div class="sImage">
                  <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
@@ -139,7 +144,7 @@
                      </c:if>
                         <div id="listFile">
                            <c:forEach items="${list}" var="image">
-                              <img src="../display?fileName=${image}" width=150 class="smallImage" id="image">
+                              <img src="../display?fileName=${image}" height=180 class="smallImage" id="image">
                            </c:forEach>
                         </div>
                       </div>

@@ -13,13 +13,14 @@
 	background: white;
 	margin: 15px;
 	padding-bottom:30px;
-	height: 3200px;
+	height: 3500px;
 }
 #content {
 	margin-top:none;
 	margin-left:70px;
 	margin-right:70px;
-	padding: 30px margin-top: 10px;
+	padding: 30px;
+	margin-top: 10px;
 	text-align: center;
 }
 
@@ -56,6 +57,7 @@ img {
 
 #img13,#img14{
 	margin:0px;
+	width:100%;
 }
 
 .image{
@@ -68,7 +70,7 @@ img {
 	width: 15%;
 	float: left;
 	text-align: center;
-	margin:38px;
+	margin:45px;
 	font-size:30px;
 }
 
@@ -87,16 +89,13 @@ img {
 }
 
 #tbl1 img,#tbl2 img,#tbl3 img{
-	width:500px;
+	width:550px;
 }
 #img3{
 	height:280px;
 }
 #img11,#img-11{
-	height:810px;
-}
-#img-8{
-	height:459px;
+	height:850px;
 }
 </style>
 </head>
@@ -183,7 +182,7 @@ img {
 					<div class="title">⊙ PACKAGE ⊙</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=family_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'">
+								<img class="image" src="display?fileName=package_family6.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=A1">가족사진</a>
@@ -192,7 +191,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=couple_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'">
+								<img class="image" src="display?fileName=package_couple2.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=A2">커플사진</a>
@@ -201,7 +200,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=profile_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'" >
+								<img class="image" src="display?fileName=package_profile2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'" >
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=B2">프로필사진</a>
@@ -210,7 +209,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=pet_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'">
+								<img class="image" src="display?fileName=package_pet7.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=C1">펫사진</a>
@@ -219,7 +218,7 @@ img {
 						</div>
 						<div class="box">
 							<div>
-								<img class="image" src="display?fileName=friend_package.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'">
+								<img class="image" src="display?fileName=package_friend2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'">
 							</div>
 							<div>
 								<a href="/package/packageRead?photo_package_code=B1">우정사진</a>

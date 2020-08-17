@@ -71,8 +71,8 @@ select option {
 }
 
 .cart,#btnList,input[type=submit] {
-	width:200px;
-	height: 60px;
+	width: 300px;
+	height: 100px;
 	font-size: 35px;
 	margin: 2px;
 	cursor: pointer;
@@ -210,7 +210,7 @@ input[type=number] {
 						<input type="button" value="장바구니에 담기" class="cart">
 					</c:if>
 					<c:if test="${users_note==1}">
-						<input type="button" value="DELETE" class="btnDelete">
+						<input type="button" value="DELET" class="btnDelete">
 					</c:if>
 				</div>
 			</form>

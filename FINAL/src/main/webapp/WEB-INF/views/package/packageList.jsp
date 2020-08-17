@@ -67,9 +67,8 @@
 			<div id="package">
 				<div class="box">
 					<div>
-						<img class="image" src="../display?fileName=family_package.jpg"
-							onClick="location.href='/package/packageRead?photo_package_code=A1'"
-							width=250 height=200>
+						<img class="image" src="../display?fileName=package_family6.jpg"
+							onClick="location.href='/package/packageRead?photo_package_code=A1'" width=250 height=200>
 					</div>
 					<div>
 						<a href="/package/packageRead?photo_package_code=A1">가족사진</a>
@@ -78,9 +77,8 @@
 				</div>
 				<div class="box">
 					<div>
-						<img class="image" src="../display?fileName=couple_package.jpg"
-							onClick="location.href='/package/packageRead?photo_package_code=A2'"
-							width=250 height=200>
+						<img class="image" src="../display?fileName=package_couple2.jpg"
+							onClick="location.href='/package/packageRead?photo_package_code=A2'" width=250 height=200>
 					</div>
 					<div>
 						<a href="/package/packageRead?photo_package_code=A2">커플사진</a>
@@ -89,9 +87,8 @@
 				</div>
 				<div class="box">
 					<div>
-						<img class="image" src="../display?fileName=profile_package.jpg"
-							onClick="location.href='/package/packageRead?photo_package_code=B2'"
-							width=250 height=200>
+						<img class="image" src="../display?fileName=package_profile2.jpg"
+							onClick="location.href='/package/packageRead?photo_package_code=B2'" width=250 height=200>
 					</div>
 					<div>
 						<a href="/package/packageRead?photo_package_code=B2">프로필사진</a>
@@ -100,9 +97,8 @@
 				</div>
 				<div class="box">
 					<div>
-						<img class="image" src="../display?fileName=pet_package.jpg"
-							onClick="location.href='/package/packageRead?photo_package_code=C1'"
-							width=250 height=200>
+						<img class="image" src="../display?fileName=package_pet7.jpg"
+							onClick="location.href='/package/packageRead?photo_package_code=C1'" width=250 height=200>
 					</div>
 					<div>
 						<a href="/package/packageRead?photo_package_code=C1">펫사진</a>
@@ -111,9 +107,8 @@
 				</div>
 				<div class="box">
 					<div>
-						<img class="image" src="../display?fileName=friend_package.jpg"
-							onClick="location.href='/package/packageRead?photo_package_code=B1'"
-							width=250 height=200>
+						<img class="image" src="../display?fileName=package_friend2.jpg"
+							onClick="location.href='/package/packageRead?photo_package_code=B1'" width=250 height=200>
 					</div>
 					<div>
 						<a href="/package/packageRead?photo_package_code=B1">우정사진</a>
