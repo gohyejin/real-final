@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -121,7 +122,7 @@ public class UsersController {
 
    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
    @ResponseBody
-   public int loginPost(Model model, boolean birthdayPointChk, UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
+   public int loginPost(Model model, boolean birthdayPointChk, UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException, ParseException {
       int result = 0;
       String users_id = vo.getUsers_id();
       String users_pass = vo.getUsers_pass();
@@ -135,11 +136,18 @@ public class UsersController {
       } else if(usersVO.getUsers_note()==3) {
          result = 4;
       }else {
-   	   SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
-   	   Date time = new Date();
-   	   String time1 = format1.format(time);
+   	   Date realTime = new Date();
+   	   int realYear=realTime.getMonth()+1;
+   	   int realDate=realTime.getDate();
+   	   String realTimeHap=Integer.toString(realYear)+Integer.toString(realDate);
    	   
-   	   if(birthdayPointChk==false && time1.equals(usersVO.getUsers_birthday())){
+   	   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+   	   Date DBbirthday = sdf.parse(usersVO.getUsers_birthday());
+   	   int DBmonth=DBbirthday.getMonth()+1;
+   	   int DBdate=DBbirthday.getDate();
+   	   String DBbirthdayHap=Integer.toString(DBmonth)+Integer.toString(DBdate);
+   	   
+   	   if(birthdayPointChk==false && realTimeHap.equals(DBbirthdayHap)){
    		   umapper.birthdayPointUpdate(users_id);
    		   birthdayPointChk=true;
    		   Cookie cookieId = new Cookie("users_idChk", users_id);
@@ -149,7 +157,7 @@ public class UsersController {
    		   cookieChk.setPath("/");
    		   cookieChk.setMaxAge(60 * 60 * 24);
    		   response.addCookie(cookieId);
-              response.addCookie(cookieChk);
+           response.addCookie(cookieChk);
    	   }
          session.setAttribute("users_id", users_id);
          session.setAttribute("users_note", usersVO.getUsers_note());
