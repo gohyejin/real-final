@@ -159,20 +159,34 @@ body {
 	</div>
 </body>
 <script>
+	var birthdayPointChk=false;
+	
 	$("#btnSignup").on("click",function(){
 		window.close();
 		var options = 'width=500, height=930, top=30, left=30, resizable=no, scrollbars=no, location=no';
 		window.open('/user/signup', 'SIGN UP', options);
 	})
 	
+	function getCookie(name) {
+  		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  		return value? value[2] : null;
+	}
+	var a=getCookie('birthdayPointChk');
+	var b=getCookie('users_idChk');
+	
 	$("#btnLogin").on("click",function(){
       var users_id=$("#users_id").val();
       var users_pass=$("#users_pass").val();
       var ex_chk=$("#ex_chk").is(":checked")==true;
+      
+      if(a!=null && users_id==b){
+  		birthdayPointChk=a;
+  	  }
+      
       $.ajax({
          type:"post",
          url:"/user/login",
-         data:{"users_id":users_id, "users_pass":users_pass, "ex_chk":ex_chk},
+         data:{"users_id":users_id, "users_pass":users_pass, "ex_chk":ex_chk, "birthdayPointChk":birthdayPointChk},
          success:function(data){
         	 if(data==0){
                  alert("존재하지 않는 아이디입니다.");
@@ -193,6 +207,6 @@ body {
 	      if(key.keyCode==13) {
 	         $("#btnLogin").click();
 	      }
-	   });
+	});
 </script>
 </html>

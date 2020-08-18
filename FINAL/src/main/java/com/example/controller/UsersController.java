@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -118,45 +120,58 @@ public class UsersController {
    }
 
    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    @ResponseBody
-    public int loginPost(UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
-       int result = 0;
-       String users_id = vo.getUsers_id();
-       String users_pass = vo.getUsers_pass();
-       UsersVO usersVO = umapper.read(users_id);
-       if (usersVO == null) {
-          result = 0;
-       } else if (!usersVO.getUsers_pass().equals(users_pass)) {
-          result = 1;
-       } else if(usersVO.getUsers_note()==2) {
-          result = 3;
-       } else if(usersVO.getUsers_note()==3) {
-          result = 4;
-       }else {
-       
-          session.setAttribute("users_id", users_id);
-          session.setAttribute("users_note", usersVO.getUsers_note());
-          session.setAttribute("users_name", usersVO.getUsers_name());
-          result = 2;
-          if (ex_chk) {
-             Cookie cookie = new Cookie("users_id", users_id);
-             Cookie cookie2 = new Cookie("users_note", Integer.toString(usersVO.getUsers_note()));
-             Cookie cookie3 = new Cookie("users_name", URLEncoder.encode(usersVO.getUsers_name(), "UTF-8"));
-             cookie.setPath("/");
-             cookie.setMaxAge(60 * 60);
-             cookie2.setPath("/");
-             cookie2.setMaxAge(60 * 60);
-             cookie3.setPath("/");
-             cookie3.setMaxAge(60 * 60);
-             response.addCookie(cookie);
-             response.addCookie(cookie2);
-             response.addCookie(cookie3);
-
-          }
-          
-       }
-       return result;
-    }
+   @ResponseBody
+   public int loginPost(Model model, boolean birthdayPointChk, UsersVO vo, boolean ex_chk, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
+      int result = 0;
+      String users_id = vo.getUsers_id();
+      String users_pass = vo.getUsers_pass();
+      UsersVO usersVO = umapper.read(users_id);
+      if (usersVO == null) {
+         result = 0;
+      } else if (!usersVO.getUsers_pass().equals(users_pass)) {
+         result = 1;
+      } else if(usersVO.getUsers_note()==2) {
+         result = 3;
+      } else if(usersVO.getUsers_note()==3) {
+         result = 4;
+      }else {
+   	   SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
+   	   Date time = new Date();
+   	   String time1 = format1.format(time);
+   	   
+   	   if(birthdayPointChk==false && time1.equals(usersVO.getUsers_birthday())){
+   		   umapper.birthdayPointUpdate(users_id);
+   		   birthdayPointChk=true;
+   		   Cookie cookieId = new Cookie("users_idChk", users_id);
+   		   Cookie cookieChk = new Cookie("birthdayPointChk", String.valueOf(birthdayPointChk));
+   		   cookieId.setPath("/");
+   		   cookieId.setMaxAge(60 * 60 * 24);
+   		   cookieChk.setPath("/");
+   		   cookieChk.setMaxAge(60 * 60 * 24);
+   		   response.addCookie(cookieId);
+              response.addCookie(cookieChk);
+   	   }
+         session.setAttribute("users_id", users_id);
+         session.setAttribute("users_note", usersVO.getUsers_note());
+         session.setAttribute("users_name", usersVO.getUsers_name());
+         result = 2;
+         if (ex_chk) {
+            Cookie cookie = new Cookie("users_id", users_id);
+            Cookie cookie2 = new Cookie("users_note", Integer.toString(usersVO.getUsers_note()));
+            Cookie cookie3 = new Cookie("users_name", URLEncoder.encode(usersVO.getUsers_name(), "UTF-8"));
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 60);
+            cookie2.setPath("/");
+            cookie2.setMaxAge(60 * 60);
+            cookie3.setPath("/");
+            cookie3.setMaxAge(60 * 60);
+            response.addCookie(cookie);
+            response.addCookie(cookie2);
+            response.addCookie(cookie3);
+         }
+      }
+      return result;
+   }
     
 
  @RequestMapping("/user/logout")
