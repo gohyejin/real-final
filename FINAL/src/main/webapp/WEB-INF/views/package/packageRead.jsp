@@ -136,7 +136,7 @@
                        <div class="listImage">
 	                       <form name="frm" action="/image/update" method="post" enctype="multipart/form-data">     
 	                         <div>
-	                          <input type="text" value="${attach.a_no}" name="a_no" class="a_no">
+	                          <input type="hidden" value="${attach.a_no}" name="a_no" class="a_no">
 	                          <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
 	                         </div>
 	                         <div><img src="../display?fileName=${attach.image}" width=150 class="smallImage"></div>
