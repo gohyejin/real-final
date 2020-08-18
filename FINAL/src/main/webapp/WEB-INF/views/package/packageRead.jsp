@@ -49,7 +49,7 @@
    margin:auto;
 }
 
-.price #btnCart,input[type="submit"]{
+.price #btnCart/* ,input[type="submit"] */{
    width:300px;
    height: 100px;
    font-size: 35px;
@@ -95,17 +95,12 @@
 
 .bigPig{
    width:30%;
-   height:900px;
+   height:700px;
    display: table-cell;
    padding:20px;
    text-align: center;
    vertical-align: middle;
 }
-
-.bigPig img{
-   height:750px;
-}
-
 .sImageDiv{
    margin: auto;
    cursor: pointer;
@@ -119,13 +114,12 @@
    text-align:center;
    padding-bottom:20px;
 }
-
 </style>
 </head>
 <body>  
    <jsp:include page="../index_include/menu.jsp" />
    <div id="page">
-      <form name="frm" action="update" method="post" enctype="multipart/form-data">
+      
       <jsp:include page="../index_include/header.jsp" />
       <div class="title">⊙ PACKAGE ⊙</div>
       <br><br>
@@ -133,37 +127,39 @@
          <div id="tbl1">
             <div class="tTitle"><${vo.photo_package_title}></div>
                <div class="bigPig">
-                  <img src="../display?fileName=${vo.photo_package_image}" id="bigPig"/>
-                  <img src="" id="bigImage"/>
+                  <img src="../display?fileName=${vo.photo_package_image}" width=500 id="bigPig"/>
+                  <img src="" width=500 id="bigImage"/>
                </div><br>
               <div class="sImage">
-                 <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
-                    <div class="sImageDiv">
-                       <c:if test="${users_note==1}">
-                        <input type="file" name="files" accept="image/*" multiple>
-                     </c:if>
-                        <div id="listFile">
-                           <c:forEach items="${list}" var="image">
-                              <img src="../display?fileName=${image}" height=180 class="smallImage" id="image">
-                           </c:forEach>
-                        </div>
-                      </div>
-                   
+                    <div id="listFile">
+                       <c:forEach items="${list}" var="attach">
+                       <div class="listImage">
+	                       <form name="frm" action="/image/update" method="post" enctype="multipart/form-data">     
+	                         <div>
+	                          <input type="hidden" value="${attach.a_no}" name="a_no" class="a_no">
+	                          <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
+	                         </div>
+	                         <div><img src="../display?fileName=${attach.image}" width=150 class="smallImage"></div>
+	                         <c:if test="${users_note==1}">
+	                         	  <div><input type="file" name="file" class="image" accept="image/*" multiple></div>
+		                          <span><input type="submit" value="수정"></span>
+							   	  <span><input type="button" value="삭제" class="btnDelete"></span>
+					   		 </c:if>
+						</form>
+						</div>
+                       </c:forEach>
+                    </div>  
             </div>
                   <hr>
              
              <div class="price">
                \<input type="text" value="${vo.photo_package_price}" size=10 readonly>
-               <c:if test="${users_note==1}">
-                  <input type="submit" value="수정">
-               </c:if>
                <c:if test="${users_note!=1}">
                <input type="button" value="장바구니에 담기" id="btnCart">
                </c:if>
             </div>
          </div>
       </div>
-      </form>
    </div>
    
    <jsp:include page="../index_include/chat.jsp" />
@@ -200,41 +196,34 @@ $("#btnCart").on("click", function(){
    }
 });
 
-//수정버튼
-$(frm).submit(function(e){
-   e.preventDefault();
-   if(!confirm("수정하시겠습니까?")) return;
-   frm.submit();
-   alert("수정되었습니다.");
+$(".btnDelete").on("click", function(){
+	if(!confirm("삭제하시겠습니까?")) return;
+	var a_no=$(this).parent().parent().find(".a_no").val();
+	$.ajax({
+		type:"get",
+		url:"/image/delete",
+		data:{"a_no":a_no},
+		success:function(){
+			alert("삭제되었습니다.");
+			location.reload();
+		}
+	});
 });
 
-$("#imageUpdate").on("click", function(){
+$(".smallImage").on("click", function(){
    $(frm.file).click();
 });
-
-/* $(frm.file).on("change", function(){
-   var file=$(frm.file)[0].files[0];
-   $("#image").attr("src", URL.createObjectURL(file));
-}); */
-
- $(frm.files).on("change", function(){
-   var files=$(frm.files)[0].files;
-   var html="";
-   $.each(files, function(index, file){
-      html += "<img src=" + URL.createObjectURL(file) + ">";
-      $("#listFile").html(html);
-   });
+ 
+$(frm.file).on("change", function(){
+	var file=$(frm.file)[0].files[0];
+	$(".smallImage").attr("src", URL.createObjectURL(file));
 });
-
-
-/*  //이미지미리보기 
-$(frm.file).change(function(e){
-    var reader = new FileReader(); 
-    var a=$(this).parent();
-    reader.onload=function(e){ 
-        a.find(".smallImage").attr("src", e.target.result); 
-    } 
-    reader.readAsDataURL(this.files[0]); 
+ 
+/* $(frm).submit(function(e){
+	 e.preventDefault();
+	 if(!confirm("수정하시겠습니까?")) return;
+	 frm.submit();
+	 alert("수정되었습니다.");
 }); */
 </script>
 </html>
