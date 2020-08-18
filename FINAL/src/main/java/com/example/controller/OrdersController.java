@@ -52,7 +52,7 @@ public class OrdersController {
    }
    
    @RequestMapping("/order/insert")
-   public String insert(int point, int orders_paytype, String orders_id, OrdersVO ordersVO, HttpServletRequest request){
+   public String insert(int totalsum, int point, int orders_paytype, String orders_id, OrdersVO ordersVO, HttpServletRequest request){
 	   ordersVO.setOrders_id(orders_id);
 	   ordersVO.setOrders_paytype(orders_paytype);
 	   String[] packageNo = request.getParameterValues("packageNO[]");
@@ -82,6 +82,7 @@ public class OrdersController {
 		   }
 	   }
 	   umapper.pointUpdate(orders_id, point);
+	   cmapper.pointAdd(totalsum, orders_id);
 
 	   return "/user/mypage";
    }

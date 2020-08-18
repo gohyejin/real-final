@@ -2,6 +2,8 @@ package com.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.example.domain.Costume_CartVO;
 import com.example.domain.Package_CartVO;
 
@@ -23,4 +25,5 @@ public interface CartMapper {
 	public void PackageStatusUpdate(int packageCartNo);
 	public void CostumeStatusUpdate(int costumeCartNo);
 	public int costumeCnt(String costume_cart_costume_code);
+	public void pointAdd(@Param("totalsum") int totalsum, @Param("orders_id") String orders_id);
 }

@@ -19,4 +19,16 @@
     <update id="pointUpdate">
     	update users set users_point=users_point-#{point} where users_id=#{users_id}
     </update>
+    
+    <select id="pcnt" resultType="int">
+       select count(users_phone) from users where users_phone=#{users_phone}
+    </select>
+    
+    <select id="ecnt" resultType="int">
+       select count(users_email) from users where users_email=#{users_email}
+    </select>
+    
+    <update id="delete">
+       update users set users_note=2 where users_id=#{users_id};
+    </update>
 </mapper>

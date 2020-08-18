@@ -8,7 +8,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <style>
 * {
-	font-family: 'Comic Sans MS'
+	font-family: 'Comic Sans MS';
 }
 
 body {
@@ -24,7 +24,6 @@ body {
 
 .text{
 	text-align: center;
-
 }
 
 .text textarea{
@@ -33,6 +32,7 @@ body {
 
 .btn {
 	text-align: center;
+	margin: 10px;
 }
 
 #divSignUpPage {
@@ -141,7 +141,7 @@ body {
 		<br><div class="title"><b>SIGN UP</b></div><br><br>
 		<div class="checks"><input type="checkbox" id="ex_chk"> <label for="ex_chk">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label></div><br><br>
 		<div class="checks"><input type="checkbox" id="ex_chk1" class="ex_chk"> <label for="ex_chk1">회원약관 (필수)</label></div>
-		<div class="text"><textarea rows="5" cols="50" readonly>
+		<div class="text"><textarea rows="9" cols="50" readonly>
 제 1 조 (목적)
 1. 본 약관은 기업마당 사이트가 제공하는 모든 서비스(이하 "서비스")의 이용조건 및 절차, 이용자와 기업마당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
 
@@ -162,7 +162,7 @@ body {
 5. 탈퇴 : 회원이 이용계약을 종료시키는 행위.
 </textarea></div><br>
 		<div class="checks"><input type="checkbox" id="ex_chk2" class="ex_chk"> <label for="ex_chk2">개인정보 수집 및 이용 동의 (필수)</label></div>
-		<div class="text"><textarea rows="5" cols="50" readonly>
+		<div class="text"><textarea rows="9" cols="50" readonly>
 1. 개인정보 수집항목 및 수집목적
 회사는 고객에게 서비스 제공에 관한 계약이행 및 주문에 대한 관리, 관계법령의 준수와 보다 나은 서비스를 위하여 개인정보를 수집하고 있으며,
 수집항목 및 목적은 다음과 같습니다.
@@ -199,7 +199,7 @@ body {
 - 배송지정보 : 이름, 전화번호, 휴대전화번호, 주소
 			</textarea></div><br>
 		<div class="checks"><input type="checkbox" id="ex_chk3" class="ex_chk"> <label for="ex_chk3">전자상거래(인터넷사이버몰) 표준약관 (필수)</label></div>
-		<div class="text"><textarea rows="5" cols="50" readonly>
+		<div class="text"><textarea rows="9" cols="50" readonly>
 전자상거래(인터넷사이버몰) 표준약관
 표준약관 제10023호
 (2015. 6. 26. 개정)

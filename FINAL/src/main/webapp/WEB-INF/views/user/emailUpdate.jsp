@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <title>E-MAIL</title>
 <style>
 #e-mail{
@@ -75,5 +76,23 @@ input::placeholder {
    </form>
    </div>
 </body>
-
+<script>
+   $(frm).submit(function(e){
+      e.preventDefault();
+      var changeEmail=$("#changeEmail").val();
+      $.ajax({
+             type:"get",
+             url:"/user/echeck",
+             data:{"users_email":changeEmail},
+             success:function(data){
+               if(data==2) {
+                  alert("사용가능한 이메일 입니다.");
+                  frm.submit();
+               } else {
+                  alert("중복된 이메일 입니다.");
+               }
+             }
+          });
+   });
+</script>
 </html>

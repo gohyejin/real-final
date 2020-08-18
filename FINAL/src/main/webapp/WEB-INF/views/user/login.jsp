@@ -161,7 +161,7 @@ body {
 <script>
 	$("#btnSignup").on("click",function(){
 		window.close();
-		var options = 'width=500, height=850, top=30, left=30, resizable=no, scrollbars=no, location=no';
+		var options = 'width=500, height=930, top=30, left=30, resizable=no, scrollbars=no, location=no';
 		window.open('/user/signup', 'SIGN UP', options);
 	})
 	

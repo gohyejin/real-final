@@ -38,6 +38,13 @@ public class UsersController {
    @Autowired
    private KakaoAPI kakao;
    
+   @RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+   public String delete(String users_id, HttpSession session) {
+      session.invalidate();
+      umapper.delete(users_id);
+      return "redirect:/index";
+   }
+   
    @RequestMapping("/user/login2")
       public void login2() {
          
@@ -184,6 +191,30 @@ public class UsersController {
          check = 0;
       } else if (umapper.readcnt(users_id) == 1) {
          check = 1;
+      }
+      return check;
+   }
+   
+   @RequestMapping("/user/pcheck")
+   @ResponseBody
+   public int pcheck(String users_phone) {
+      int check = 1;
+       if(umapper.pcnt(users_phone) == 0) {
+         check = 2;
+      } else if(umapper.pcnt(users_phone) == 1) {
+         check = 3;
+      }
+      return check;
+   }
+   
+   @RequestMapping("/user/echeck")
+   @ResponseBody
+   public int echeck(String users_email) {
+      int check = 1;
+       if(umapper.ecnt(users_email) == 0) {
+         check = 2;
+      } else if(umapper.ecnt(users_email) == 1) {
+         check = 3;
       }
       return check;
    }

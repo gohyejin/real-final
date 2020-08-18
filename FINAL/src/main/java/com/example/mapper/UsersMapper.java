@@ -10,4 +10,7 @@ public interface UsersMapper {
 	public UsersVO read(String users_id);
 	public void update(UsersVO vo);
 	public void pointUpdate(@Param("users_id") String orders_id, @Param("point") int point);
+	public int pcnt(String users_phone);
+    public int ecnt(String users_email);
+    public void delete(String users_id);
 }

@@ -214,6 +214,10 @@ input[type="number"]{
    padding-left:5px;
 }
 
+#divtotalSum input[type="text"]{
+color:red;
+}
+
 </style>
 </head>
 <body>
@@ -330,6 +334,7 @@ input[type="number"]{
 				<div>
 					<h2>TOTAL</h2>
 					<input type="text" id="totalSum" value="${psum+csum}" readonly> 원 <br>
+					<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###" /> p 적립 예정<br>
 				</div>
 			</div>
 		</form>
@@ -410,12 +415,14 @@ input[type="number"]{
                costumeQuantity.push(costume_quantity);
             });
             
+            var totalsum=$("#totalSum").val();
+            
             $.ajax({
                type : "post",
                url : "/order/insert",
                data : {"packageNO[]":packageNO, "costumeNO[]":costumeNO, 
             	   "packageQuantity[]":packageQuantity, "costumeQuantity[]":costumeQuantity,
-            	   "orders_paytype":orders_paytype, "orders_id":users_id, 
+            	   "orders_paytype":orders_paytype, "orders_id":users_id, "totalsum":totalsum,
             	   "point":point},
                success : function() {
                   location.href="/user/mypage?users_id="+users_id;
