@@ -65,7 +65,7 @@ body {
 }
 
 .checks{
-	margin-left: 60px;
+	margin-left: 90px;
 	margin-top: 5px;
 	cursor: pointer;
 }

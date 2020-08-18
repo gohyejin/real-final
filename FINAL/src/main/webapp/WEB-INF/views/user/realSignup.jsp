@@ -101,7 +101,7 @@ input[type="submit"]:active {
 
 .checks {
 	position: relative;
-	margin-left:48px;
+	margin-left:77px;
 }
 
 .checks input[type="radio"] { /* 실제 체크박스는 화면에서 숨김 */

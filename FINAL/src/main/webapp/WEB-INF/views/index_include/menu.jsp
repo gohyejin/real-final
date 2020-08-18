@@ -106,10 +106,10 @@ if(cookies3 != null) {
 		<div class="items3">
 			<b>FAQ</b>
 		</div>
-		<c:if test="${users_note==0}">
 		<div class="items4">
 			<b>CART</b>
 		</div>
+		<c:if test="${users_note==0}">
 		<div class="items9">
 			<b>RESERVATION</b>
 		</div>
@@ -240,7 +240,7 @@ if(cookies3 != null) {
 	
 	/*LOGIN메뉴*/
 	$(".items6").on("click",function(){
-		var options = 'width=500, height=700, top=30, left=30, resizable=no, scrollbars=no, location=no';
+		var options = 'width=500, height=600, top=30, left=30, resizable=no, scrollbars=no, location=no';
 		window.open('/user/login', 'LOGIN', options);
 	})
 </script>

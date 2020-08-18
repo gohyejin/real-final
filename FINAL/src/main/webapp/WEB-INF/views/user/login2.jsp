@@ -37,8 +37,8 @@ body {
 
 
 #id input, #pw input {
-   width: 27.5%;
-   height: 90px;
+   width: 24.5%;
+   height: 65px;
    font-size: 30px;
    padding:20px;
 }
@@ -53,7 +53,7 @@ body {
 }
 
 #btnLogin, #btnSignup {
-   width: 30%;
+   width: 26.5%;
    height: 90px;
    font-size: 50px;
    margin: 2px;
@@ -74,7 +74,7 @@ body {
 }
 
 .checks{
-   margin-left:35%;
+   margin-left:37%;
    margin-top: 10px;
    cursor: pointer;
 }
@@ -149,7 +149,7 @@ body {
       <div class="ortxt">or</div>
       <div class="or">
          <a href="https://kauth.kakao.com/oauth/authorize?client_id=46437f58302b5ad35f92bcb713a26e08&redirect_uri=http://localhost:8088/kakaoLogin2&response_type=code">
-            <img class="kakao" src="../display?fileName=kakao.png" width=30%>
+            <img class="kakao" src="../display?fileName=kakao.png" width=26.5%>
          </a>
          <!-- 네이버아이디로로그인 버튼 노출 영역 -->
          <div id="naver_id_login"></div>
