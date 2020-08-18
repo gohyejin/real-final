@@ -145,8 +145,7 @@
 			if ($.cookie('testCookie') == undefined) {
 				//쿠키가 없는 경우 testCookie 쿠키를 추가
 				$.cookie('testCookie', 'testCK', {
-					expires : 1,
-					path : '/index'
+					expires : 1
 				});
 				
 				/**
