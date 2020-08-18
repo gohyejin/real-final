@@ -334,7 +334,7 @@ color:red;
 				<div>
 					<h2>TOTAL</h2>
 					<input type="text" id="totalSum" value="${psum+csum}" readonly> 원 <br>
-					<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###" /> p 적립 예정<br>
+					<input type="text" value="<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###"/>" id="money"> p 적립 예정<br>
 				</div>
 			</div>
 		</form>
@@ -356,7 +356,7 @@ color:red;
       var totalSum=parseInt($("#totalSum").val());
       var myPoint=parseInt($("#myPoint").html());
       point=parseInt($("#point").val());
-
+	  $("#money").val((totalSum-point)*0.01);
       if(point<=myPoint) {
          $("#totalSum").val(totalSum-point);
          $("#btn").attr('disabled', true);
