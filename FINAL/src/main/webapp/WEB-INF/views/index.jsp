@@ -14,31 +14,30 @@
 	background: white;
 	margin: 15px;
 	padding-bottom:30px;
-	height: 3500px;
+	height: 3300px;
 }
 #content {
 	margin-top:none;
 	margin-left:70px;
 	margin-right:70px;
-	padding: 30px;
 	margin-top: 10px;
 	text-align: center;
 }
 
 #tbl1 {
- 	width:10%;
+ 	width:7%;
 	float:left;
 }
 
 #tbl2 {
- 	width:10%;
+ 	width:7%;
 	float:left;
-	margin-left: 5.3%;
-	margin-right: 5.3%;
+	margin-left: 1.3%;
+	margin-right: 1.3%;
 }
 
 #tbl3 {
- 	width:10%;
+ 	width:7%;
 	float:right;
 }
 
@@ -73,10 +72,10 @@ img {
 }
 
 .box {
-	width: 15%;
+	width: 15.5%;
 	float: left;
 	text-align: center;
-	margin:45px;
+	margin:2%;
 	font-size:30px;
 }
 
