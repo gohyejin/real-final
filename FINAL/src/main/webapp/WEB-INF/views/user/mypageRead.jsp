@@ -295,6 +295,7 @@ $("#emailSendInjeung").on("click", function(){
 
 $("#btnDelete").on("click", function(){
    if(!confirm("회원 탈퇴하시겠습니까?")) return; 
+   if(!confirm("탈퇴한 계정을 복구하고 싶으시면 운영자한테 문의해주세요.")) return; 
    alert("회원 탈퇴되었습니다!");
    frm.action="/user/delete";
    frm.submit();

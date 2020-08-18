@@ -78,40 +78,39 @@
     </select>
     
     
-    <select id="packagechart" resultType="com.example.domain.ChartsVO">
-        select photo_package_title name, (select count(photo_package_code) *package_cart_price) value
-       from package_orders o, package_cart c, photo_package p
-       where p.photo_package_code=c.package_cart_package_code and c.package_cart_no=o.package_cart_ono
+   <select id="packagechart" resultType="com.example.domain.ChartsVO">
+        select photo_package_title name, (sum(orders_package_quantity)*package_cart_price) value
+       from package_orders o, package_cart c, photo_package p, users u
+       where p.photo_package_code=c.package_cart_package_code and c.package_cart_no=o.package_cart_ono and u.users_id=c.package_cart_id
         and year(orders_day) like #{year} and MONTH(orders_day) like #{month}
        group by photo_package_title
-       order by photo_package_title
+       order by photo_package_title;
     </select>
     
     <select id="packagechart2" resultType="com.example.domain.ChartsVO">
-        select photo_package_title name, count(orders_package_quantity) value
-       from package_orders o, package_cart c, photo_package p
-       where p.photo_package_code=c.package_cart_package_code and c.package_cart_no=o.package_cart_ono
+       select photo_package_title name, sum(orders_package_quantity) value
+       from package_orders o, package_cart c, photo_package p, users u
+       where p.photo_package_code=c.package_cart_package_code and c.package_cart_no=o.package_cart_ono and u.users_id=c.package_cart_id
            and year(orders_day) like #{year} and MONTH(orders_day) like #{month}
-       group by photo_package_title
-       order by photo_package_title
+        group by photo_package_title
+       order by photo_package_title;
     </select>
     
     <select id="costumechart" resultType="com.example.domain.ChartsVO">
-        select lend_costume_name name, (select count(lend_costume_code) *costume_cart_price) value
-       from costume_orders o, costume_cart c, lend_costume l
-       where o.costume_cart_ono=c.costume_cart_no and c.costume_cart_costume_code=l.lend_costume_code
+        select lend_costume_name name, (sum(orders_costume_quantity)*costume_cart_price) value
+       from costume_orders o, costume_cart c, lend_costume l, users u
+       where o.costume_cart_ono=c.costume_cart_no and c.costume_cart_costume_code=l.lend_costume_code and u.users_id=c.costume_cart_id
           and year(orders_day) like #{year} and MONTH(orders_day) like #{month}
        group by lend_costume_name
        order by lend_costume_name
     </select>
     
     <select id="costumechart2" resultType="com.example.domain.ChartsVO">
-        select lend_costume_name name, count(orders_costume_quantity) value
-       from costume_orders o, costume_cart c, lend_costume l
-       where o.costume_cart_ono=c.costume_cart_no and c.costume_cart_costume_code=l.lend_costume_code
+        select lend_costume_name name, sum(orders_costume_quantity) value
+       from costume_orders o, costume_cart c, lend_costume l, users u
+       where o.costume_cart_ono=c.costume_cart_no and c.costume_cart_costume_code=l.lend_costume_code and u.users_id=c.costume_cart_id
           and year(orders_day) like #{year} and MONTH(orders_day) like #{month}
        group by lend_costume_name
        order by lend_costume_name
     </select>
-    
 </mapper>
