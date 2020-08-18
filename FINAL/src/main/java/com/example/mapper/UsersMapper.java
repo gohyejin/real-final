@@ -13,4 +13,5 @@ public interface UsersMapper {
 	public int pcnt(String users_phone);
     public int ecnt(String users_email);
     public void delete(String users_id);
+    public void birthdayPointUpdate(String users_id);
 }

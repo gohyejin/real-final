@@ -31,4 +31,7 @@
     <update id="delete">
        update users set users_note=2 where users_id=#{users_id};
     </update>
+    <update id="birthdayPointUpdate">
+    	update users set users_point=users_point+1000 where users_id=#{users_id}
+    </update>
 </mapper>
