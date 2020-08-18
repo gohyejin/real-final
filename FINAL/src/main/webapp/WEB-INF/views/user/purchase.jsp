@@ -334,7 +334,7 @@ color:red;
 				<div>
 					<h2>TOTAL</h2>
 					<input type="text" id="totalSum" value="${psum+csum}" readonly> 원 <br>
-					<input type="text" value="<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###"/>" id="money"> p 적립 예정<br>
+					<input type="text" value="<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###"/>" id="money" readonly> p 적립 예정<br>
 				</div>
 			</div>
 		</form>
