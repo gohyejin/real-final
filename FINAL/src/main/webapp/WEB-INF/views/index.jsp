@@ -33,8 +33,8 @@
 #tbl2 {
  	width:10%;
 	float:left;
-	margin-left: 5.5%;
-	margin-right: 5.5%;
+	margin-left: 5.3%;
+	margin-right: 5.3%;
 }
 
 #tbl3 {
