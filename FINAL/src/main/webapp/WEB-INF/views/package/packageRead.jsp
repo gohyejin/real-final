@@ -20,19 +20,20 @@
 }
 
 #content {
-   margin-top:none;
    margin-left:70px;
    margin-right:70px;
    padding: 30px ;
    margin-top: 10px;
    text-align: center;
+   margin:auto;
 }
 
 #tbl1{
-    width:80%;
+   width:80%;
    margin:auto;
    overflow: hidden;
    border-collapse:collapse;
+   text-align:center;
 }
 
 .tTitle{
@@ -94,25 +95,45 @@
 }
 
 .bigPig{
-   width:30%;
-   height:700px;
+   width:20%;
+   height:900px;
    display: table-cell;
    padding:20px;
    text-align: center;
    vertical-align: middle;
 }
+
+.bigPig img{
+   height:750px;
+}
+
 .sImageDiv{
    margin: auto;
    cursor: pointer;
     max-width:100%; 
     max-height:100%;
-    display: inline-block;
 }
 
 .sImage{
-   width:100%;
+   width:75%;
    text-align:center;
    padding-bottom:20px;
+	margin:auto;
+	word-break:inherit;
+}
+.image{
+   width:100px;
+   text-align:center;
+}
+form{
+	float:left;
+	text-align: center;
+	margin:0px 2px 0px 2px;
+	font-size:30px
+}
+
+hr {
+margin-top:250px;
 }
 </style>
 </head>
@@ -127,8 +148,8 @@
          <div id="tbl1">
             <div class="tTitle"><${vo.photo_package_title}></div>
                <div class="bigPig">
-                  <img src="../display?fileName=${vo.photo_package_image}" width=500 id="bigPig"/>
-                  <img src="" width=500 id="bigImage"/>
+                  <img src="../display?fileName=${vo.photo_package_image}" id="bigPig"/>
+                  <img src="" id="bigImage"/>
                </div><br>
               <div class="sImage">
                     <div id="listFile">
@@ -139,7 +160,7 @@
 	                          <input type="hidden" value="${attach.a_no}" name="a_no" class="a_no">
 	                          <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
 	                         </div>
-	                         <div><img src="../display?fileName=${attach.image}" width=150 class="smallImage"></div>
+	                         <div><img src="../display?fileName=${attach.image}" height=170 class="smallImage"></div>
 	                         <c:if test="${users_note==1}">
 	                         	  <div><input type="file" name="file" class="image" accept="image/*" multiple></div>
 		                          <span><input type="submit" value="수정"></span>
@@ -150,6 +171,7 @@
                        </c:forEach>
                     </div>  
             </div>
+            <br>
                   <hr>
              
              <div class="price">
@@ -214,16 +236,24 @@ $(".smallImage").on("click", function(){
    $(frm.file).click();
 });
  
-$(frm.file).on("change", function(){
+/* $(frm.file).on("change", function(){
 	var file=$(frm.file)[0].files[0];
 	$(".smallImage").attr("src", URL.createObjectURL(file));
-});
+}); */
+
+$(frm.file).change(function(e) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+       $(".smallImage").attr("src", e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+ });
  
-/* $(frm).submit(function(e){
+$(frm).submit(function(e){
 	 e.preventDefault();
 	 if(!confirm("수정하시겠습니까?")) return;
 	 frm.submit();
 	 alert("수정되었습니다.");
-}); */
+}); 
 </script>
 </html>

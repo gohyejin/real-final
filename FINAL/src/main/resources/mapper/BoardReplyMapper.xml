@@ -20,5 +20,7 @@
     <select id="ReplyRead" resultType="com.example.domain.BoardReplyVO">
     	select * from board_reply where board_reply_rno=#{board_reply_rno}
     </select>
-    
+    <delete id="ReplyDeleteAll"> 
+       delete from board_reply where board_reply_bno=#{board_bno}
+    </delete>
 </mapper>

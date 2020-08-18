@@ -11,4 +11,5 @@ public interface BoardReplyMapper {
 	public void ReplyInsert(BoardReplyVO vo);
 	public void ReplyDelete(int board_reply_rno);
 	public BoardReplyVO ReplyRead(int board_reply_rno);
+	public void ReplyDeleteAll(int board_bno);
 }

@@ -238,6 +238,10 @@ $("#emailSendInjeung").on("click", function(){
       alert("아이디를 중복확인 해주세요!");
       return;
    }
+   if(phoneCHK==false){
+       alert("연락처를 중복확인 해주세요!");
+       return;
+    }
    
    var users_birthday=$("#users_birthdayYear").val()+"-"+$("#users_birthdayMonth").val()+"-"+$("#users_birthdayDay").val();
    $("#users_birthday").val(users_birthday);

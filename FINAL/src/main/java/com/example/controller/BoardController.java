@@ -29,6 +29,9 @@ public class BoardController {
     BoardMapper mapper; 
 
 	@Autowired
+    BoardReplyMapper rmapper; 
+	
+	@Autowired
 	BoardService service;
     
     @RequestMapping("/QnA_FAQ/QnA")
@@ -76,10 +79,10 @@ public class BoardController {
     
     @RequestMapping(value="/QnADelete", method=RequestMethod.POST)
     public String QnADelete(int board_bno, int page) {
-    	
-    	mapper.QnADelete(board_bno);
-    	
-    	return "redirect:/QnA_FAQ/QnA?page="+page;
+       rmapper.ReplyDeleteAll(board_bno);
+       mapper.QnADelete(board_bno);
+       
+       return "redirect:/QnA_FAQ/QnA?page="+page;
     }
     
     @RequestMapping("/QnA_FAQ/FAQ")
