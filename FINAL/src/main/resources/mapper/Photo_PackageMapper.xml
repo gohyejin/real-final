@@ -26,15 +26,19 @@
        insert into attach(image, photo_package_code) values(#{image}, #{photo_package_code})
     </insert>
     
-    <select id="getAttach" resultType="String">
-       select image from attach where photo_package_code=#{photo_package_code}
+    <select id="getAttach" resultType="com.example.domain.AttachVO">
+       select a_no, image from attach where photo_package_code=#{photo_package_code}
     </select> 
+    
     <delete id="delAttach">
-       delete from attach where photo_package_code=#{photo_package_code}
+       delete from attach where a_no=#{a_no}
     </delete>
     
- <!--     <update id="updateAttach">
-       update attach set image=#{image} where photo_package_code=#{photo_package_code} and image=#{preimage}
+    <update id="updateAttach">
+       update attach set image=#{image} where a_no=#{a_no}
     </update>
-     -->
+    
+    <select id="getImage" resultType="String">
+    	select image from attach where a_no=#{a_no}
+    </select>
 </mapper>

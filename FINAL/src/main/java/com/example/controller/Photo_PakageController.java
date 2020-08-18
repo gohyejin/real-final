@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.example.domain.AttachVO;
 import com.example.domain.Photo_PackageVO;
 import com.example.mapper.Photo_PackageMapper;
 
@@ -41,35 +43,36 @@ public class Photo_PakageController {
       
    }
    
-   @RequestMapping(value="/update", method=RequestMethod.POST)
-   public String updatePost(Photo_PackageVO vo, MultipartHttpServletRequest multi)throws Exception{
-      // 추가이미지 업로드
-      List<MultipartFile> files=multi.getFiles("files");
-      // 기존 추가이미지가 있으면 삭제
-      if(!files.get(0).isEmpty()){
-         List<String> oldImages=mapper.getAttach(vo.getPhoto_package_code());
-         for(String oldImage:oldImages){
-            new File(path + File.separator + oldImage).delete();
-         }
-      }
-      // 새로운 추가이미지 업로드
-      ArrayList<String> images=new ArrayList<String>();
-      for(MultipartFile attFile:files){
-         if(!attFile.isEmpty()){
-            String image=System.currentTimeMillis() + attFile.getOriginalFilename();
-            attFile.transferTo(new File(path + File.separator + image));
-            images.add(image);
-         }
-      }
-      vo.setImages(images);
-      
-      List<String> Images=vo.getImages();
-      if(Images.size()>0){
-         mapper.delAttach(vo.getPhoto_package_code());
-         for(String image:Images){
-            mapper.addAttach(image, vo.getPhoto_package_code());
-         }
-      }
-      return "redirect:/package/packageRead?photo_package_code="+vo.getPhoto_package_code();
+   @RequestMapping(value="/image/update", method=RequestMethod.POST)
+   public String updatePost(AttachVO vo, MultipartHttpServletRequest multi)throws Exception{
+	   MultipartFile file=multi.getFile("file");
+	   System.out.println(vo.toString());
+		// 대표이미지 업로드
+		if(!file.isEmpty()){
+			String oldImage=mapper.getImage(vo.getA_no());
+			// 기존 대표이미지가 있으면 삭제
+			if(!oldImage.equals("")){
+				new File(path + File.separator + oldImage).delete();
+			}
+			String nimage=System.currentTimeMillis() + file.getOriginalFilename();
+			file.transferTo(new File(path + File.separator + nimage));
+			vo.setImage(nimage);
+		}
+		String images=vo.getImage();
+		if(!images.equals("")){
+			mapper.updateAttach(images, vo.getA_no());
+		}
+		return "redirect:/package/packageRead?photo_package_code="+vo.getPhoto_package_code();
+   }
+   
+   @RequestMapping("/image/delete")
+   @ResponseBody
+   public void delete(int a_no){
+		String oldImage=mapper.getImage(a_no);
+		// 기존 대표이미지가 있으면 삭제
+		if(!oldImage.equals("")){
+			new File(path + File.separator + oldImage).delete();
+		}
+		mapper.delAttach(a_no);
    }
 }
