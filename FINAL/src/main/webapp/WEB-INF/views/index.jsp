@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 <style>
 * {font-family:'@여기어때 잘난체'}
-@media ( min-width : 770px) {
+@media ( min-width : 768px) {
 #page {
 	background: white;
 	margin: 15px;
