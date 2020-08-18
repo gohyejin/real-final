@@ -6,9 +6,10 @@
 	<meta charset="UTF-8">
 	<title>방울방울</title>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<link rel="stylesheet" href="/resources/css/style.css">
 <style>
 * {font-family:'@여기어때 잘난체'}
-
+@media ( min-width : 770px) {
 #page {
 	background: white;
 	margin: 15px;
@@ -32,7 +33,8 @@
 #tbl2 {
  	width:10%;
 	float:left;
-	margin-left:25px;
+	margin-left: 5.5%;
+	margin-right: 5.5%;
 }
 
 #tbl3 {
@@ -43,8 +45,12 @@
 img {
 	margin: 25px;
 	padding: none;
-	
 }
+
+#tbl1 img, #tbl2 img, #tbl3 img {
+		width: 15%;
+		margin: 0px;
+	}
 
 #img1,#img2,#img5,#img8,#img11,#img14{
 	cursor:pointer;
@@ -96,6 +102,7 @@ img {
 }
 #img11,#img-11{
 	height:850px;
+}
 }
 </style>
 </head>
@@ -178,52 +185,32 @@ img {
 			<img id="img13" src="display?fileName=introduce.jpg">
 			<img id="img14" src="display?fileName=introduce1.jpg">
 			<!-- photo_package 출력하기 -->
-				<div id="package">
 					<div class="title">⊙ PACKAGE ⊙</div>
+				<div id="package">
 						<div class="box">
-							<div>
-								<img class="image" src="display?fileName=package_family6.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'">
-							</div>
-							<div>
-								<a href="/package/packageRead?photo_package_code=A1">가족사진</a>
-							</div>
-								<div>190,000</div>
+							<img class="image" src="display?fileName=package_family6.jpg" onClick="location.href='/package/packageRead?photo_package_code=A1'">
+							<br><a href="/package/packageRead?photo_package_code=A1">가족사진</a><br>
+							190,000
 						</div>
 						<div class="box">
-							<div>
-								<img class="image" src="display?fileName=package_couple2.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'">
-							</div>
-							<div>
-								<a href="/package/packageRead?photo_package_code=A2">커플사진</a>
-							</div>
-								<div>50,000</div>
+							<img class="image" src="display?fileName=package_couple2.jpg" onClick="location.href='/package/packageRead?photo_package_code=A2'">
+							<br><a href="/package/packageRead?photo_package_code=A2">커플사진</a><br>
+							50,000
 						</div>
 						<div class="box">
-							<div>
-								<img class="image" src="display?fileName=package_profile2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'" >
-							</div>
-							<div>
-								<a href="/package/packageRead?photo_package_code=B2">프로필사진</a>
-							</div>
-								<div>28,000</div>
+							<img class="image" src="display?fileName=package_profile2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B2'" >
+							<br><a href="/package/packageRead?photo_package_code=B2">프로필사진</a><br>
+							28,000
 						</div>
 						<div class="box">
-							<div>
-								<img class="image" src="display?fileName=package_pet7.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'">
-							</div>
-							<div>
-								<a href="/package/packageRead?photo_package_code=C1">펫사진</a>
-							</div>
-								<div>19,900</div>
+							<img class="image" src="display?fileName=package_pet7.jpg" onClick="location.href='/package/packageRead?photo_package_code=C1'">
+							<br><a href="/package/packageRead?photo_package_code=C1">펫사진</a><br>
+							19,900
 						</div>
 						<div class="box">
-							<div>
-								<img class="image" src="display?fileName=package_friend2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'">
-							</div>
-							<div>
-								<a href="/package/packageRead?photo_package_code=B1">우정사진</a>
-							</div>
-								<div>30,000</div>
+							<img class="image" src="display?fileName=package_friend2.jpg" onClick="location.href='/package/packageRead?photo_package_code=B1'">
+							<br><a href="/package/packageRead?photo_package_code=B1">우정사진</a><br>
+							30,000
 						</div>	
 				</div>
 			<!-- photo_package 출력끝 -->	
