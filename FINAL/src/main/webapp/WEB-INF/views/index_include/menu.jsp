@@ -240,7 +240,7 @@ if(cookies3 != null) {
 	
 	/*LOGIN메뉴*/
 	$(".items6").on("click",function(){
-		var options = 'width=500, height=600, top=30, left=30, resizable=no, scrollbars=no, location=no';
+		var options = 'width=500, height=700, top=30, left=30, resizable=no, scrollbars=no, location=no';
 		window.open('/user/login', 'LOGIN', options);
 	})
 </script>
