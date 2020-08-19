@@ -160,10 +160,13 @@ input[type=number] {
 					<tr>
 						<th width=150>TITLE</th>
 						<td colspan=4 class="name">
-							<input type="text" value="[${vo.lend_costume_code}]" name="lend_costume_code" readonly size=4>
+							<input type="text" value="${vo.lend_costume_code}" name="lend_costume_code" readonly size=4>
 							<input type="text" value="${vo.lend_costume_name}" name="lend_costume_name" size=35>
 						</td>
-						<td rowspan=6 width=500><input type="file" name="file">
+						<td rowspan=6 width=500>
+						<c:if test="${users_note==1}">
+							<input type="file" name="file">
+						</c:if>
 							<c:if
 								test="${vo.lend_costume_image!=null && vo.lend_costume_image!=''}">
 								<img id="image" src="../display?fileName=${vo.lend_costume_image}"
@@ -173,7 +176,7 @@ input[type=number] {
 								<img id="image" src="http://placehold.it/100x80" width=100>
 							</c:if> <!-- 예시사진 --> 
 							
-							<input type="hidden" name="lend_costume_image" value="${vo.lend_costume_image}">
+							<input type="text" name="lend_costume_image" value="${vo.lend_costume_image}">
 						</td>
 					</tr>
 					<tr>
@@ -192,7 +195,7 @@ input[type=number] {
 					</tr>
 					<tr>
 						<td colspan=4>
-							<textarea name=lend_costume_content rows=10 cols=50>${vo.lend_costume_content}</textarea>
+							<textarea name="lend_costume_content" rows=10 cols=50>${vo.lend_costume_content}</textarea>
 						</td>
 					</tr>
 					<tr>
