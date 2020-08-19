@@ -79,6 +79,28 @@
    margin:20px;
 }
 
+input[type="submit"]{
+	width: 50px;
+	height: 20px;
+	cursor: pointer;
+	background: #e6bbea;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	text-align: center;
+}
+
+input[type="button"]{
+	width: 50px;
+	height: 20px;
+	cursor: pointer;
+	background: #969596;
+	color: white;
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	text-align: center;
+}
+
 .price{
    padding-right:50px;
    text-align: left;

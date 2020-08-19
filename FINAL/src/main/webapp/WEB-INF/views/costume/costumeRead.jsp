@@ -82,9 +82,9 @@ select option {
 	border-radius: 3px 3px 3px 3px;
 }
 .btnDelete{
-	width:200px;
-	height: 60px;
-	font-size: 30px;
+	width:300px;
+	height: 100px;
+	font-size: 35px;
 	margin: 2px;
 	cursor: pointer;
 	background: #969596;
