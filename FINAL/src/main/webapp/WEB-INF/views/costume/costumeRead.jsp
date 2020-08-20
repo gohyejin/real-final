@@ -259,11 +259,20 @@ input[type=number] {
 		$(frm.file).click();
 	});
 
-	//파일업로드
+	/* //파일업로드
 	$(frm.file).on("change", function() {
 		var file = $(frm.file)[0].files[0]; //1번째 input type="file"에서 이미지 1개만
 		$("#image").attr("src", URL.createObjectURL(file));
-	});
+	}); */
+	
+	//이미지 미리보기    
+	 $(frm.file).on("change", function(e){        
+		var reader = new FileReader();        
+		reader.onload=function(e){            
+		$("#image").attr("src", e.target.result);       
+			}        
+		reader.readAsDataURL(this.files[0]);    
+			});
 	
 	//장바구니 버튼을 클릭했을 때
 	$(".cart").on("click", function(){
