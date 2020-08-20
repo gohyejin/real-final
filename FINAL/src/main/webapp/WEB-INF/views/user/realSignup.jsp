@@ -318,7 +318,6 @@ $(frm).submit(function(e){
           url:"/user/echeck",
           data:{"users_email":users_email},
           success:function(data){
-        	  alert(data);
              if(data==2){
                 frm.submit();
                 alert("가입되었습니다.");
