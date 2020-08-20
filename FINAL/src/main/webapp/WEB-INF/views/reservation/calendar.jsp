@@ -188,6 +188,7 @@ th {
                {{/each}}
             </script>
 		<div id="pagination"></div>
+		<div>예약취소에 대한 문의는 사진관으로 연락주시기 바랍니다.</div>
 		</div>
 		</div>
 	</div>

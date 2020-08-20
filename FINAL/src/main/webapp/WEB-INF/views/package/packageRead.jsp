@@ -175,17 +175,18 @@ margin-top:250px;
                </div><br>
               <div class="sImage">
                     <div id="listFile">
-                       <c:forEach items="${list}" var="attach">
+                       <c:forEach items="${list}" var="attach"  varStatus="status">
                        <div class="listImage">
 	                       <form name="frm" action="/image/update" method="post" enctype="multipart/form-data">     
 	                         <div>
+	                          <input type="hidden" class="index" value="${status.index}">
 	                          <input type="hidden" value="${attach.a_no}" name="a_no" class="a_no">
 	                          <input type="hidden" value="${param.photo_package_code}" name="photo_package_code">
 	                         </div>
 	                         <div><img src="../display?fileName=${attach.image}" height=170 class="smallImage"></div>
 	                         <c:if test="${users_note==1}">
 	                         	  <div><input type="file" name="file" class="image" accept="image/*" multiple></div>
-		                          <span><input type="submit" value="수정"></span>
+		                          <span><input type="submit" class="sub" value="수정"></span>
 							   	  <span><input type="button" value="삭제" class="btnDelete"></span>
 					   		 </c:if>
 						</form>
@@ -263,19 +264,29 @@ $(".smallImage").on("click", function(){
 	$(".smallImage").attr("src", URL.createObjectURL(file));
 }); */
 
-$(frm.file).change(function(e) {
+$(".image").change(function(e) {
+	var row=$(this).parent().parent().parent()
+	var myIndex=row.find(".index").val();
+	
     var reader = new FileReader();
     reader.onload = function(e) {
-       $(".smallImage").attr("src", e.target.result);
+    	if(myIndex==0){
+    		row.find(".smallImage").attr("src", e.target.result);
+    	}
     }
     reader.readAsDataURL(this.files[0]);
  });
  
-$(frm).submit(function(e){
+/* $(frm).submit(function(e){
 	 e.preventDefault();
 	 if(!confirm("수정하시겠습니까?")) return;
-	 frm.submit();
+	 $(this).unbind('submit').submit();
 	 alert("수정되었습니다.");
-}); 
+}); */
+
+$(".sub").on("click", function(){
+	if(!confirm("수정하시겠습니까?")) return;
+	alert("수정되었습니다.");
+});
 </script>
 </html>

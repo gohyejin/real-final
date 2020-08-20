@@ -74,7 +74,6 @@ public class HomeController {
 	@RequestMapping(value="/costumeReplyInsert",method=RequestMethod.POST)
 	@ResponseBody
 	public void insert(Costume_ReplyVO vo) {
-		System.out.println(vo.toString());
 		cmapper.insert(vo);
 	}
 	

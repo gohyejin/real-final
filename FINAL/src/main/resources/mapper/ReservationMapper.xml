@@ -7,7 +7,7 @@
     </select>
     
     <select id="listpage" resultType="com.example.domain.ReservationVO">
-        select reservation_reno, reservation_id, reservation_redate, users_name from reservation r, users u where u.users_id=r.reservation_id order by reservation_redate limit #{cri.pageStart}, #{cri.perPageNum}
+        select reservation_reno, reservation_id, reservation_redate, users_name from reservation r, users u where u.users_id=r.reservation_id order by reservation_redate DESC limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
  
     <select id="calendarCount" resultType="int">
