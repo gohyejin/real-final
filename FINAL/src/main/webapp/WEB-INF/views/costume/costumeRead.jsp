@@ -200,7 +200,7 @@ input[type=number] {
 					</tr>
 					<tr>
 						<td width=200 class="price" colspan=4>
-							\<input type="text" value="${vo.lend_costume_price}" name="lend_costume_price" size=10>
+							\<input type="text" id="price" value="${vo.lend_costume_price}" name="lend_costume_price" size=10>
 						</td>
 					</tr>
 				</table>
@@ -224,6 +224,15 @@ input[type=number] {
 	<jsp:include page="../index_include/top.jsp" />
 </body>
 <script>
+	var users_note="${users_note}";
+	
+	if(users_note==1){
+		$("#price").removeAttr("readonly");
+	}
+	if(users_note==0){
+		 $("#price").attr("readonly",true);
+	}
+	
 	//삭제 버튼을 클릭했을 때
 	$(".btnDelete").on("click", function(){
 		var code="${vo.lend_costume_code}";

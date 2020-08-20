@@ -183,7 +183,6 @@ th {
                   <td>{{users_name}}</td>
                   <td>
 						{{reservation_redate}}
-						<button class="X">X</button>
 				  </td>
                </tr>
                {{/each}}
@@ -267,20 +266,6 @@ function getList() {
 	             getList();
 	         });
 	      }
-      
-      
-   $("#tbl1").on("click", ".row .X", function(){
-      var reservation_reno=$(this).parent().parent().find(".reno").html()
-      $.ajax({
-         type : "post",
-         url : "/redelete",
-         data:{"reservation_reno":reservation_reno},
-         success : function() {
-            alert("삭제 되었습니다.");
-            location.href="/reservation/calendar";
-            }
-         });
-   });
    
    
    $("#btnReser").on("click", function(){
