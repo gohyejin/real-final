@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,7 +208,7 @@ input[type="text"] {
 							<a href="costumeRead?lend_costume_code=${vo.lend_costume_code}">${vo.lend_costume_code}</a>
 						</div>
 						<div>${vo.lend_costume_name}</div>
-						<div>${vo.lend_costume_price}</div>
+						<div><fmt:formatNumber value="${vo.lend_costume_price}" pattern="#,###"/></div>
 					</div>
 				</c:forEach>
 				<br>
