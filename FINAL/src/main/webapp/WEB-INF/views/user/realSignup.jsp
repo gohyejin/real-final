@@ -10,7 +10,7 @@
    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 * {
-	font-family: 'Comic Sans MS'
+	font-family: 'Comic Sans MS';
 }
 
 body {

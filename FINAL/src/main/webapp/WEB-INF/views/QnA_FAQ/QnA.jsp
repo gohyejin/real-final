@@ -10,8 +10,14 @@
 <title>Q&A</title>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <style>
+ @font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
-	font-family: '@여기어때 잘난체'
+	font-family: '@여기어때 잘난체';
 }
 
 #page {

@@ -3,8 +3,9 @@
 <%@page import="java.net.URLDecoder"%> 
 <!DOCTYPE html>
 <style>
+
 * {
-	font-family: 'Comic Sans MS'
+	font-family: 'Comic Sans MS';
 }
 
 #menu {

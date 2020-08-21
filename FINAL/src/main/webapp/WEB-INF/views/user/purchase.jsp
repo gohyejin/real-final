@@ -11,7 +11,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
-* {font-family:'@여기어때 잘난체'}
+ @font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {font-family:'@여기어때 잘난체';}
 
 #page {
    background: white;
