@@ -256,7 +256,7 @@ color:red;
 			<td>${vo.users_address}</td>
 			<td>${vo.users_phone}</td>
 			<td>${vo.users_email}</td>
-			<td>${vo.users_point}</td>
+			<td><fmt:formatNumber value="${vo.users_point}" pattern="#,###"/></td>
 			<td>${vo.users_gender}</td>
 		</tr>
 	</table>
@@ -279,8 +279,8 @@ color:red;
 				<td>${vo.photo_package_title}</td>
 				<td><img class="img" src="../display?fileName=${vo.photo_package_image}" width=110 onClick="location.href='/costume/costumeRead?id=${vo.photo_package_code}'"></td>
 				<td class="quantity">${vo.package_cart_quantity}</td>
-				<td>${vo.package_cart_price}원</td>
-				<td>${vo.package_cart_price*vo.package_cart_quantity}원</td>
+				<td><fmt:formatNumber value="${vo.package_cart_price}" pattern="#,###"/>원</td>
+				<td><fmt:formatNumber value="${vo.package_cart_price*vo.package_cart_quantity}" pattern="#,###"/>원</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -303,8 +303,8 @@ color:red;
 				<td>${v.lend_costume_name}</td>
 				<td><img class="img" src="../display?fileName=${v.lend_costume_image}" width=110 onClick="location.href='/costume/costumeRead?id=${v.lend_costume_code}'"></td>
 				<td class="quantity">${v.costume_cart_quantity}</td>
-				<td>${v.costume_cart_price}원</td>
-				<td>${v.costume_cart_price*v.costume_cart_quantity}원</td>
+				<td><fmt:formatNumber value="${v.costume_cart_price}" pattern="#,###"/>원</td>
+				<td><fmt:formatNumber value="${v.costume_cart_price*v.costume_cart_quantity}" pattern="#,###"/>원</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -313,7 +313,7 @@ color:red;
 			<div id="divSum">
 				<div>
 					<h2>PACKAGE</h2>
-					<input type="text" id="packageSum" value="${psum}" readonly> 원
+					<input type="text" id="packageSum" value=<fmt:formatNumber value="${psum}" pattern="#,###"/> readonly> 원
 				</div>
 			</div>
 			<div class="divOper">
@@ -322,7 +322,7 @@ color:red;
 			<div id="divShipping">
 				<div>
 					<h2>COSTUME</h2>
-					<input type="text" id="costumeSum" value="${csum}" readonly> 원
+					<input type="text" id="costumeSum" value=<fmt:formatNumber value="${csum}" pattern="#,###"/> readonly> 원
 				</div>
 			</div>
 			<div class="divOper">
@@ -332,8 +332,8 @@ color:red;
 			<div id="divPoint">
 				<div>
 					<h2>POINT</h2>
-					MY POINT : <span id="myPoint">${point}</span><br>
-					<input type="text" id="point" value="0" > 원<br>
+					MY POINT : <span id="myPoint"><fmt:formatNumber value="${point}" pattern="#,###"/></span><br>
+					<input type="text" id="point" value="0" onkeyup="inputNumberFormat(this)"> 원<br>
 					<input type="button" value="사용하기" id="btn">
 					<input type="reset" value="초기화" id="reset">
 				</div>
@@ -344,7 +344,7 @@ color:red;
 			<div id="divtotalSum">
 				<div>
 					<h2>TOTAL</h2>
-					<input type="text" id="totalSum" value="${psum+csum}" readonly> 원 <br>
+					<input type="text" id="totalSum" value=<fmt:formatNumber value="${psum+csum}" pattern="#,###"/> readonly> 원 <br>
 					<input type="text" value="<fmt:formatNumber value="${(psum+csum)*0.01}" pattern="#,###"/>" id="money" readonly> p 적립 예정<br>
 				</div>
 			</div>
@@ -362,22 +362,46 @@ color:red;
    $("#tbl3 .no").hide();
    var point="0";
    
-   /*포인트 사용*/
-   $("#btn").on("click", function(){
-      var totalSum=parseInt($("#totalSum").val());
-      var myPoint=parseInt($("#myPoint").html());
-      point=parseInt($("#point").val());
-	  $("#money").val((totalSum-point)*0.01);
-      if(point<=myPoint) {
-         $("#totalSum").val(totalSum-point);
-         $("#btn").attr('disabled', true);
-      } else if(point>myPoint){
-         alert("보유한 포인트를 초과합니다.");
-         $("#point").val("");
-         $("#point").focus();
-         return;
-      }
-   });
+   /*input type text 콤마*/
+   function inputNumberFormat(obj) {
+   obj.value = comma(uncomma(obj.value));
+	}
+	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+  
+  /*포인트 사용*/
+  $("#btn").on("click", function(){
+     var totalSum=$("#totalSum").val();
+     var myPoint=$("#myPoint").html();
+     point=$("#point").val();
+     
+     totalSum=parseInt(totalSum.replace(/,/g , ''));
+     myPoint=parseInt(myPoint.replace(/,/g , ''));
+     point=parseInt(point.replace(/,/g , ''));
+     
+     if(point<=myPoint) {
+   	 var accumulate=(totalSum-point)*0.01;
+   	 accumulate=Math.floor(accumulate);
+        accumulate=accumulate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   	 $("#money").val(accumulate);
+   	  
+   	 var ts=totalSum-point;
+   	 ts=ts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $("#totalSum").val(ts);
+        $("#btn").attr('disabled', true);
+     } else if(point>myPoint){
+        alert("보유한 포인트를 초과합니다.");
+        $("#point").val("");
+        $("#point").focus();
+        return;
+     }
+  });
       
    $("#reset").on("click", function(){
       $("#btn").attr('disabled', false);

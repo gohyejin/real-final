@@ -326,10 +326,19 @@ input[type="number"]{
 			if(Cchk==true){
 				$("#tbl2 .row .chk").each(function() {
 					var costume_price=$(this).parent().parent().find(".totprice").html();
-					costumeSum = parseInt(costumeSum) + parseInt(costume_price);  
+					costume_price=parseInt(costume_price.replace(/,/g , ''));
+					costumeSum = costumeSum + costume_price;  
 				});
+				costumeSum=costumeSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				$("#costumeSum").val(costumeSum);
-				totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+				
+				ps=$("#packageSum").val();
+				cs=$("#costumeSum").val();
+				ps=parseInt(ps.replace(/,/g , ''));
+				cs=parseInt(cs.replace(/,/g , ''));
+				
+				totalSum=ps+cs;
+				totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				$("#totalSum").val(totalSum);
 				costumeSum=0;
 				costume_price=0;
@@ -340,7 +349,14 @@ input[type="number"]{
 		} else {
 			costumeSum=0;
 			$("#costumeSum").val(costumeSum);
-			totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+			
+			ps=$("#packageSum").val();
+			cs=$("#costumeSum").val();
+			ps=parseInt(ps.replace(/,/g , ''));
+			cs=parseInt(cs.replace(/,/g , ''));
+			
+			totalSum=ps+cs;
+			totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$("#totalSum").val(totalSum);
 			Cchk=false;
 			$("#tbl2 .row .chk").each(function() {
@@ -356,10 +372,19 @@ input[type="number"]{
 			if(Pchk==true){
 				$("#tbl1 .row .chk").each(function() {
 					var package_price=$(this).parent().parent().find(".totprice").html();
-					packageSum = parseInt(packageSum) + parseInt(package_price); 
+					package_price=parseInt(package_price.replace(/,/g , ''));
+					packageSum = packageSum + package_price; 
 				});
+				packageSum=packageSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				$("#packageSum").val(packageSum);
-				totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+				
+				ps=$("#packageSum").val();
+				cs=$("#costumeSum").val();
+				ps=parseInt(ps.replace(/,/g , ''));
+				cs=parseInt(cs.replace(/,/g , ''));
+				
+				totalSum=ps+cs;
+				totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				$("#totalSum").val(totalSum);
 				packageSum=0;
 	     		package_price=0;
@@ -370,7 +395,13 @@ input[type="number"]{
 	      } else {
 	    	 packageSum=0;
 			 $("#packageSum").val(packageSum);
-			 totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+			 ps=$("#packageSum").val();
+			 cs=$("#costumeSum").val();
+			 ps=parseInt(ps.replace(/,/g , ''));
+			 cs=parseInt(cs.replace(/,/g , ''));
+				
+			 totalSum=ps+cs;
+			 totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			 $("#totalSum").val(totalSum);
 	         Pchk=false;
 	         $("#tbl1 .row .chk").each(function() {
@@ -379,25 +410,43 @@ input[type="number"]{
 	      }
 	   });
 	
-	//선택 체크버튼
+	/*패키지선택 체크버튼*/
 	$("#tbl1").on("click", ".row .chk", function(){	
 		$("#tbl1 .row .chk:checked").each(function() {
 			var package_price=$(this).parent().parent().find(".totprice").html();
-			packageSum = parseInt(packageSum) + parseInt(package_price); 
+			package_price=parseInt(package_price.replace(/,/g , ''));
+			packageSum = packageSum + package_price; 
 		});
+		packageSum=packageSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$("#packageSum").val(packageSum);
-		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+		ps=$("#packageSum").val();
+		cs=$("#costumeSum").val();
+		ps=parseInt(ps.replace(/,/g , ''));
+		cs=parseInt(cs.replace(/,/g , ''));
+			
+		totalSum=ps+cs;
+		totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$("#totalSum").val(totalSum);
 		packageSum=0;
 		package_price=0;
 	});
+	
+	/*코스튬선택 체크버튼*/
 	$("#tbl2").on("click", ".row .chk", function(){
 		$("#tbl2 .row .chk:checked").each(function() {
 			var costume_price=$(this).parent().parent().find(".totprice").html();
-			costumeSum = parseInt(costumeSum) + parseInt(costume_price); 
+			costume_price=parseInt(costume_price.replace(/,/g , ''));
+			costumeSum = costumeSum + costume_price; 
 		});
+		costumeSum=costumeSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$("#costumeSum").val(costumeSum);
-		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
+		ps=$("#packageSum").val();
+		cs=$("#costumeSum").val();
+		ps=parseInt(ps.replace(/,/g , ''));
+		cs=parseInt(cs.replace(/,/g , ''));
+			
+		totalSum=ps+cs;
+		totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$("#totalSum").val(totalSum);
 		costumeSum=0;
 		costume_price=0;
@@ -473,17 +522,26 @@ input[type="number"]{
          url:"/cart/pupdate",
          data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
          success:function(data){
+        	 data=data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	 a.children().eq(5).html(data);
         	 
         	 $("#tbl1 .row .chk:checked").each(function() {
        			var package_price=$(this).parent().parent().find(".totprice").html();
-       			packageSum = parseInt(packageSum) + parseInt(package_price); 
+       			package_price=parseInt(package_price.replace(/,/g , ''));
+       			packageSum = packageSum + package_price; 
        		 });
         	 
         	 if($("#tbl1 .row .chk:checked")){
+        		 packageSum=packageSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         		 $("#packageSum").val(packageSum);
-        		 totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
-          		 $("#totalSum").val(totalSum);
+        		 ps=$("#packageSum").val();
+        		 cs=$("#costumeSum").val();
+        		 ps=parseInt(ps.replace(/,/g , ''));
+        		 cs=parseInt(cs.replace(/,/g , ''));
+        				
+        		 totalSum=ps+cs;
+        		 totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        		 $("#totalSum").val(totalSum);
           		 packageSum=0;
         		 package_price=0;
         	 }
@@ -502,16 +560,25 @@ input[type="number"]{
          url:"/cart/cupdate",
          data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
          success:function(data){
+        	 data=data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         	 a.children().eq(5).html(data);
         	 
         	 $("#tbl2 .row .chk:checked").each(function() {
      			var costume_price=$(this).parent().parent().find(".totprice").html();
-     			costumeSum = parseInt(costumeSum) + parseInt(costume_price); 
+     			costume_price=parseInt(costume_price.replace(/,/g , ''));
+     			costumeSum = costumeSum + costume_price; 
      		 });
         	 if($("#tbl2 .row .chk:checked")){
+        		costumeSum=costumeSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         		$("#costumeSum").val(costumeSum);
-          		totalSum=parseInt($("#packageSum").val())+parseInt($("#costumeSum").val());
-          		$("#totalSum").val(totalSum);
+        		ps=$("#packageSum").val();
+       		 	cs=$("#costumeSum").val();
+       			ps=parseInt(ps.replace(/,/g , ''));
+       		 	cs=parseInt(cs.replace(/,/g , ''));
+       				
+       		 	totalSum=ps+cs;
+       		 	totalSum=totalSum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       		 	$("#totalSum").val(totalSum);
           		costumeSum=0;
           		costume_price=0;
         	 }
@@ -604,7 +671,9 @@ input[type="number"]{
             dataType:"json",
             success:function(data){
             	var temp=Handlebars.compile($("#temp1").html());
-                $("#tbl1").html(temp(data));
+            	var aa=temp(data);
+                aa=aa.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $("#tbl1").html(aa);
          	   var Pdata = $("#tbl1 .row .package_cart_no").val();
          	   if(Pdata!=null){
          		   $("#tbl1").show();
@@ -626,7 +695,9 @@ input[type="number"]{
            dataType:"json",
            success:function(data){
         	   var temp=Handlebars.compile($("#temp2").html());
-               $("#tbl2").html(temp(data));
+        	   var bb=temp(data);
+               bb=bb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+               $("#tbl2").html(bb);
         	   var Cdata = $("#tbl2 .row .costume_cart_no").val();
         	   if(Cdata!=null){
         		   $("#tbl2").show();

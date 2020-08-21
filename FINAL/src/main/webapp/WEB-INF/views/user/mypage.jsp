@@ -271,7 +271,9 @@ $("#tbl3").on("click", ".row button",function(){
          dataType:"json",
          success:function(data){
             var temp=Handlebars.compile($("#temp2").html());
-            $("#tbl2").html(temp(data));
+            var aa=temp(data);
+            aa=aa.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $("#tbl2").html(aa);
          }
       });
    }
@@ -284,7 +286,9 @@ $("#tbl3").on("click", ".row button",function(){
             dataType:"json",
             success:function(data){
                var temp=Handlebars.compile($("#temp3").html());
-               $("#tbl3").html(temp(data));
+               var bb=temp(data);
+               bb=bb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+               $("#tbl3").html(bb);
             }
          });
       }
