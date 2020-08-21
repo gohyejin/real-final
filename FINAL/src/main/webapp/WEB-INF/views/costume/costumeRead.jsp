@@ -176,7 +176,7 @@ input[type=number] {
 								<img id="image" src="http://placehold.it/100x80" width=100>
 							</c:if> <!-- 예시사진 --> 
 							
-							<input type="text" name="lend_costume_image" value="${vo.lend_costume_image}">
+							<input type="hidden" name="lend_costume_image" value="${vo.lend_costume_image}">
 						</td>
 					</tr>
 					<tr>
