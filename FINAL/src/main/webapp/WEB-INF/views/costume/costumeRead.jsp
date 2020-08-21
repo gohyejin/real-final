@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,7 +201,7 @@ input[type=number] {
 					</tr>
 					<tr>
 						<td width=200 class="price" colspan=4>
-							\<input type="text" id="price" value="${vo.lend_costume_price}" name="lend_costume_price" size=10>
+							\<input type="text" id="price" value="<fmt:formatNumber value="${vo.lend_costume_price}" pattern="#,###"/>" name="lend_costume_price" size=10>
 						</td>
 					</tr>
 				</table>

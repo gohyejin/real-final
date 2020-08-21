@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -198,7 +199,7 @@ margin-top:250px;
                   <hr>
              
              <div class="price">
-               \<input type="text" value="${vo.photo_package_price}" size=10 readonly>
+               \<input type="text" value="<fmt:formatNumber value="${vo.photo_package_price}" pattern="#,###"/>" size=10 readonly>
                <c:if test="${users_note!=1}">
                <input type="button" value="장바구니에 담기" id="btnCart">
                </c:if>
