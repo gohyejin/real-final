@@ -125,6 +125,10 @@ th {
 .active {
 	color: hotpink;
 }
+
+#divTxt{
+	width:50px;
+}
 </style>
 </head>
 <body>
@@ -167,7 +171,11 @@ th {
 					<tr>
 						<td colspan=2 id="Rbutton"><input type="button" value="예약하기" id="btnReser"></td>
 					</tr>
+					<tr>
+						<td colspan=3>예약취소에 대한 문의는 사진관으로 연락주시기 바랍니다.</td>
+					</tr>
 				</table>
+				
 				<table id="tbl1"></table>
 				<script id="temp" type="text/x-handlebars-template"> 
                <tr>
@@ -188,7 +196,6 @@ th {
                {{/each}}
             </script>
 		<div id="pagination"></div>
-		<div>예약취소에 대한 문의는 사진관으로 연락주시기 바랍니다.</div>
 		</div>
 		</div>
 	</div>
