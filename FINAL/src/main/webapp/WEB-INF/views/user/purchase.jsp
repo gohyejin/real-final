@@ -450,8 +450,16 @@ color:red;
                costumeQuantity.push(costume_quantity);
             });
             
-            var totalsum=$("#totalSum").val();
             
+            function removeComma(str){
+
+        		n = parseInt(str.replace(/,/g,""));
+
+        		return n;
+        	}
+             
+            var totalsum=removeComma($("#totalSum").val());
+            alert(totalsum);
             $.ajax({
                type : "post",
                url : "/order/insert",
