@@ -112,6 +112,10 @@ img:hover{
 	cursor: pointer;
 	color:red;
 }
+
+.pcprice{
+	font-size: 13px;
+}
 </style>
 </head>
 <body>
@@ -150,9 +154,9 @@ img:hover{
                </td>
                <td rowspan=3>{{photo_package_title}}</td>
                   <td rowspan=3>{{orders_package_quantity}}개</td>
-                  <td rowspan=3>{{package_cart_price}}원</td>
+                  <td rowspan=3 class="pcprice">{{package_cart_price}}원</td>
                   <td rowspan=3>{{printStyle orders_paytype}}</td>
-                  <td rowspan=3>{{total}}원</td>
+                  <td rowspan=3 class="pcprice">{{total}}원</td>
 					<td rowspan=3><button class="X">X</button></td>
                <td class="code">{{photo_package_code}}</td>
             	<td class="no">{{orders_no}}</td>
@@ -183,9 +187,9 @@ img:hover{
                   <td class="img"><img src="../display?fileName={{lend_costume_image}}" width=110/></td>
                   <td rowspan=3>{{lend_costume_name}}</td>
                  <td rowspan=3>{{orders_costume_quantity}}개</td>
-                  <td rowspan=3>{{costume_cart_price}}원</td>
+                  <td rowspan=3 class="pcprice">{{costume_cart_price}}원</td>
                   <td rowspan=3>{{printStyle2 orders_paytype}}</td>
-                  <td rowspan=3>{{total}}원</td>
+                  <td rowspan=3 class="pcprice">{{total}}원</td>
 					<td rowspan=3><button class="X">X</button></td>
                  <td class="code">{{lend_costume_code}}</td>
              <td class="no">{{orders_no}}</td>

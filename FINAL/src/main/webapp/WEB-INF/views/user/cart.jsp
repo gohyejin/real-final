@@ -194,6 +194,10 @@ input[type="number"]{
 .null,.null1{
 	margin-top:100px;
 }
+
+.pcprice,.totprice{
+	font-size: 13px;
+}
 </style>
 </head>
 <body>
@@ -232,12 +236,12 @@ input[type="number"]{
 				</td>
                <td><img src="../display?fileName={{photo_package_image}}" width=110 class="image"/></td>
                <td class="photo_package_title" width=80>{{photo_package_title}}</td>
-               <td class="photo_package_price">{{photo_package_price}}</td>
+               <td class="pcprice">{{photo_package_price}}원</td>
 				<td>
                   <span><input type="hidden" value={{package_cart_no}} size=3 name="package_cart_no" class="package_cart_no"></span>
 				  <span><input type="number" value="{{package_cart_quantity}}" min="1" class="pnumber"></span>
 			   </td>
-               <td class="totprice">{{totprice}}</td>
+               <td class="totprice">{{totprice}}원</td>
                <td><button class="btnDel">X</button></td>
             </tr>
             {{/each}}
@@ -263,12 +267,12 @@ input[type="number"]{
 				</td>
                <td><img src="../display?fileName={{lend_costume_image}}" width=110 class="image"/></td>
                <td class="photo_package_title" width=80>{{lend_costume_name}}/{{costume_size}}</td>
-               <td><span class="lend_costume_price">{{lend_costume_price}}</span></td>
+               <td><span class="pcprice">{{lend_costume_price}}원</span></td>
 				<td>
                   <span><input type="hidden" value={{costume_cart_no}} size=3 name="costume_cart_no" class="costume_cart_no"></span>                
 				  <span><input type="number" value="{{costume_cart_quantity}}" min="1" class="cnumber"></span>
 				</td>
-               <td class="totprice">{{totprice}}</td>
+               <td class="totprice">{{totprice}}원</td>
                <td><button class="btnDel">X</button></td>
             </tr>
             {{/each}}
@@ -523,7 +527,7 @@ input[type="number"]{
          data:{"package_cart_no":package_cart_no, "package_cart_quantity":package_cart_quantity},
          success:function(data){
         	 data=data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        	 a.children().eq(5).html(data);
+        	 a.children().eq(5).html(data+"원");
         	 
         	 $("#tbl1 .row .chk:checked").each(function() {
        			var package_price=$(this).parent().parent().find(".totprice").html();
@@ -561,7 +565,7 @@ input[type="number"]{
          data:{"costume_cart_no":costume_cart_no, "costume_cart_quantity":costume_cart_quantity},
          success:function(data){
         	 data=data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        	 a.children().eq(5).html(data);
+        	 a.children().eq(5).html(data+"원");
         	 
         	 $("#tbl2 .row .chk:checked").each(function() {
      			var costume_price=$(this).parent().parent().find(".totprice").html();
