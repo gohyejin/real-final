@@ -459,7 +459,6 @@ color:red;
         	}
              
             var totalsum=removeComma($("#totalSum").val());
-            alert(totalsum);
             $.ajax({
                type : "post",
                url : "/order/insert",

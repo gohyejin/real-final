@@ -301,11 +301,13 @@ input[type=number] {
    });
 	
 	//수정버튼을 눌렀을 대
-	$(frm).submit(function(e){
-		e.preventDefault();
-		if(!confirm("상품정보를 수정하시겠습니까?")) return;
-		frm.submit();
-		alert("상품정보를 수정하였습니다!");
-	});
+	   $(frm).submit(function(e){
+	      e.preventDefault();
+	      if(!confirm("상품정보를 수정하시겠습니까?")) return;
+	      var price="${vo.lend_costume_price}";
+	      alert("상품정보를 수정하였습니다!");
+	      $(frm.lend_costume_price).val(removeComma(price))
+	      frm.submit();
+	   });
 </script>
 </html>
