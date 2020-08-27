@@ -300,11 +300,18 @@ input[type=number] {
       }
    });
 	
+	function removeComma(str){
+
+        n = parseInt(str.replace(/,/g,""));
+
+        return n;
+     }
+	
 	//수정버튼을 눌렀을 대
 	   $(frm).submit(function(e){
 	      e.preventDefault();
 	      if(!confirm("상품정보를 수정하시겠습니까?")) return;
-	      var price="${vo.lend_costume_price}";
+	      var price=$("#price").val();
 	      alert("상품정보를 수정하였습니다!");
 	      $(frm.lend_costume_price).val(removeComma(price))
 	      frm.submit();

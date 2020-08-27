@@ -66,7 +66,7 @@ input::placeholder {
          <h1>E-MAIL 인증</h1>
          <h4>(인증이 완료되어야 다음 단계로 넘어갈 수 있습니다.)</h4>
           <h3>인증받을 E-MAIL을 입력하여 주세요!</h3>
-          <input type="text" name="emailSendInjeung" value="" size=40 placeholder="E-MAIL">
+          <input type="text" name="emailSendInjeung" value="" size=40 placeholder="E-MAIL" id="changeEmail">
       <br><br>
       <div>
          <input type="hidden" name="users_email" value="${email}">
